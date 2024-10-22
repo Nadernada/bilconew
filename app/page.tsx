@@ -10,45 +10,40 @@ import { HexColorPicker } from "react-colorful";
 const ThreeScene: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [color, setColor] = useState("#cccccc");
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [currentLight, setCurrentLight] = useState(0);
   const modelRef = useRef<THREE.Group | null>(null);
-  const lightsRef = useRef<THREE.Light[]>([]); // Store references to lights
-	const rendererRef = useRef<THREE.WebGLRenderer | null>(null); // Keep track of renderer
-
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+  const [lights, setLights] = useState<{ keyLight: THREE.SpotLight; fillLight: THREE.SpotLight; backLight: THREE.SpotLight } | null>(null); // Use state to store lights
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const scene = new THREE.Scene();
 
       const init = async () => {
-
-				if (rendererRef.current) return;
+        if (rendererRef.current) return;
 
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setAnimationLoop(animate);
         renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(window.innerWidth /2, window.innerHeight /2);
+        renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        // Append the renderer to the containerRef div instead of document.body
+
         if (containerRef.current) {
           containerRef.current.appendChild(renderer.domElement);
         }
 
-				rendererRef.current = renderer; // Store the renderer in the ref
+        rendererRef.current = renderer;
 
         const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.05, 20);
-        camera.position.set(0.35, 0.05, 0.35);
+        camera.position.set(0.35, 0.35, 0.35);
 
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
         controls.dampingFactor = 0.05;
         controls.enablePan = false; // Disable panning
-        controls.minPolarAngle = Math.PI / 2; // Restrict vertical rotation (only horizontal)
-        controls.maxPolarAngle = Math.PI / 2; // Restrict vertical rotation (only horizontal)
-        controls.autoRotateSpeed = -0.5;
-				controls.target.set(0, 0.2, 0);
-        controls.update();
+        controls.enableRotate = true; // Disable rotation of the entire scene
+        controls.minPolarAngle = Math.PI / 2; // Lock vertical rotation
+        controls.maxPolarAngle = Math.PI / 2;
+        controls.autoRotate = false;
 
         const rgbeLoader = new RGBELoader().setPath('/');
         const gltfLoader = new GLTFLoader().setPath('/');
@@ -58,20 +53,21 @@ const ThreeScene: React.FC = () => {
           gltfLoader.loadAsync('bilco19.glb'),
         ]);
 
-        const normalMap = new THREE.TextureLoader().load('/normal-map1.png');
+				const normalMap = new THREE.TextureLoader().load('/normal-map1.png');
         const aoMap = new THREE.TextureLoader().load('/ao_map2.png');
         aoMap.flipY = false;
         normalMap.flipY = false;
 
         modelRef.current = gltf.scene;
         gltf.scene.traverse((child) => {
-					if ((child as THREE.Mesh).isMesh) { // Type cast to `THREE.Mesh`
+          if ((child as THREE.Mesh).isMesh) {
             const mesh = child as THREE.Mesh;
             mesh.material = new THREE.MeshStandardMaterial({
-              color: new THREE.Color(color),
+							color: new THREE.Color(color),
               aoMap: aoMap,
               normalMap: normalMap,
-              aoMapIntensity: 1.0,
+              aoMapIntensity: 1.5,
+							roughness: 2,
             });
             mesh.castShadow = true;
             mesh.receiveShadow = true;
@@ -82,117 +78,112 @@ const ThreeScene: React.FC = () => {
         scene.environment = texture;
         scene.add(gltf.scene);
 
-        // Add three light sources with different luminance
-        const lights = [
-          new THREE.PointLight(0xffffff, 50, 100),
-          new THREE.PointLight(0xffffff, 80, 100),
-          new THREE.PointLight(0xffffff, 100, 100),
-        ];
+        // Initialize lights and save them in state
+        const initializedLights = setupLights(scene);
+        setLights(initializedLights); // Save the lights to state
 
-        lights.forEach((light, i) => {
-          light.position.set(1, 2, 3); // Adjust positions as needed
-          lightsRef.current.push(light);
-          scene.add(light);
-          if (i > 0) light.visible = false; // Only show the first light initially
-        });
-
-				const spotLight = new THREE.SpotLight( 0xffffff, 50 );
-				spotLight.position.set( 2.5, 5, 2.5 );
-				spotLight.angle = Math.PI / 6;
-				spotLight.penumbra = 1;
-				spotLight.decay = 2;
-				spotLight.distance = 0;
-				// spotLight.map = textures[ '/disturb.jpg' ];
-
-				spotLight.castShadow = true;
-				spotLight.shadow.mapSize.width = 1024;
-				spotLight.shadow.mapSize.height = 1024;
-				spotLight.shadow.camera.near = 1;
-				spotLight.shadow.camera.far = 10;
-				spotLight.shadow.focus = 1;
-				scene.add( spotLight );
-
-				const lightHelper = new THREE.SpotLightHelper( spotLight );
-				scene.add( lightHelper );
-
-
+        // Animation loop
         function animate() {
           if (modelRef.current) {
-            // Rotate the model
-						modelRef.current.traverse((child) => {
-							if ((child as THREE.Mesh).isMesh) { // Type cast to `THREE.Mesh`
-								const mesh = child as THREE.Mesh;
-								mesh.rotation.y += 0.002; // Rotate only along the Y-axis
-							}
-						});
-					}
-
+            modelRef.current.traverse((child) => {
+              if ((child as THREE.Mesh).isMesh) {
+                const mesh = child as THREE.Mesh;
+                mesh.rotation.y += 0.002; // Rotate only along the Y-axis
+              }
+            });
+          }
           renderer.render(scene, camera);
         }
-				animate();
+        animate();
       };
 
       init();
     }
   }, []);
 
-  // Update material color dynamically
-  useEffect(() => {
-    if (modelRef.current) {
-      modelRef.current.traverse((child) => {
-				if ((child as THREE.Mesh).isMesh && (child as THREE.Mesh).material) { // Type cast to `THREE.Mesh`
-					const mesh = child as THREE.Mesh;
-					// Check if material is an array or a single material
-					if (Array.isArray(mesh.material)) {
-						mesh.material.forEach((material) => {
-							if (material instanceof THREE.MeshStandardMaterial) {
-								material.color.set(color);
-							}
-						});
-					} else {
-						if (mesh.material instanceof THREE.MeshStandardMaterial) {
-							mesh.material.color.set(color);
-						}
-					}
-				}
-      });
-    }
-  }, [color]);
+	// Setup the lights
+const setupLights = (scene: THREE.Scene) => {
+  // Key Light (Main Light)
+  const keyLight = new THREE.SpotLight(0xffffff, 10); // Default intensity
+  keyLight.position.set(5, 5, 5); // Adjust position
+  keyLight.castShadow = true; // Casts shadow for realism
+  scene.add(keyLight);
 
-  // Function to change the light
-  const handleLightChange = (lightIndex: number) => {
-    lightsRef.current.forEach((light, index) => {
-      light.visible = index === lightIndex;
-    });
-    setCurrentLight(lightIndex);
-  };
+  // Fill Light
+  const fillLight = new THREE.SpotLight(0xffffff, 0.8); // Softer fill light
+  fillLight.position.set(-5, 2, 5); // Position on the opposite side of the Key Light
+  fillLight.castShadow = true; // Optional: Shadows for extra realism
+  scene.add(fillLight);
 
-  const handleColorChange = (newColor: string) => {
-    setColor(newColor);
-  };
+  // Back Light (Rim Light)
+  const backLight = new THREE.SpotLight(0xffffff, 1.2); // Light from behind
+  backLight.position.set(0, 5, -5); // Position behind the model
+  backLight.castShadow = true;
+  scene.add(backLight);
+
+  return { keyLight, fillLight, backLight }; // Return references for controlling luminance
+};
+
+// Define luminance values
+const luminanceValues = {
+  low: 10,
+  medium: 25,
+  high: 35,
+};
+
+// Function to change the luminance of the main light
+const switchMainLightLuminance = (keyLight: THREE.SpotLight, level: 'low' | 'medium' | 'high') => {
+  switch (level) {
+    case 'low':
+      keyLight.intensity = luminanceValues.low;
+      break;
+    case 'medium':
+      keyLight.intensity = luminanceValues.medium;
+      break;
+    case 'high':
+      keyLight.intensity = luminanceValues.high;
+      break;
+  }
+};
+
+const handleSetLuminance = (level: 'low' | 'medium' | 'high') => {
+  if (lights) {
+    switchMainLightLuminance(lights.keyLight, level);
+  }
+};
+	
 
   return (
     <div className="p-4 flex flex-col gap-4 justify-center items-center h-screen w-screen">
-			<div className="p-4">
-				<div ref={containerRef} />
-			</div>
-      <HexColorPicker color={color} onChange={handleColorChange} />
+      <div ref={containerRef} />
+      <HexColorPicker color={color} onChange={setColor} />
       <div className="flex flex-row gap-2 justify-center items-center">
 				<div className="flex flex-col gap-2 justify-center items-center">
-					<button className="bg-yellow-200 rounded-full w-10 h-10 cursor-pointer hover:bg-yellow-400 transition-all" onClick={() => handleLightChange(0)}></button>
+					<button
+						className="bg-slate-200 rounded-full w-10 h-10 cursor-pointer hover:bg-slate-200 transition-all"
+						onClick={() => handleSetLuminance('low')}
+					/>
 					<p className="text-slate-100 text-base">Light 1</p>
 				</div>
 				<div className="flex flex-col gap-2 justify-center items-center">
-					<button className="bg-yellow-300 rounded-full w-10 h-10 cursor-pointer hover:bg-yellow-400 transition-all" onClick={() => handleLightChange(1)}></button>
+					<button
+						className="bg-slate-200 rounded-full w-10 h-10 cursor-pointer hover:bg-slate-200 transition-all"
+						onClick={() => handleSetLuminance('medium')}
+					/>
 					<p className="text-slate-100 text-base">Light 2</p>
 				</div>
 				<div className="flex flex-col gap-2 justify-center items-center">
-					<button className="bg-yellow-400 rounded-full w-10 h-10 cursor-pointer hover:bg-yellow-400 transition-all" onClick={() => handleLightChange(2)}></button>
+					<button
+						className="bg-slate-200 rounded-full w-10 h-10 cursor-pointer hover:bg-slate-200 transition-all"
+						onClick={() => handleSetLuminance('high')}
+					/>
 					<p className="text-slate-100 text-base">Light 3</p>
 				</div>
       </div>
+
     </div>
   );
 };
+
 
 export default ThreeScene;
