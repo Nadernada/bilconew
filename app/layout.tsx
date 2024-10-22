@@ -25,6 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+              <head>
+          {/* <script src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script> */}
+        </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
