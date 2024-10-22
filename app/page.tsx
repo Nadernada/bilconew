@@ -10,6 +10,7 @@ import { HexColorPicker } from "react-colorful";
 const ThreeScene: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [color, setColor] = useState("#cccccc");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [currentLight, setCurrentLight] = useState(0);
   const modelRef = useRef<THREE.Group | null>(null);
   const lightsRef = useRef<THREE.Light[]>([]); // Store references to lights
@@ -19,8 +20,6 @@ const ThreeScene: React.FC = () => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const scene = new THREE.Scene();
-      const loader = new GLTFLoader();
-      const clock = new THREE.Clock();
 
       const init = async () => {
 
@@ -66,16 +65,16 @@ const ThreeScene: React.FC = () => {
 
         modelRef.current = gltf.scene;
         gltf.scene.traverse((child) => {
-          if (child.isMesh) {
-            child.material = new THREE.MeshStandardMaterial({
+					if ((child as THREE.Mesh).isMesh) { // Type cast to `THREE.Mesh`
+            const mesh = child as THREE.Mesh;
+            mesh.material = new THREE.MeshStandardMaterial({
               color: new THREE.Color(color),
               aoMap: aoMap,
               normalMap: normalMap,
               aoMapIntensity: 1.0,
             });
-            child.castShadow = true;
-            child.receiveShadow = true;
-						// child.scale.set(0.2, 0.2, 0.2);
+            mesh.castShadow = true;
+            mesh.receiveShadow = true;
           }
         });
 
@@ -121,8 +120,9 @@ const ThreeScene: React.FC = () => {
           if (modelRef.current) {
             // Rotate the model
 						modelRef.current.traverse((child) => {
-							if (child.isMesh && child.material) {
-								child.rotation.y += 0.002; // Rotate only along the Y-axis
+							if ((child as THREE.Mesh).isMesh) { // Type cast to `THREE.Mesh`
+								const mesh = child as THREE.Mesh;
+								mesh.rotation.y += 0.002; // Rotate only along the Y-axis
 							}
 						});
 					}
@@ -140,22 +140,34 @@ const ThreeScene: React.FC = () => {
   useEffect(() => {
     if (modelRef.current) {
       modelRef.current.traverse((child) => {
-        if (child.isMesh && child.material) {
-          child.material.color.set(color);
-        }
+				if ((child as THREE.Mesh).isMesh && (child as THREE.Mesh).material) { // Type cast to `THREE.Mesh`
+					const mesh = child as THREE.Mesh;
+					// Check if material is an array or a single material
+					if (Array.isArray(mesh.material)) {
+						mesh.material.forEach((material) => {
+							if (material instanceof THREE.MeshStandardMaterial) {
+								material.color.set(color);
+							}
+						});
+					} else {
+						if (mesh.material instanceof THREE.MeshStandardMaterial) {
+							mesh.material.color.set(color);
+						}
+					}
+				}
       });
     }
   }, [color]);
 
   // Function to change the light
-  const handleLightChange = (lightIndex) => {
+  const handleLightChange = (lightIndex: number) => {
     lightsRef.current.forEach((light, index) => {
       light.visible = index === lightIndex;
     });
     setCurrentLight(lightIndex);
   };
 
-  const handleColorChange = (newColor) => {
+  const handleColorChange = (newColor: string) => {
     setColor(newColor);
   };
 
