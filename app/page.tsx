@@ -54,7 +54,7 @@ const ThreeScene: React.FC = () => {
         const gltfLoader = new GLTFLoader().setPath('/');
 
         const [texture, gltf] = await Promise.all([
-          rgbeLoader.loadAsync('MR_INT-003_kitchen_Pierre1.hdr'),
+          rgbeLoader.loadAsync('environment.hdr'),
           gltfLoader.loadAsync('bilco19.glb'),
         ]);
 
