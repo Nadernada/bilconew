@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RGBELoader } from "three/examples/jsm/Addons.js";
-import { HexColorPicker } from "react-colorful";
+import { HexColorInput, HexColorPicker } from "react-colorful";
 
 const ThreeScene: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -24,7 +24,7 @@ const ThreeScene: React.FC = () => {
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setAnimationLoop(animate);
         renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
+        renderer.setSize(window.innerWidth / 1.5, window.innerHeight / 1.5);
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
         if (containerRef.current) {
@@ -49,7 +49,7 @@ const ThreeScene: React.FC = () => {
         const gltfLoader = new GLTFLoader().setPath('/');
 
         const [texture, gltf] = await Promise.all([
-          rgbeLoader.loadAsync('environment.hdr'),
+          rgbeLoader.loadAsync('royal_esplanade_1k.hdr'),
           gltfLoader.loadAsync('bilco19.glb'),
         ]);
 
@@ -71,6 +71,9 @@ const ThreeScene: React.FC = () => {
             });
             mesh.castShadow = true;
             mesh.receiveShadow = true;
+
+            mesh.scale.set(0.5, 0.5, 0.5);
+            mesh.rotation.set(0, -1.7, 1.7);
           }
         });
 
@@ -84,14 +87,16 @@ const ThreeScene: React.FC = () => {
 
         // Animation loop
         function animate() {
-          if (modelRef.current) {
-            modelRef.current.traverse((child) => {
-              if ((child as THREE.Mesh).isMesh) {
-                const mesh = child as THREE.Mesh;
-                mesh.rotation.y += 0.002; // Rotate only along the Y-axis
-              }
-            });
-          }
+          // if (modelRef.current) {
+          //   modelRef.current.traverse((child) => {
+          //     if ((child as THREE.Mesh).isMesh) {
+          //       const mesh = child as THREE.Mesh;
+          //       mesh.scale.set(0.8, 0.8, 0.8);
+          //       mesh.rotation.set(0, 0.8, 0);
+          //       // mesh.rotation.y += 0.002; // Rotate only along the Y-axis
+          //     }
+          //   });
+          // }
           renderer.render(scene, camera);
         }
         animate();
@@ -114,6 +119,12 @@ const setupLights = (scene: THREE.Scene) => {
   fillLight.position.set(-5, 2, 5); // Position on the opposite side of the Key Light
   fillLight.castShadow = true; // Optional: Shadows for extra realism
   scene.add(fillLight);
+
+  // Back Light (Rim Light)
+  const backsdLight = new THREE.SpotLight(0xffffff, 1.2); // Light from behind
+  backsdLight.position.set(5, 5, 5); // Position behind the model
+  backsdLight.castShadow = true;
+  scene.add(backsdLight);
 
   // Back Light (Rim Light)
   const backLight = new THREE.SpotLight(0xffffff, 1.2); // Light from behind
@@ -151,30 +162,55 @@ const handleSetLuminance = (level: 'low' | 'medium' | 'high') => {
     switchMainLightLuminance(lights.keyLight, level);
   }
 };
+
+
+  // Update material color dynamically
+  useEffect(() => {
+    if (modelRef.current) {
+      modelRef.current.traverse((child) => {
+				if ((child as THREE.Mesh).isMesh && (child as THREE.Mesh).material) { // Type cast to `THREE.Mesh`
+					const mesh = child as THREE.Mesh;
+					// Check if material is an array or a single material
+					if (Array.isArray(mesh.material)) {
+						mesh.material.forEach((material) => {
+							if (material instanceof THREE.MeshStandardMaterial) {
+								material.color.set(color);
+							}
+						});
+					} else {
+						if (mesh.material instanceof THREE.MeshStandardMaterial) {
+							mesh.material.color.set(color);
+						}
+					}
+				}
+      });
+    }
+  }, [color]);
 	
 
   return (
     <div className="p-4 flex flex-col gap-4 justify-center items-center h-screen w-screen">
       <div ref={containerRef} />
       <HexColorPicker color={color} onChange={setColor} />
+      <HexColorInput color={color} onChange={setColor} className="p-2 rounded-lg border border-slate-500 placeholder:text-slate-700 text-slate-700" />
       <div className="flex flex-row gap-2 justify-center items-center">
 				<div className="flex flex-col gap-2 justify-center items-center">
 					<button
-						className="bg-slate-200 rounded-full w-10 h-10 cursor-pointer hover:bg-slate-200 transition-all"
+						className="bg-yellow-100 rounded-full w-10 h-10 cursor-pointer hover:bg-slate-200 transition-all"
 						onClick={() => handleSetLuminance('low')}
 					/>
 					<p className="text-slate-100 text-base">Light 1</p>
 				</div>
 				<div className="flex flex-col gap-2 justify-center items-center">
 					<button
-						className="bg-slate-200 rounded-full w-10 h-10 cursor-pointer hover:bg-slate-200 transition-all"
+						className="bg-yellow-200 rounded-full w-10 h-10 cursor-pointer hover:bg-slate-200 transition-all"
 						onClick={() => handleSetLuminance('medium')}
 					/>
 					<p className="text-slate-100 text-base">Light 2</p>
 				</div>
 				<div className="flex flex-col gap-2 justify-center items-center">
 					<button
-						className="bg-slate-200 rounded-full w-10 h-10 cursor-pointer hover:bg-slate-200 transition-all"
+						className="bg-yellow-400 rounded-full w-10 h-10 cursor-pointer hover:bg-slate-200 transition-all"
 						onClick={() => handleSetLuminance('high')}
 					/>
 					<p className="text-slate-100 text-base">Light 3</p>
