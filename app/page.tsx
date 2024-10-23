@@ -41,7 +41,7 @@ const ThreeScene: React.FC = () => {
         controls.dampingFactor = 0.05;
         controls.enablePan = false; // Disable panning
         controls.enableRotate = true; // Disable rotation of the entire scene
-
+        controls.enableZoom = false;
         controls.autoRotate = false;
 
         const rgbeLoader = new EXRLoader().setPath('/');
