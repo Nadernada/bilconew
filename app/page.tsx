@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from 'three';
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { RGBELoader } from "three/examples/jsm/Addons.js";
+import { EXRLoader } from "three/examples/jsm/Addons.js";
 import { HexColorInput, HexColorPicker } from "react-colorful";
 
 const ThreeScene: React.FC = () => {
@@ -44,11 +44,11 @@ const ThreeScene: React.FC = () => {
 
         controls.autoRotate = false;
 
-        const rgbeLoader = new RGBELoader().setPath('/');
+        const rgbeLoader = new EXRLoader().setPath('/');
         const gltfLoader = new GLTFLoader().setPath('/');
 
         const [texture, gltf] = await Promise.all([
-          rgbeLoader.loadAsync('royal_esplanade_1k.hdr'),
+          rgbeLoader.loadAsync('sunset.exr'),
           gltfLoader.loadAsync('bilco19.glb'),
         ]);
 
@@ -67,7 +67,9 @@ const ThreeScene: React.FC = () => {
               normalMap: normalMap,
               aoMapIntensity: 1.5,
 							roughness: 2,
+              blendColor: '#cccccc'
             });
+            // mesh.material.blending = THREE.MultiplyBlending;
             mesh.castShadow = true;
             mesh.receiveShadow = true;
 
