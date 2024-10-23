@@ -41,8 +41,7 @@ const ThreeScene: React.FC = () => {
         controls.dampingFactor = 0.05;
         controls.enablePan = false; // Disable panning
         controls.enableRotate = true; // Disable rotation of the entire scene
-        controls.minPolarAngle = Math.PI / 2; // Lock vertical rotation
-        controls.maxPolarAngle = Math.PI / 2;
+
         controls.autoRotate = false;
 
         const rgbeLoader = new RGBELoader().setPath('/');
@@ -81,22 +80,11 @@ const ThreeScene: React.FC = () => {
         scene.environment = texture;
         scene.add(gltf.scene);
 
-        // Initialize lights and save them in state
         const initializedLights = setupLights(scene);
         setLights(initializedLights); // Save the lights to state
 
         // Animation loop
         function animate() {
-          // if (modelRef.current) {
-          //   modelRef.current.traverse((child) => {
-          //     if ((child as THREE.Mesh).isMesh) {
-          //       const mesh = child as THREE.Mesh;
-          //       mesh.scale.set(0.8, 0.8, 0.8);
-          //       mesh.rotation.set(0, 0.8, 0);
-          //       // mesh.rotation.y += 0.002; // Rotate only along the Y-axis
-          //     }
-          //   });
-          // }
           renderer.render(scene, camera);
         }
         animate();
@@ -168,7 +156,7 @@ const handleSetLuminance = (level: 'low' | 'medium' | 'high') => {
   useEffect(() => {
     if (modelRef.current) {
       modelRef.current.traverse((child) => {
-				if ((child as THREE.Mesh).isMesh && (child as THREE.Mesh).material) { // Type cast to `THREE.Mesh`
+				if ((child as THREE.Mesh).isMesh && (child as THREE.Mesh).material) {
 					const mesh = child as THREE.Mesh;
 					// Check if material is an array or a single material
 					if (Array.isArray(mesh.material)) {
