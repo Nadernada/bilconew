@@ -158,7 +158,7 @@ const handleSetLuminance = (level: 'low' | 'medium' | 'high') => {
 useEffect(() => {
   if (modelRef.current) {
     const blendFactor = 0.85; // Adjust the blend factor (0 = full gray, 1 = full user color)
-    const baseColor = new THREE.Color("#cccccc"); // Gray base
+    const baseColor = new THREE.Color("#A9A9A9"); // Gray base
     const userColor = new THREE.Color(color); // User-selected color
     const blendedColor = baseColor.clone().lerp(userColor, blendFactor); // Blend the two colors
 
