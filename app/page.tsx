@@ -49,7 +49,7 @@ const ThreeScene: React.FC = () => {
 
         const [texture, gltf] = await Promise.all([
           rgbeLoader.loadAsync('sunset.exr'),
-          gltfLoader.loadAsync('bilco22.glb'),
+          gltfLoader.loadAsync('bilco23.glb'),
         ]);
 
 				const normalMap = new THREE.TextureLoader().load('/baked details.001.png');
@@ -67,14 +67,12 @@ const ThreeScene: React.FC = () => {
               normalMap: normalMap,
               aoMapIntensity: 1,
 							roughness: 2,
-              blendColor: '#cccccc'
             });
-            // mesh.material.blending = THREE.MultiplyBlending;
             mesh.castShadow = true;
             mesh.receiveShadow = true;
 
             mesh.scale.set(0.5, 0.5, 0.5);
-            mesh.rotation.set(0, -1.7, 1.7);
+            mesh.rotation.set(0, 0, 0);
           }
         });
 
@@ -127,9 +125,9 @@ const setupLights = (scene: THREE.Scene) => {
 
 // Define luminance values
 const luminanceValues = {
-  low: 10,
-  medium: 25,
-  high: 35,
+  low: 100,
+  medium: 150,
+  high: 200,
 };
 
 // Function to change the luminance of the main light
@@ -137,12 +135,15 @@ const switchMainLightLuminance = (keyLight: THREE.SpotLight, level: 'low' | 'med
   switch (level) {
     case 'low':
       keyLight.intensity = luminanceValues.low;
+      keyLight.color.set("#FFFFFF");
       break;
     case 'medium':
       keyLight.intensity = luminanceValues.medium;
+      keyLight.color.set("#FFFFC5");
       break;
     case 'high':
       keyLight.intensity = luminanceValues.high;
+      keyLight.color.set("#BA8E23");
       break;
   }
 };
@@ -154,28 +155,33 @@ const handleSetLuminance = (level: 'low' | 'medium' | 'high') => {
 };
 
 
-  // Update material color dynamically
-  useEffect(() => {
-    if (modelRef.current) {
-      modelRef.current.traverse((child) => {
-				if ((child as THREE.Mesh).isMesh && (child as THREE.Mesh).material) {
-					const mesh = child as THREE.Mesh;
-					// Check if material is an array or a single material
-					if (Array.isArray(mesh.material)) {
-						mesh.material.forEach((material) => {
-							if (material instanceof THREE.MeshStandardMaterial) {
-								material.color.set(color);
-							}
-						});
-					} else {
-						if (mesh.material instanceof THREE.MeshStandardMaterial) {
-							mesh.material.color.set(color);
-						}
-					}
-				}
-      });
-    }
-  }, [color]);
+useEffect(() => {
+  if (modelRef.current) {
+    const blendFactor = 0.85; // Adjust the blend factor (0 = full gray, 1 = full user color)
+    const baseColor = new THREE.Color("#cccccc"); // Gray base
+    const userColor = new THREE.Color(color); // User-selected color
+    const blendedColor = baseColor.clone().lerp(userColor, blendFactor); // Blend the two colors
+
+    modelRef.current.traverse((child) => {
+      if ((child as THREE.Mesh).isMesh && (child as THREE.Mesh).material) {
+        const mesh = child as THREE.Mesh;
+        // Check if material is an array or a single material
+        if (Array.isArray(mesh.material)) {
+          mesh.material.forEach((material) => {
+            if (material instanceof THREE.MeshStandardMaterial) {
+              material.color.set(blendedColor);
+            }
+          });
+        } else {
+          if (mesh.material instanceof THREE.MeshStandardMaterial) {
+            mesh.material.color.set(blendedColor);
+          }
+        }
+      }
+    });
+  }
+}, [color]);
+
 	
 
   return (
