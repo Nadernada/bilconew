@@ -49,11 +49,11 @@ const ThreeScene: React.FC = () => {
 
         const [texture, gltf] = await Promise.all([
           rgbeLoader.loadAsync('sunset.exr'),
-          gltfLoader.loadAsync('bilco19.glb'),
+          gltfLoader.loadAsync('bilco22.glb'),
         ]);
 
-				const normalMap = new THREE.TextureLoader().load('/normal-map1.png');
-        const aoMap = new THREE.TextureLoader().load('/ao_map2.png');
+				const normalMap = new THREE.TextureLoader().load('/baked details.001.png');
+        const aoMap = new THREE.TextureLoader().load('/ao_map.png');
         aoMap.flipY = false;
         normalMap.flipY = false;
 
@@ -65,7 +65,7 @@ const ThreeScene: React.FC = () => {
 							color: new THREE.Color(color),
               aoMap: aoMap,
               normalMap: normalMap,
-              aoMapIntensity: 1.5,
+              aoMapIntensity: 1,
 							roughness: 2,
               blendColor: '#cccccc'
             });
