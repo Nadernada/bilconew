@@ -14,109 +14,106 @@ const ThreeScene: React.FC = () => {
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const [lights, setLights] = useState<{ keyLight: THREE.SpotLight; fillLight: THREE.SpotLight; backLight: THREE.SpotLight } | null>(null); // Use state to store lights
 
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const scene = new THREE.Scene();
-
+  
       const init = async () => {
         if (rendererRef.current) return;
-
+  
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setAnimationLoop(animate);
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(window.innerWidth / 1.5, window.innerHeight / 1.5);
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
-
+  
         if (containerRef.current) {
           containerRef.current.appendChild(renderer.domElement);
         }
-
+  
         rendererRef.current = renderer;
-
+  
         const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.05, 20);
         camera.position.set(0.35, 0.35, 0.35);
-
+  
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
         controls.dampingFactor = 0.05;
         controls.enablePan = false; // Disable panning
-        controls.enableRotate = true; // Disable rotation of the entire scene
+        controls.enableRotate = true; // Allow rotation of the model
         controls.enableZoom = false;
         controls.autoRotate = false;
-
+  
         const rgbeLoader = new EXRLoader().setPath('/');
         const gltfLoader = new GLTFLoader().setPath('/');
-
+  
         const [texture, gltf] = await Promise.all([
           rgbeLoader.loadAsync('sunset.exr'),
           gltfLoader.loadAsync('bilco23.glb'),
         ]);
-
-				const normalMap = new THREE.TextureLoader().load('/baked details.001.png');
+  
+        const normalMap = new THREE.TextureLoader().load('/baked details.001.png');
         const aoMap = new THREE.TextureLoader().load('/ao_map.png');
         aoMap.flipY = false;
         normalMap.flipY = false;
-
+  
         modelRef.current = gltf.scene;
         gltf.scene.traverse((child) => {
           if ((child as THREE.Mesh).isMesh) {
             const mesh = child as THREE.Mesh;
             mesh.material = new THREE.MeshStandardMaterial({
-							color: new THREE.Color(color),
+              color: new THREE.Color(color),
               aoMap: aoMap,
               normalMap: normalMap,
               aoMapIntensity: 1,
-							roughness: 2,
+              roughness: 2,
             });
             mesh.castShadow = true;
             mesh.receiveShadow = true;
-
-            mesh.scale.set(0.5, 0.5, 0.5);
-            mesh.rotation.set(0, 0, 0);
+  
+            mesh.scale.set(0.4, 0.4, 0.4);
+            mesh.rotation.set(0, 1.2, 0);
           }
         });
-
+  
         texture.mapping = THREE.EquirectangularReflectionMapping;
         scene.environment = texture;
         scene.add(gltf.scene);
-
+  
+        // Setup lights in fixed positions in the scene
         const initializedLights = setupLights(scene);
-        setLights(initializedLights); // Save the lights to state
-
+        setLights(initializedLights);
+  
         // Animation loop
         function animate() {
           renderer.render(scene, camera);
         }
         animate();
       };
-
+  
       init();
     }
   }, []);
 
-	// Setup the lights
+
+// Setup the lights and place them in fixed positions in the scene
 const setupLights = (scene: THREE.Scene) => {
   // Key Light (Main Light)
-  const keyLight = new THREE.SpotLight(0xffffff, 10); // Default intensity
-  keyLight.position.set(5, 5, 5); // Adjust position
+  const keyLight = new THREE.SpotLight(0xffffff, 2); // Default intensity
+  keyLight.position.set(5, 5, 5); // Fixed position
   keyLight.castShadow = true; // Casts shadow for realism
   scene.add(keyLight);
 
   // Fill Light
-  const fillLight = new THREE.SpotLight(0xffffff, 0.8); // Softer fill light
-  fillLight.position.set(-5, 2, 5); // Position on the opposite side of the Key Light
+  const fillLight = new THREE.SpotLight(0xffffff, 1); // Softer fill light
+  fillLight.position.set(-5, 2, 5); // Fixed position on the opposite side of the Key Light
   fillLight.castShadow = true; // Optional: Shadows for extra realism
   scene.add(fillLight);
 
   // Back Light (Rim Light)
-  const backsdLight = new THREE.SpotLight(0xffffff, 1.2); // Light from behind
-  backsdLight.position.set(5, 5, 5); // Position behind the model
-  backsdLight.castShadow = true;
-  scene.add(backsdLight);
-
-  // Back Light (Rim Light)
   const backLight = new THREE.SpotLight(0xffffff, 1.2); // Light from behind
-  backLight.position.set(0, 5, -5); // Position behind the model
+  backLight.position.set(0, 5, -5); // Fixed position behind the model
   backLight.castShadow = true;
   scene.add(backLight);
 
@@ -126,7 +123,7 @@ const setupLights = (scene: THREE.Scene) => {
 // Define luminance values
 const luminanceValues = {
   low: 100,
-  medium: 150,
+  medium: 250,
   high: 200,
 };
 
@@ -139,7 +136,7 @@ const switchMainLightLuminance = (keyLight: THREE.SpotLight, level: 'low' | 'med
       break;
     case 'medium':
       keyLight.intensity = luminanceValues.medium;
-      keyLight.color.set("#FFFFC5");
+      keyLight.color.set("#ADD8E6");
       break;
     case 'high':
       keyLight.intensity = luminanceValues.high;
