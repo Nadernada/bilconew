@@ -1,218 +1,237 @@
 'use client'
 
+import Image from "next/image";
+import NavBar from "./components/NavBar";
+import localFont from "next/font/local";
+import ThreeScene from "./ThreeScene";
+import 'swiper/css'
 import { useEffect, useRef, useState } from "react";
-import * as THREE from 'three';
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { EXRLoader } from "three/examples/jsm/Addons.js";
-import { HexColorInput, HexColorPicker } from "react-colorful";
-
-const ThreeScene: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [color, setColor] = useState("#cccccc");
-  const modelRef = useRef<THREE.Group | null>(null);
-  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
-  const [lights, setLights] = useState<{ keyLight: THREE.SpotLight; fillLight: THREE.SpotLight; backLight: THREE.SpotLight } | null>(null); // Use state to store lights
+import Standards from "./components/Standards";
+import ParallelBrick from "./components/ParallelBrick";
+import ZoomIn from "./components/ZoomIn";
+import Slider from "./components/Slider";
+import Contact from "./components/Contact";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from '@gsap/react';
 
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const scene = new THREE.Scene();
-  
-      const init = async () => {
-        if (rendererRef.current) return;
-  
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setAnimationLoop(animate);
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(window.innerWidth / 1.5, window.innerHeight / 1.5);
-        renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  
-        if (containerRef.current) {
-          containerRef.current.appendChild(renderer.domElement);
-        }
-  
-        rendererRef.current = renderer;
-  
-        const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.05, 20);
-        camera.position.set(0.35, 0.35, 0.35);
-  
-        const controls = new OrbitControls(camera, renderer.domElement);
-        controls.enableDamping = true;
-        controls.dampingFactor = 0.05;
-        controls.enablePan = false; // Disable panning
-        controls.enableRotate = true; // Allow rotation of the model
-        controls.enableZoom = false;
-        controls.autoRotate = false;
-  
-        const rgbeLoader = new EXRLoader().setPath('/');
-        const gltfLoader = new GLTFLoader().setPath('/');
-  
-        const [texture, gltf] = await Promise.all([
-          rgbeLoader.loadAsync('sunset.exr'),
-          gltfLoader.loadAsync('bilco23.glb'),
-        ]);
-  
-        const normalMap = new THREE.TextureLoader().load('/baked details.001.png');
-        const aoMap = new THREE.TextureLoader().load('/ao_map.png');
-        aoMap.flipY = false;
-        normalMap.flipY = false;
-  
-        modelRef.current = gltf.scene;
-        gltf.scene.traverse((child) => {
-          if ((child as THREE.Mesh).isMesh) {
-            const mesh = child as THREE.Mesh;
-            mesh.material = new THREE.MeshStandardMaterial({
-              color: new THREE.Color(color),
-              aoMap: aoMap,
-              normalMap: normalMap,
-              aoMapIntensity: 1,
-              roughness: 2,
-            });
-            mesh.castShadow = true;
-            mesh.receiveShadow = true;
-  
-            mesh.scale.set(0.4, 0.4, 0.4);
-            mesh.rotation.set(0, 1.2, 0);
-          }
-        });
-  
-        texture.mapping = THREE.EquirectangularReflectionMapping;
-        scene.environment = texture;
-        scene.add(gltf.scene);
-  
-        // Setup lights in fixed positions in the scene
-        const initializedLights = setupLights(scene);
-        setLights(initializedLights);
-  
-        // Animation loop
-        function animate() {
-          renderer.render(scene, camera);
-        }
-        animate();
-      };
-  
-      init();
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+
+const urdwinBoldMono = localFont({
+  src: "./fonts/URWDINCond-Bold.ttf",
+  variable: "--font-geist-mono",
+  weight: "700",
+});
+
+const Home = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const playButtonRef = useRef<any | null | undefined>(null);
+  const videoRef = useRef(null);
+  const [showLightbox, setShowLightbox] = useState(false);
+  const [buttonPosition, setButtonPosition] = useState({ x: 0, y: 0 });
+  const magneticStrength = 300; // Adjust for magnetic range
+  const textTopRef = useRef(null);
+  const textBottomRef = useRef(null);
+  const lineTextRef = useRef(null);
+  const lineRef = useRef(null);
+
+
+  useGSAP(
+    () => {
+      gsap.from(textTopRef.current, {
+        y: 200,
+        opacity: 0,
+        start: 'top 60%',
+        end: 'top 0%',
+        scrub: true,
+        ease: 'expo.out',
+        duration: 2,
+        delay: 1
+      });
+      gsap.from(textBottomRef.current, {
+        y: 200,
+        opacity: 0,
+        start: 'top 60%',
+        end: 'top 0%',
+        scrub: true,
+        ease: 'expo.out',
+        duration: 2,
+        delay: 1.5
+      });
+      gsap.from(lineTextRef.current, {
+        y: 200,
+        opacity: 0,
+        start: 'top 60%',
+        end: 'top 0%',
+        scrub: true,
+        ease: 'expo.out',
+        duration: 1
+      });
+      gsap.from(lineRef.current, {
+        scaleX: 0,
+        start: 'top 60%',
+        end: 'top 0%',
+        scrub: true,
+        ease: 'expo.out',
+        duration: 1,
+        delay: 0.5
+      });
     }
-  }, []);
+  );
+  
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      if (playButtonRef.current) {
+        const buttonRect= playButtonRef.current.getBoundingClientRect();
+        const buttonX = buttonRect.left + buttonRect.width / 2;
+        const buttonY = buttonRect.top + buttonRect.height / 2;
 
+        const deltaX = event.clientX - buttonX;
+        const deltaY = event.clientY - buttonY;
+        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-// Setup the lights and place them in fixed positions in the scene
-const setupLights = (scene: THREE.Scene) => {
-  // Key Light (Main Light)
-  const keyLight = new THREE.SpotLight(0xffffff, 2); // Default intensity
-  keyLight.position.set(5, 5, 5); // Fixed position
-  keyLight.castShadow = true; // Casts shadow for realism
-  scene.add(keyLight);
+        // Adjusted distance checks
+        if (distance < magneticStrength) {
+          const angle = Math.atan2(deltaY, deltaX);
+          const intensity = Math.max(0, (1 - distance / magneticStrength) * 10);
+          const offsetX = Math.cos(angle) * intensity;
+          const offsetY = Math.sin(angle) * intensity;
 
-  // Fill Light
-  const fillLight = new THREE.SpotLight(0xffffff, 1); // Softer fill light
-  fillLight.position.set(-5, 2, 5); // Fixed position on the opposite side of the Key Light
-  fillLight.castShadow = true; // Optional: Shadows for extra realism
-  scene.add(fillLight);
-
-  // Back Light (Rim Light)
-  const backLight = new THREE.SpotLight(0xffffff, 1.2); // Light from behind
-  backLight.position.set(0, 5, -5); // Fixed position behind the model
-  backLight.castShadow = true;
-  scene.add(backLight);
-
-  return { keyLight, fillLight, backLight }; // Return references for controlling luminance
-};
-
-// Define luminance values
-const luminanceValues = {
-  low: 100,
-  medium: 250,
-  high: 200,
-};
-
-// Function to change the luminance of the main light
-const switchMainLightLuminance = (keyLight: THREE.SpotLight, level: 'low' | 'medium' | 'high') => {
-  switch (level) {
-    case 'low':
-      keyLight.intensity = luminanceValues.low;
-      keyLight.color.set("#FFFFFF");
-      break;
-    case 'medium':
-      keyLight.intensity = luminanceValues.medium;
-      keyLight.color.set("#ADD8E6");
-      break;
-    case 'high':
-      keyLight.intensity = luminanceValues.high;
-      keyLight.color.set("#BA8E23");
-      break;
-  }
-};
-
-const handleSetLuminance = (level: 'low' | 'medium' | 'high') => {
-  if (lights) {
-    switchMainLightLuminance(lights.keyLight, level);
-  }
-};
-
-
-useEffect(() => {
-  if (modelRef.current) {
-    const blendFactor = 0.55; // Adjust the blend factor (0 = full gray, 1 = full user color)
-    const baseColor = new THREE.Color("#A9A9A9"); // Gray base
-    const userColor = new THREE.Color(color); // User-selected color
-    const blendedColor = baseColor.clone().lerp(userColor, blendFactor); // Blend the two colors
-
-    modelRef.current.traverse((child) => {
-      if ((child as THREE.Mesh).isMesh && (child as THREE.Mesh).material) {
-        const mesh = child as THREE.Mesh;
-        // Check if material is an array or a single material
-        if (Array.isArray(mesh.material)) {
-          mesh.material.forEach((material) => {
-            if (material instanceof THREE.MeshStandardMaterial) {
-              material.color.set(blendedColor);
-            }
-          });
+          // Smoothing the transition
+          setButtonPosition((prev) => ({
+            x: prev.x + (offsetX - prev.x) * 0.1,
+            y: prev.y + (offsetY - prev.y) * 0.1,
+          }));
         } else {
-          if (mesh.material instanceof THREE.MeshStandardMaterial) {
-            mesh.material.color.set(blendedColor);
-          }
+          setButtonPosition({ x: 0, y: 0 });
         }
       }
-    });
-  }
-}, [color]);
+    };
 
-	
+    const optimizedMouseMove = (event: MouseEvent) => {
+      requestAnimationFrame(() => handleMouseMove(event));
+    };
+
+    window.addEventListener('mousemove', optimizedMouseMove);
+    
+    return () => {
+      window.removeEventListener('mousemove', optimizedMouseMove);
+    };
+  }, [playButtonRef.current]);
+
+
 
   return (
-    <div className="p-4 flex flex-col gap-4 justify-center items-center h-screen w-screen">
-      <div ref={containerRef} />
-      <HexColorPicker color={color} onChange={setColor} />
-      <HexColorInput color={color} onChange={setColor} className="p-2 rounded-lg border border-slate-500 placeholder:text-slate-700 text-slate-700" />
-      <div className="flex flex-row gap-2 justify-center items-center">
-				<div className="flex flex-col gap-2 justify-center items-center">
-					<button
-						className="bg-yellow-100 rounded-full w-10 h-10 cursor-pointer hover:bg-slate-200 transition-all"
-						onClick={() => handleSetLuminance('low')}
-					/>
-					<p className="text-slate-100 text-base">Light 1</p>
-				</div>
-				<div className="flex flex-col gap-2 justify-center items-center">
-					<button
-						className="bg-yellow-200 rounded-full w-10 h-10 cursor-pointer hover:bg-slate-200 transition-all"
-						onClick={() => handleSetLuminance('medium')}
-					/>
-					<p className="text-slate-100 text-base">Light 2</p>
-				</div>
-				<div className="flex flex-col gap-2 justify-center items-center">
-					<button
-						className="bg-yellow-400 rounded-full w-10 h-10 cursor-pointer hover:bg-slate-200 transition-all"
-						onClick={() => handleSetLuminance('high')}
-					/>
-					<p className="text-slate-100 text-base">Light 3</p>
-				</div>
+    <div className="w-full bg-[#090A0A] relative">
+
+      <NavBar />
+
+      {showLightbox && <div className="absolute top-0 left-0 h-screen w-screen bg-black/80 p-14 z-50">
+          <div className="w-full p-4 flex justify-end">
+            <p className="text-black bg-white rounded-full w-12 h-12 flex justify-center items-center text-lg cursor-pointer hover:bg-transparent hover:text-white duration-300 border border-white transition-colors"
+            onClick={() => setShowLightbox(false)}
+            >X</p>
+          </div>
+        <div className="w-full h-[90%] rounded-2xl overflow-hidden">
+          <video src="/images/hero-video.mp4" className="object-cover !max-w-none" autoPlay muted loop ref={videoRef}></video>
+        </div>
+      </div>}
+      <div className="w-screen relative h-screen overflow-hidden">
+        <div className="h-screen lg:h-fit w-auto lg:w-full z-0 overflow-hidden">
+          <video src="/images/hero-video.mp4" className="object-cover !max-w-none"></video>
+        </div>
+
+        <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center gap-24">
+          <div className="w-full flex flex-col justify-center items-center gap-y-6 z-10 relative">
+            <div className="overflow-hidden">
+              <h1 className={`${urdwinBoldMono.className} antialiased text-[#F3F3F6] font-bold text-[2rem] uppercase`} ref={lineTextRef}>professional line</h1>
+            </div>
+            <Image src="/images/hero-rainbow.png" alt="rainbow-img" width={400} height={2} ref={lineRef} />
+            <div className="overflow-hidden">
+              <h2
+                className={`${urdwinBoldMono.className} antialiased text-[#F3F3F6] font-bold text-[5rem] lg:text-[8rem] leading-[5rem] lg:leading-[8rem] uppercase text-center text-shadow`}
+                ref={textTopRef}
+                >
+                GO BOLD WITH
+              </h2>
+            </div>
+            <div className="overflow-hidden">
+              <h2
+                className={`${urdwinBoldMono.className} antialiased text-[#F3F3F6] font-bold text-[5rem] lg:text-[8rem] leading-[5rem] lg:leading-[8rem] uppercase text-center text-shadow`}
+                ref={textBottomRef}
+                >
+                BILCO BRICK
+              </h2>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-y-6 justify-center items-center z-10 relative w-full pb-24">
+            <div className="w-12 h-12 rounded-full border border-slate-100 flex justify-center items-center cursor-pointer hover:bg-slate-100 transition-colors group duration-300" ref={playButtonRef}
+              style={{ transform: `translate(${buttonPosition.x}px, ${buttonPosition.y}px)` }}
+              onClick={() => setShowLightbox(true)}
+            >
+              <Image src="/images/chevron-right.svg" alt="chevron-img" width={11} height={16} className="group-hover:invert transition-all duration-300" />
+            </div>
+            <p className="text-[#969696] text-lg lg:text-xl text-center">The only concrete brick that’s colored to the core.</p>
+          </div>
+        </div>
       </div>
 
+      <div className="mt-24">
+        <div>
+          <h3 className={`${urdwinBoldMono.className} antialiased text-[#F3F3F6] font-bold text-[4rem] leading-[4rem] uppercase text-center`}><span className="text-bg">explore the</span><br/>full spectrum</h3>
+        </div>
+
+        <div>
+          <ThreeScene />
+        </div>
+      </div>
+
+      <Standards font={urdwinBoldMono} />
+
+
+      <ParallelBrick font={urdwinBoldMono} />
+
+      <ZoomIn font={urdwinBoldMono} />
+
+      <Slider font={urdwinBoldMono} />
+
+
+      <Contact font={urdwinBoldMono} />
+
+
+      <div className="mt-24 footer p-12 lg:p-28 ps-12 2xl:ps-80 bg-black">
+        <div className="flex flex-col gap-y-12 justify-start">
+          <Image src="/images/bilco-logo.png" alt="bilco logo" width={175} height={28}/>
+
+          <p className="text-[#969696] text-sm text-left">If you’d like more information about our products or <br />would like to place an order, please call, email or fax us:</p>
+
+          <div className="flex flex-col gap-y-4">
+            <p className="text-white text-sm text-left">Phone: (972) 227-3380</p>
+            <p className="text-white text-sm text-left">Email: info@BilcoBrick.com</p>
+          </div>
+
+          <p className="text-white text-sm text-left">bilcobrick.com</p>
+
+          <div className="flex flex-row justify-start items-center gap-x-3">
+            <Image src="/images/ig-bilco.svg" alt="bilco logo" width={34} height={34} className="hover:scale-105 transition-all cursor-pointer hover:invert"/>
+            <Image src="/images/fb-bilco.svg" alt="bilco logo" width={34} height={34} className="hover:scale-105 transition-all cursor-pointer hover:invert"/>
+            <Image src="/images/linkedin-bilco.svg" alt="bilco logo" width={34} height={34} className="hover:scale-105 transition-all cursor-pointer hover:invert"/>
+
+          </div>
+
+          <p className="text-[#969696] text-sm text-left">© 2024 Bilco Corporation  |  All Rights Reserved  | Terms of Use</p>
+
+
+        </div>
+      </div>
+          <Image src="/images/footer-bricks.png" alt="bilco logo" width={175} height={28} className="flex lg:hidden w-full"/>
+      
     </div>
   );
 };
 
-
-export default ThreeScene;
+export default Home;
