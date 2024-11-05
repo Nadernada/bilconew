@@ -9,6 +9,7 @@ import { HexColorInput } from "react-colorful";
 import Image from "next/image";
 import { PopoverPicker } from "./components/PopoverPicker";
 
+
 const ThreeScene: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [color, setColor] = useState("#cccccc");
@@ -32,10 +33,12 @@ const ThreeScene: React.FC = () => {
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setAnimationLoop(animate);
         renderer.setPixelRatio(window.devicePixelRatio);
+        console.log(window.innerWidth, 'inner');
+        
         if(window.innerWidth > 726) {
           renderer.setSize(window.innerWidth / 2.5, window.innerHeight / 2.5);
         } else {
-          renderer.setSize(window.innerWidth / 0.9, window.innerHeight / 0.9);
+          renderer.setSize(window.innerWidth, window.innerHeight / 2.5);
         }
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
   
@@ -107,7 +110,11 @@ const ThreeScene: React.FC = () => {
               mesh.castShadow = true;
               mesh.receiveShadow = true;
 
-              mesh.scale.set(0.6, 0.6, 0.6);
+              if(window.innerWidth > 726) {
+                mesh.scale.set(0.6, 0.6, 0.6);
+              } else {
+                mesh.scale.set(0.2, 0.6, 0.2);
+              }
               mesh.rotation.set(0, 1.2, 0);
             }
           });
@@ -264,7 +271,7 @@ useEffect(() => {
             <HexColorInput
               color={color}
               onChange={setColor}
-              className="px-2 bg-transparent rounded-lg placeholder:text-slate-700 text-slate-700 w-fit colorInput"
+              className="px-2 bg-transparent rounded-lg placeholder:text-slate-700 text-slate-700 w-1/3 lg:w-fit colorInput"
             />
             <div className="flex flex-row gap-x-4 cursor-pointer" >
               <p className="text-base text-white uppercase">Select a color</p>
@@ -275,8 +282,8 @@ useEffect(() => {
 
         </div>
 
-        <div className="flex flex-col justify-center items-center gap-y-2">
-          <div className="flex flex-row gap-2 justify-center items-center bg-[#2D2D2F] rounded-full px-2">
+        <div className="flex flex-col justify-center items-center gap-y-2 mt-6 lg:mt-0">
+          <div className="flex flex-row gap-2 justify-between lg:justify-center items-center bg-[#2D2D2F] rounded-full px-2 w-full lg:w-auto">
             <div className={`flex flex-col gap-2 justify-center items-center relative ${selectedLight === 0 ? 'bg-white' : 'bg-transparent'} rounded-full px-10 py-4 h-[80%] transition-all duration-300`}>
               <button
                 className="rounded-full w-full h-full cursor-pointer transition-all absolute z-10"

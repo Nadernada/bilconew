@@ -139,12 +139,12 @@ const Home = () => {
           <video src="/images/hero-video.mp4" className="object-cover !max-w-none" autoPlay muted loop ref={videoRef}></video>
         </div>
       </div>}
-      <div className="w-screen relative h-screen overflow-hidden">
+      <div className="w-screen relative h-fit overflow-hidden">
         <div className="h-screen lg:h-fit w-auto lg:w-full z-0 overflow-hidden">
           <video src="/images/hero-video.mp4" className="object-cover !max-w-none"></video>
         </div>
 
-        <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center gap-24">
+        <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center gap-24">
           <div className="w-full flex flex-col justify-center items-center gap-y-6 z-10 relative">
             <div className="overflow-hidden">
               <h1 className={`${urdwinBoldMono.className} antialiased text-[#F3F3F6] font-bold text-[2rem] uppercase`} ref={lineTextRef}>professional line</h1>
@@ -203,7 +203,7 @@ const Home = () => {
       <Contact font={urdwinBoldMono} />
 
 
-      <div className="mt-24 footer p-12 lg:p-28 ps-12 2xl:ps-80 bg-black">
+      <div className="mt-0 footer p-12 lg:p-28 lg:pb-12 ps-12 2xl:ps-80 bg-black">
         <div className="flex flex-col gap-y-12 justify-start">
           <Image src="/images/bilco-logo.png" alt="bilco logo" width={175} height={28}/>
 

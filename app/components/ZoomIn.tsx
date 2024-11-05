@@ -19,6 +19,8 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
 
   const brickRef = useRef(null);
   const brickSectionRef = useRef(null);
+  const textTopRef = useRef(null);
+  const textBottomRef = useRef(null);
 
   useGSAP(
     () => {
@@ -28,8 +30,30 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
         // opacity: 0,
         scrollTrigger: {
           trigger: brickSectionRef.current,
-          start: 'top 80%',
-          end: 'center 30%',
+          start: 'top bottom',
+          end: 'center bottom',
+          scrub: true,
+          // markers: true,
+        },
+      });
+      gsap.from(textTopRef.current, {
+        y: 100,
+        opacity: 0, 
+        scrollTrigger: {
+          trigger: brickSectionRef.current,
+          start: 'top bottom',
+          end: 'center bottom',
+          scrub: true,
+          // markers: true,
+        },
+      });
+      gsap.from(textBottomRef.current, {
+        y: 100,
+        opacity: 0,
+        scrollTrigger: {
+          trigger: brickSectionRef.current,
+          start: 'top bottom',
+          end: 'center bottom',
           scrub: true,
           // markers: true,
         },
@@ -38,14 +62,14 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
   );
 
   return (
-    <div className="mt-48 flex flex-col items-center" ref={brickSectionRef}>
-        <h3 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[4rem] leading-[4rem] uppercase text-center`}>Weather Any Weather</h3>
-        <p className="text-[#969696] text-base text-center">Endure the wear and tear of typical fading and sun damage. Build it brighter. Build it to last.</p>
-        <Image src="/images/gray-brick.png" alt="brick-img" width={1302} height={463} className="mt-24" ref={brickRef} />
+    <div className="mt-12 lg:mt-48 flex flex-col items-center" ref={brickSectionRef}>
+        <h3 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[4rem] leading-[3rem] lg:leading-[4rem] uppercase text-center`} ref={textTopRef}>Weather Any Weather</h3>
+        <p className="text-[#969696] text-base text-center" ref={textBottomRef}>Endure the wear and tear of typical fading and sun damage. Build it brighter. Build it to last.</p>
+        <Image src="/images/gray-brick.png" alt="brick-img" width={1000} height={356} className="mt-12" ref={brickRef} />
 
 
         <div className="mt-28 flex flex-col lg:flex-row justify-around items-center lg:items-start">
-          <h3 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[4rem] leading-[4rem] uppercase`}>Custom<br /> Created</h3>
+          <h3 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[4rem] leading-[3rem] lg:leading-[4rem] uppercase`}>Custom<br /> Created</h3>
           <p className="text-[#969696] text-base w-4/5 lg:w-1/2 text-center lg:text-left">Unlike mass produced clay bricks, every batch of the Bilco Professional Line is <span className="text-white">made to order.</span> <br/><br/>Through this personalized manufacturing process, the bricks are guaranteed to match your vision.</p>
         </div>
 

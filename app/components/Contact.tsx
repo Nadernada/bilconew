@@ -41,15 +41,15 @@ const Contact:React.FC<ContactProps> = ({ font }) => {
             <p className="text-white text-base text-left uppercase">Interested In:</p>
 
             <div className="flex flex-row flex-wrap items-start lg:items-center gap-3 mb-8">
-              <div className="flex flex-row gap-3">
+              <div className="flex flex-row gap-1">
                 <input type="radio" name="interests" value={'Business Inquiry'} id="inquiry" />
                 <label htmlFor="inquiry" className="text-white text-base text-center uppercase ms-2 me-4">Business Inquiry</label>
               </div>
-              <div className="flex flex-row gap-3">
+              <div className="flex flex-row gap-1">
                 <input type="radio" name="interests" value={'Sample Kit'} />
                 <label htmlFor="inquiry" className="text-white text-base text-center uppercase ms-2 me-4">Sample Kit</label>
               </div>
-              <div className="flex flex-row gap-3">
+              <div className="flex flex-row gap-1">
                 <input type="radio" name="interests" value={'other'} />
                 <label htmlFor="inquiry" className="text-white text-base text-center uppercase ms-2 me-4">Other</label>
               </div>
