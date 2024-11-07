@@ -32,6 +32,17 @@ const ParallelBrick: React.FC<ParallelBrickProps> = ({ font }) => {
           // markers: true,
         },
       });
+      gsap.from('.fade-up', {
+        y: 70,
+        opacity: 0,
+        scrollTrigger: {
+          trigger: brickSectionRef.current,
+          start: 'top bottom',
+          end: 'center bottom',
+          scrub: true,
+          // markers: true,
+        },
+      });
     }
   );
 
@@ -44,7 +55,7 @@ const ParallelBrick: React.FC<ParallelBrickProps> = ({ font }) => {
         <Image src="/images/brick-cut.png" alt="brick-img" width={500} height={200} className="absolute bottom-[-0.5vw] left-[30%] w-[51vw] lg:w-[25vw]" ref={brickCutRef} />
       </div>
 
-      <div className="w-2/3 lg:w-1/3  text-center lg:text-left flex flex-col items-center lg:items-start mt-12 lg:mt-0">
+      <div className="w-2/3 lg:w-1/3  text-center lg:text-left flex flex-col items-center lg:items-start mt-12 lg:mt-0 fade-up">
         <h3 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[4rem] leading-[3rem] lg:leading-[4rem] uppercase`}><span className="text-bg">Colored</span><br/>to the core</h3>
         <p className="text-[#969696] text-base">Get unparalleled, deep color seamlessly mixed <span className="text-white">throughout every millimeter of concrete</span>, from the inside out. Full spectrum. Full coverage.</p>
       </div>

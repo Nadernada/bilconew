@@ -37,6 +37,7 @@ const Home = () => {
   const textBottomRef = useRef(null);
   const lineTextRef = useRef(null);
   const lineRef = useRef(null);
+  const footerRef = useRef(null);
 
 
   useGSAP(
@@ -79,8 +80,20 @@ const Home = () => {
         duration: 1,
         delay: 0.5
       });
+      gsap.from('.fade-up-footer', {
+        y: 100,
+        opacity: 0,
+        scrollTrigger: {
+          trigger: footerRef.current,
+          start: 'top bottom',
+          end: 'center bottom',
+          scrub: true,
+          // markers: true,
+        },
+      });
     }
   );
+  
   
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
@@ -221,32 +234,32 @@ const Home = () => {
       <Contact font={urdwinBoldMono} />
 
 
-      <div className="mt-0 footer p-12 lg:p-28 lg:pb-12 ps-12 2xl:ps-80 bg-black">
-        <div className="flex flex-col gap-y-12 justify-start">
+      <div className="mt-0 footer p-12 lg:p-28 lg:pb-12 ps-12 2xl:ps-80 bg-black  fade-up-footer"  ref={footerRef}>
+        <div className="flex flex-col gap-y-12 justify-start  fade-up-footer">
           <Image src="/images/bilco-logo.png" alt="bilco logo" width={175} height={28}/>
 
-          <p className="text-[#969696] text-sm text-left">If you’d like more information about our products or <br />would like to place an order, please call, email or fax us:</p>
+          <p className="text-[#969696] text-sm text-left fade-up-footer">If you’d like more information about our products or <br />would like to place an order, please call, email or fax us:</p>
 
-          <div className="flex flex-col gap-y-4">
+          <div className="flex flex-col gap-y-4 fade-up-footer">
             <p className="text-white text-sm text-left">Phone: (972) 227-3380</p>
             <p className="text-white text-sm text-left">Email: info@BilcoBrick.com</p>
           </div>
 
-          <p className="text-white text-sm text-left">bilcobrick.com</p>
+          <p className="text-white text-sm text-left fade-up-footer">bilcobrick.com</p>
 
-          <div className="flex flex-row justify-start items-center gap-x-3">
+          <div className="flex flex-row justify-start items-center gap-x-3 fade-up-footer">
             <Image src="/images/ig-bilco.svg" alt="bilco logo" width={34} height={34} className="hover:scale-105 transition-all cursor-pointer hover:invert"/>
             <Image src="/images/fb-bilco.svg" alt="bilco logo" width={34} height={34} className="hover:scale-105 transition-all cursor-pointer hover:invert"/>
             <Image src="/images/linkedin-bilco.svg" alt="bilco logo" width={34} height={34} className="hover:scale-105 transition-all cursor-pointer hover:invert"/>
 
           </div>
 
-          <p className="text-[#969696] text-sm text-left">© 2024 Bilco Corporation  |  All Rights Reserved  | Terms of Use</p>
+          <p className="text-[#969696] text-sm text-left fade-up-footer">© 2024 Bilco Corporation  |  All Rights Reserved  | Terms of Use</p>
 
 
         </div>
       </div>
-          <Image src="/images/footer-bricks.png" alt="bilco logo" width={175} height={28} className="flex lg:hidden w-full"/>
+          <Image src="/images/footer-bricks.png" alt="bilco logo" width={175} height={28} className="flex lg:hidden w-full fade-up-footer"/>
       
     </div>
   );

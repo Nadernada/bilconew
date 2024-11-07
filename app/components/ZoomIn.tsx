@@ -58,6 +58,17 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
           // markers: true,
         },
       });
+      gsap.from('.fade-up-zoom', {
+        y: 100,
+        opacity: 0,
+        scrollTrigger: {
+          trigger: brickSectionRef.current,
+          start: 'top bottom',
+          end: 'center bottom',
+          scrub: true,
+          // markers: true,
+        },
+      });
     }
   );
 
@@ -69,12 +80,12 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
 
 
         <div className="mt-28 flex flex-col lg:flex-row justify-around items-center lg:items-start">
-          <h3 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[4rem] leading-[3rem] lg:leading-[4rem] uppercase`}>Custom<br /> Created</h3>
-          <p className="text-[#969696] text-base w-4/5 lg:w-1/2 text-center lg:text-left">Unlike mass produced clay bricks, every batch of the Bilco Professional Line is <span className="text-white">made to order.</span> <br/><br/>Through this personalized manufacturing process, the bricks are guaranteed to match your vision.</p>
+          <h3 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[4rem] leading-[3rem] lg:leading-[4rem] uppercase fade-up-zoom`}>Custom<br /> Created</h3>
+          <p className="text-[#969696] text-base w-4/5 lg:w-1/2 text-center lg:text-left fade-up-zoom">Unlike mass produced clay bricks, every batch of the Bilco Professional Line is <span className="text-white">made to order.</span> <br/><br/>Through this personalized manufacturing process, the bricks are guaranteed to match your vision.</p>
         </div>
 
-        <Image src="/images/brick-pattern.png" alt="brick-img" width={1302} height={463} className="mt-24 w-auto lg:w-full max-w-none lg:max-w-full h-svh lg:h-auto hidden sm:flex" />
-        <Image src="/images/brick-pattern-mobile.png" alt="brick-img" width={1302} height={463} className="mt-24 w-full max-w-none aspect-auto object-cover flex sm:hidden" />
+        <Image src="/images/brick-pattern.png" alt="brick-img" width={1302} height={463} className="mt-24 w-auto lg:w-full max-w-none lg:max-w-full h-svh lg:h-auto hidden sm:flex fade-up-zoom" />
+        <Image src="/images/brick-pattern-mobile.png" alt="brick-img" width={1302} height={463} className="mt-24 w-full max-w-none aspect-auto object-cover flex sm:hidden fade-up-zoom" />
       </div>
   );
 };

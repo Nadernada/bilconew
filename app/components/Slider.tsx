@@ -6,6 +6,11 @@ import { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Swiper as SwiperType } from 'swiper';
 import { FreeMode, Mousewheel } from 'swiper/modules';
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 
 SwiperCore.use([FreeMode, Mousewheel]);
@@ -58,25 +63,43 @@ const Slider: React.FC<SliderProps> = ({ font }) => {
     
   }, [flipCardIndex])
 
+  const sectionRef = useRef(null);
+
+  useGSAP(
+    () => {
+      gsap.from('.fade-up-slider', {
+        y: 70,
+        opacity: 0,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top bottom',
+          end: 'center bottom',
+          scrub: true,
+          // markers: true,
+        },
+      });
+    }, { scope: sectionRef }
+  );
+
 
   return (
-    <div className="mt-24 flex flex-col items-center ps-6 lg:ps-36 max-h-screen">
+    <div className="mt-24 flex flex-col items-center ps-6 lg:ps-36 max-h-screen" ref={sectionRef}>
 
         <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start">
           <div className="w-4/5 lg:w-1/3 text-center lg:text-left flex flex-col items-center lg:items-start">
-            <h3 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[4rem] leading-[3rem] lg:leading-[4rem] uppercase`}><span className="text-bg">Color</span><br/>that inspires</h3>
-            <p className="text-[#969696] text-base">If you aspire to create stunning structures that are a reflection of your life’s work, consider how the Bilco Professional Line of concrete bricks can <span className="text-white">brighten your next project.</span></p>
+            <h3 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[4rem] leading-[3rem] lg:leading-[4rem] uppercase fade-up-slider`}><span className="text-bg">Color</span><br/>that inspires</h3>
+            <p className="text-[#969696] text-base fade-up-slider">If you aspire to create stunning structures that are a reflection of your life’s work, consider how the Bilco Professional Line of concrete bricks can <span className="text-white">brighten your next project.</span></p>
           </div>
 
           <div className="lg:flex flex-row gap-x-4 justify-center self-end hidden me-8">
             <button 
-              className="rounded-full w-12 h-12 bg-[#2D2D2F] flex justify-center items-center"
+              className="rounded-full w-12 h-12 bg-[#2D2D2F] flex justify-center items-center fade-up-slider"
               onClick={() => swiperRef?.current?.slidePrev()}
             >
               <Image src="/images/left-chevron.svg" alt="brick-img" width={8} height={16} />
             </button>
             <button
-              className="rounded-full w-12 h-12 bg-[#2D2D2F] flex justify-center items-center"
+              className="rounded-full w-12 h-12 bg-[#2D2D2F] flex justify-center items-center fade-up-slider"
               onClick={() => swiperRef.current?.slideNext()}
             >
               <Image src="/images/right-chevron.svg" alt="brick-img" width={8} height={16} />
@@ -84,7 +107,7 @@ const Slider: React.FC<SliderProps> = ({ font }) => {
           </div>
         </div>
 
-        <div className="w-full mt-6" >
+        <div className="w-full mt-6 fade-up-slider" >
           <Swiper
             onSwiper={(swiper) => (swiperRef.current = swiper)}
             slidesPerView={3.3}
@@ -145,13 +168,13 @@ const Slider: React.FC<SliderProps> = ({ font }) => {
 
         <div className="lg:hidden flex-row gap-x-4 justify-center lg:self-end flex">
             <button 
-              className="rounded-full w-12 h-12 bg-[#2D2D2F] flex justify-center items-center"
+              className="rounded-full w-12 h-12 bg-[#2D2D2F] flex justify-center items-center fade-up-slider"
               onClick={() => swiperRef?.current?.slidePrev()}
             >
               <Image src="/images/left-chevron.svg" alt="brick-img" width={8} height={16} />
             </button>
             <button
-              className="rounded-full w-12 h-12 bg-[#2D2D2F] flex justify-center items-center"
+              className="rounded-full w-12 h-12 bg-[#2D2D2F] flex justify-center items-center fade-up-slider"
               onClick={() => swiperRef?.current?.slideNext()}
             >
               <Image src="/images/right-chevron.svg" alt="brick-img" width={8} height={16} />
