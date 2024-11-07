@@ -31,7 +31,6 @@ const Home = () => {
   const playButtonRef = useRef<any | null | undefined>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const [showLightbox, setShowLightbox] = useState(false);
   const [buttonPosition, setButtonPosition] = useState({ x: 0, y: 0 });
   const magneticStrength = 300; // Adjust for magnetic range
   const textTopRef = useRef(null);
