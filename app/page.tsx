@@ -138,7 +138,7 @@ const Home = () => {
 
 
   return (
-    <div className="w-full bg-[#090A0A] relative">
+    <div className="w-full bg-[#090A0A] relative overflow-x-hidden">
 
       <NavBar />
 
