@@ -3,6 +3,7 @@
 import Button from "./Button";
 import { NextFontWithVariable } from "next/dist/compiled/@next/font";
 import Image from "next/image";
+import { useState } from "react";
 
 
 interface ContactProps {
@@ -11,6 +12,17 @@ interface ContactProps {
 
 
 const Contact:React.FC<ContactProps> = ({ font }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+
+  const options = ['Builder', 'Design firm', 'Architect', 'Contractor', 'Engineer', 'Distributor'];
+
+  const handleOptionClick = (option: string) => {
+    setSelectedOption(option);
+    setIsOpen(false); // Close dropdown after selecting
+  };
+
+
   return (
     <div className="mt-36 flex flex-col items-center">
         <div className="w-4/5 mb-10">
@@ -26,15 +38,30 @@ const Contact:React.FC<ContactProps> = ({ font }) => {
             <input type="text" name="fullname" id="fullname" className="bg-transparent placeholder:text-white border-b border-white w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Full Name" />
             <input type="text" name="business-name" id="business-name" className="bg-transparent placeholder:text-white border-b border-white w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Business Name" />
             <input type="text" name="business-website" id="business-website" className="bg-transparent placeholder:text-white border-b border-white w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Business Name" />
-            <label htmlFor="description">Which best describes you?</label>
-            <select name="description" id="description" className=" w-full lg:w-4/5 bg-transparent py-2 border-b border-white">
-              <option value="builder" className="uppercase text-white text-base">Builder</option>
-              <option value="builder" className="uppercase text-white text-base">Design firm</option>
-              <option value="builder" className="uppercase text-white text-base">Architect</option>
-              <option value="builder" className="uppercase text-white text-base">Contractor</option>
-              <option value="builder" className="uppercase text-white text-base">Engineer</option>
-              <option value="builder" className="uppercase text-white text-base">Distributor</option>
-            </select>
+            <div id="business-website" className="bg-transparent placeholder:text-white border-b border-white w-full lg:w-4/5 leading-7 py-2 colorInput relative cursor-pointer">
+              <div
+                className="dropdown-header w-full flex justify-between items-center text-white uppercase"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                {selectedOption || 'Which best describes you?'}
+                <span className={`arrow w-3 h-3 ${isOpen ? 'open' : ''}`}>
+                  <Image src="/images/chevron-down.svg" alt="brick-img" width={16} height={16} />
+                </span>
+              </div>
+              {isOpen && (
+                <div className="dropdown-list absolute top-[110%] left-0 w-full flex flex-col gap-1 bg-black">
+                  {options.map((option) => (
+                    <div
+                      key={option}
+                      className="dropdown-item uppercase text-white text-base hover:bg-white hover:text-black duration-200 p-2 cursor-pointer transition-colors"
+                      onClick={() => handleOptionClick(option)}
+                    >
+                      {option}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
             <input type="phone" name="phone" id="phone" className="bg-transparent placeholder:text-white border-b border-white w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Phone" />
             <input type="email" name="email" id="email" className="bg-transparent placeholder:text-white border-b border-white w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Email" />
 

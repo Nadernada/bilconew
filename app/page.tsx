@@ -29,7 +29,8 @@ const urdwinBoldMono = localFont({
 const Home = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const playButtonRef = useRef<any | null | undefined>(null);
-  const videoRef = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const [showLightbox, setShowLightbox] = useState(false);
   const [buttonPosition, setButtonPosition] = useState({ x: 0, y: 0 });
   const magneticStrength = 300; // Adjust for magnetic range
@@ -129,16 +130,34 @@ const Home = () => {
 
       <NavBar />
 
-      {showLightbox && <div className="absolute top-0 left-0 h-screen w-screen bg-black/80 p-14 z-50">
+      <dialog className=" h-screen w-screen bg-[#000000cc] focus-visible:outline-none p-14 z-50 backdrop:bg-[#000000cc]" ref={dialogRef}>
           <div className="w-full p-4 flex justify-end">
             <p className="text-black bg-white rounded-full w-12 h-12 flex justify-center items-center text-lg cursor-pointer hover:bg-transparent hover:text-white duration-300 border border-white transition-colors"
-            onClick={() => setShowLightbox(false)}
+            onClick={() => dialogRef.current?.close()}
             >X</p>
           </div>
-        <div className="w-full h-[90%] rounded-2xl overflow-hidden">
+        <div className="w-full h-[90%] rounded-2xl overflow-hidden relative group">
+          <div
+            className="absolute w-full h-full top-0 left-0 group-hover:opacity-100 opacity-0 transition-all duration-300 delay-200 bg-slate-950/30 flex justify-center items-center cursor-pointer z-30"
+            onClick={() => {
+              if(videoRef.current?.paused) {
+                videoRef.current?.play();
+              } else {
+                videoRef.current?.pause();
+              }
+            }}
+          >
+            {
+              !videoRef.current?.paused ? (
+                <Image src="/images/pause-svgrepo-com.svg" alt="pause-img" width={31} height={36} className="invert" />
+              ): (
+                <Image src="/images/chevron-right.svg" alt="chevron-img" width={31} height={36} className="" />
+              )
+            }
+          </div>
           <video src="/images/hero-video.mp4" className="object-cover !max-w-none" autoPlay muted loop ref={videoRef}></video>
         </div>
-      </div>}
+      </dialog>
       <div className="w-screen relative h-fit overflow-hidden">
         <div className="h-screen lg:h-fit w-auto lg:w-full z-0 overflow-hidden">
           <video src="/images/hero-video.mp4" className="object-cover !max-w-none"></video>
@@ -171,7 +190,7 @@ const Home = () => {
           <div className="flex flex-col gap-y-6 justify-center items-center z-10 relative w-full pb-24">
             <div className="w-12 h-12 rounded-full border border-slate-100 flex justify-center items-center cursor-pointer hover:bg-slate-100 transition-colors group duration-300" ref={playButtonRef}
               style={{ transform: `translate(${buttonPosition.x}px, ${buttonPosition.y}px)` }}
-              onClick={() => setShowLightbox(true)}
+              onClick={() => dialogRef.current?.showModal()}
             >
               <Image src="/images/chevron-right.svg" alt="chevron-img" width={11} height={16} className="group-hover:invert transition-all duration-300" />
             </div>
