@@ -183,7 +183,7 @@ const Home = () => {
             <Image src="/images/hero-rainbow.png" alt="rainbow-img" width={400} height={2} ref={lineRef} />
             <div className="overflow-hidden">
               <h2
-                className={`${urdwinBoldMono.className} antialiased text-[#F3F3F6] font-bold text-[5rem] lg:text-[8rem] leading-[5rem] lg:leading-[8rem] uppercase text-center text-shadow`}
+                className={`${urdwinBoldMono.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[8rem] leading-[3rem] lg:leading-[8rem] uppercase text-center text-shadow`}
                 ref={textTopRef}
                 >
                 GO BOLD WITH
@@ -191,7 +191,7 @@ const Home = () => {
             </div>
             <div className="overflow-hidden">
               <h2
-                className={`${urdwinBoldMono.className} antialiased text-[#F3F3F6] font-bold text-[5rem] lg:text-[8rem] leading-[5rem] lg:leading-[8rem] uppercase text-center text-shadow`}
+                className={`${urdwinBoldMono.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[8rem] leading-[3rem] lg:leading-[8rem] uppercase text-center text-shadow`}
                 ref={textBottomRef}
                 >
                 BILCO BRICK
