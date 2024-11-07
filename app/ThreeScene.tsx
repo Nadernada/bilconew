@@ -36,7 +36,7 @@ const ThreeScene: React.FC = () => {
         console.log(window.innerWidth, 'inner');
         
         if(window.innerWidth > 726) {
-          renderer.setSize(window.innerWidth / 2.5, window.innerHeight / 2.5);
+          renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
         } else {
           renderer.setSize(window.innerWidth, window.innerHeight / 2.5);
         }
@@ -54,7 +54,7 @@ const ThreeScene: React.FC = () => {
           camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.05, 20);
           camera.position.set(0.35, 0.35, 0.35);
         } else {
-          camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.05, 20);
+          camera = new THREE.PerspectiveCamera(50, window.innerWidth / (window.innerHeight / 2.5), 0.05, 20);
           camera.position.set(0.35, 0.35, 0.35);
         }
   
@@ -118,9 +118,9 @@ const ThreeScene: React.FC = () => {
               mesh.receiveShadow = true;
 
               if(window.innerWidth > 726) {
-                mesh.scale.set(0.6, 0.6, 0.6);
+                mesh.scale.set(0.25, 0.25, 0.25);
               } else {
-                mesh.scale.set(0.2, 0.6, 0.2);
+                mesh.scale.set(0.4, 0.4, 0.4);
               }
               mesh.rotation.set(0, 1.2, 0);
             }

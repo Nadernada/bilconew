@@ -176,7 +176,7 @@ const Home = () => {
         </div>
 
         <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center gap-24">
-          <div className="w-full flex flex-col justify-center items-center gap-y-6 z-10 relative mt-10 lg:mt-0">
+          <div className="w-full flex flex-col justify-center items-center gap-y-6 z-10 relative mt-24 lg:mt-0">
             <div className="overflow-hidden">
               <h1 className={`${urdwinBoldMono.className} antialiased text-[#F3F3F6] font-bold text-[2rem] uppercase`} ref={lineTextRef}>professional line</h1>
             </div>
