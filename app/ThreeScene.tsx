@@ -48,8 +48,15 @@ const ThreeScene: React.FC = () => {
   
         rendererRef.current = renderer;
   
-        const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.05, 20);
-        camera.position.set(0.35, 0.35, 0.35);
+        let camera: THREE.PerspectiveCamera;
+                
+        if(window.innerWidth > 726) {
+          camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.05, 20);
+          camera.position.set(0.35, 0.35, 0.35);
+        } else {
+          camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.05, 20);
+          camera.position.set(0.35, 0.35, 0.35);
+        }
   
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
