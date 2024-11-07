@@ -176,7 +176,7 @@ const Home = () => {
         </div>
 
         <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center gap-24">
-          <div className="w-full flex flex-col justify-center items-center gap-y-6 z-10 relative">
+          <div className="w-full flex flex-col justify-center items-center gap-y-6 z-10 relative mt-10 lg:mt-0">
             <div className="overflow-hidden">
               <h1 className={`${urdwinBoldMono.className} antialiased text-[#F3F3F6] font-bold text-[2rem] uppercase`} ref={lineTextRef}>professional line</h1>
             </div>
@@ -213,7 +213,7 @@ const Home = () => {
 
       <div className="mt-24">
         <div>
-          <h3 className={`${urdwinBoldMono.className} antialiased text-[#F3F3F6] font-bold text-[4rem] leading-[4rem] uppercase text-center`}><span className="text-bg">explore the</span><br/>full spectrum</h3>
+          <h3 className={`${urdwinBoldMono.className} antialiased text-[#F3F3F6] font-bold  text-[3rem] lg:text-[4rem] leading-[3rem] lg:leading-[4rem] uppercase text-center`}><span className="text-bg">explore the</span><br/>full spectrum</h3>
         </div>
 
         <div>

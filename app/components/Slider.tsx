@@ -123,7 +123,7 @@ const Slider: React.FC<SliderProps> = ({ font }) => {
                 slidesPerView: 1.5
               },
               768: {
-                slidesPerView: 2.5
+                slidesPerView: 1.5
               },
             }}
           >
