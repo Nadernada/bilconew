@@ -53,6 +53,10 @@ body {
   outline: none;
 }
 
+.colorInput:focus-visible::placeholder {
+  opacity: 0;
+}
+
 .checkmark-container input:checked ~ .checkmark:after {
   display: block;
 }

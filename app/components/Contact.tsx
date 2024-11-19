@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from '@gsap/react';
+import Button from "./Button";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -51,15 +52,15 @@ const Contact:React.FC<ContactProps> = ({ font }) => {
         </div>
 
         <h2 id="contact" className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] leading-[3rem] lg:text-[5.25rem] lg:leading-[5.3rem] uppercase text-center fade-up-contact  -translate-y-14 lg:translate-y-0`}>Let&apos;s Start Building</h2>
-        <p className="text-[#969696] text-base text-center fade-up-contact -translate-y-14 lg:translate-y-0 w-4/5 lg:w-full">Reach out to get ahold of our team or a sample</p>
+        <p className="text-[#969696]  text-base lg:text-[1.375rem] lg:leading-[1.75rem] text-center fade-up-contact -translate-y-14 lg:translate-y-0 w-4/5 lg:w-full">Reach out to get ahold of our team or a sample</p>
 
  
-        <div className="mt-12 flex flex-row justify-around bg-contact-gradient rounded-3xl p-6 lg:p-16 w-full lg:w-4/5 fade-up-contact  -translate-y-14">
+        <div className="mt-12 flex flex-row justify-around bg-contact-gradient rounded-3xl p-6 lg:px-28 lg:py-20 w-full lg:w-4/5 fade-up-contact  -translate-y-14 lg:translate-y-0">
           <form action="" className="w-full lg:w-1/2 flex flex-col gap-y-6">
-            <input type="text" name="fullname" id="fullname" className="bg-transparent placeholder:text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-base border-[#f3f3f6] w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Full Name" />
-            <input type="text" name="business-name" id="business-name" className="bg-transparent placeholder:text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-base border-[#f3f3f6] w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Business Name" />
-            <input type="text" name="business-website" id="business-website" className="bg-transparent placeholder:text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-base border-[#f3f3f6] w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Business Website" />
-            <div id="business-website" className="bg-transparent placeholder:text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-base border-[#f3f3f6] w-full lg:w-4/5 leading-7 py-2 colorInput relative cursor-pointer">
+            <input type="text" name="fullname" id="fullname" className="bg-transparent placeholder:text-[#f3f3f6] text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Full Name" />
+            <input type="text" name="business-name" id="business-name" className="bg-transparent placeholder:text-[#f3f3f6] text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Business Name" />
+            <input type="text" name="business-website" id="business-website" className="bg-transparent placeholder:text-[#f3f3f6] text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Business Website" />
+            <div id="business-website" className="bg-transparent placeholder:text-[#f3f3f6] text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full lg:w-4/5 leading-7 py-2 colorInput relative cursor-pointer">
               <div
                 className="dropdown-header w-full flex justify-between items-center text-[#f3f3f6] uppercase"
                 onClick={() => setIsOpen(!isOpen)}
@@ -70,11 +71,11 @@ const Contact:React.FC<ContactProps> = ({ font }) => {
                 </span>
               </div>
               {isOpen && (
-                <div className="dropdown-list absolute top-[120%] left-0 w-full flex flex-col gap-1 bg-[#5B5B5B] py-2">
+                <div className="dropdown-list absolute top-[120%] left-0 w-full z-20 flex flex-col gap-1 bg-[#5B5B5B] py-2">
                   {options.map((option) => (
                     <div
                       key={option}
-                      className="dropdown-item uppercase text-[#f3f3f6] text-base hover:bg-[#404040] hover:text-[#f3f3f6] duration-200 py-2 px-5 cursor-pointer transition-colors"
+                      className="dropdown-item uppercase text-[#f3f3f6] text-sm hover:bg-[#404040] hover:text-[#f3f3f6] duration-200 py-2 px-5 cursor-pointer transition-colors"
                       onClick={() => handleOptionClick(option)}
                     >
                       {option}
@@ -83,36 +84,34 @@ const Contact:React.FC<ContactProps> = ({ font }) => {
                 </div>
               )}
             </div>
-            <input type="phone" name="phone" id="phone" className="bg-transparent placeholder:text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-base border-[#f3f3f6] w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Phone" />
-            <input type="email" name="email" id="email" className="bg-transparent placeholder:text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-base border-[#f3f3f6] w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Email" />
+            <input type="phone" name="phone" id="phone" className="bg-transparent placeholder:text-[#f3f3f6] text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Phone" />
+            <input type="email" name="email" id="email" className="bg-transparent placeholder:text-[#f3f3f6] text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Email" />
 
             <p className="text-[#f3f3f6] text-base text-left uppercase">Interested In:</p>
 
-            <div className="flex flex-row flex-wrap items-start lg:items-center gap-3 mb-8">
-              <div className="flex flex-row gap-1 relative checkmark-container cursor-pointer">
+            <div className="flex flex-row flex-wrap items-start lg:items-center gap-3 mb-8 ms-0 lg:ms-4">
+              <div className="flex flex-row  relative checkmark-container cursor-pointer">
                 <input type="radio" name="interests" value={'Business Inquiry'} id="inquiry" className="absolute opacity-0 top-0 left-0 w-full h-full z-10 cursor-pointer" />
-                <div className="absolute top-1/2 left-0 -translate-y-1/2 bg-transparent border text-[1rem] lg:text-base border-[#f3f3f6] w-4 h-4 rounded-full checkmark"/>
-                <label htmlFor="inquiry" className="text-[#f3f3f6] text-base text-center uppercase ms-2 me-4 ps-5">Business Inquiry</label>
+                <div className="absolute top-1/2 left-0 -translate-y-1/2 bg-transparent border text-[1rem] lg:text-sm border-[#969696] w-4 h-4 rounded-full checkmark"/>
+                <label htmlFor="inquiry" className="text-[#f3f3f6] text-base text-center uppercase ms-1 me-4 ps-5">Business Inquiry</label>
               </div>
-              <div className="flex flex-row gap-1 relative checkmark-container cursor-pointer">
+              <div className="flex flex-row  relative checkmark-container cursor-pointer">
                 <input type="radio" name="interests" value={'Business Inquiry'} id="inquiry" className="absolute opacity-0 top-0 left-0 w-full h-full z-10 cursor-pointer" />
-                <div className="absolute top-1/2 left-0 -translate-y-1/2 bg-transparent border text-[1rem] lg:text-base border-[#f3f3f6] w-4 h-4 rounded-full checkmark"/>
-                <label htmlFor="inquiry" className="text-[#f3f3f6] text-base text-center uppercase ms-2 me-4 ps-5">Sample Kit</label>
+                <div className="absolute top-1/2 left-0 -translate-y-1/2 bg-transparent border text-[1rem] lg:text-sm border-[#969696] w-4 h-4 rounded-full checkmark"/>
+                <label htmlFor="inquiry" className="text-[#f3f3f6] text-base text-center uppercase ms-1 me-4 ps-5">Sample Kit</label>
               </div>
-              <div className="flex flex-row gap-1 relative checkmark-container cursor-pointer">
+              <div className="flex flex-row  relative checkmark-container cursor-pointer">
                 <input type="radio" name="interests" value={'Business Inquiry'} id="inquiry" className="absolute opacity-0 top-0 left-0 w-full h-full z-10 cursor-pointer" />
-                <div className="absolute top-1/2 left-0 -translate-y-1/2 bg-transparent border text-[1rem] lg:text-base border-[#f3f3f6] w-4 h-4 rounded-full checkmark"/>
-                <label htmlFor="inquiry" className="text-[#f3f3f6] text-base text-center uppercase ms-2 me-4 ps-5">Other</label>
+                <div className="absolute top-1/2 left-0 -translate-y-1/2 bg-transparent border text-[1rem] lg:text-sm border-[#f3f3f6] w-4 h-4 rounded-full checkmark"/>
+                <label htmlFor="inquiry" className="text-[#f3f3f6] text-base text-center uppercase ms-1 me-4 ps-5">Other</label>
               </div>
             </div>
 
-            <a href='#' className="w-full lg:w-fit px-[37.5px] py-[16px] flex justify-center items-center text-black font-semibold bg-[#F3F3F6] rounded-full uppercase text-sm leading-[16.5px] border text-[1rem] lg:text-base border-[#F3F3F6] transition-all">
-              submit
-            </a>
+            <Button link="#" text="Submit" />
           </form>
 
           <div className="relative w-1/2 hidden lg:flex">
-            <div className="mt-24 absolute -right-24">
+            <div className="mt-24 absolute -top-[15%] -right-48">
               <Image src="/images/form-img.png" alt="brick-img" width={863} height={468} className="hidden lg:flex" />
             </div>
           </div>

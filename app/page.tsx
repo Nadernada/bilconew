@@ -142,13 +142,13 @@ const Home = () => {
 
       <NavBar />
 
-      <dialog className=" h-screen w-screen bg-[#000000cc] focus-visible:outline-none p-0 z-50 backdrop:bg-[#000000cc]" ref={dialogRef}>
-          <div className="w-full p-4 flex justify-end">
+      <dialog className=" h-screen w-screen bg-[#000000cc] relative focus-visible:outline-none p-0 z-50 backdrop:bg-[#000000cc]" ref={dialogRef}>
+          <div className="w-full absolute top-4 right-4 z-50 p-4 flex justify-end">
             <p className="text-black bg-[#f3f3f6] rounded-full w-12 h-12 flex justify-center items-center text-lg cursor-pointer hover:bg-transparent hover:text-[#f3f3f6] duration-300 border border-[#f3f3f6] transition-colors"
             onClick={() => dialogRef.current?.close()}
             >X</p>
           </div>
-        <div className="w-full h-[90%] rounded-2xl overflow-hidden relative group">
+        <div className="w-full h-full overflow-hidden relative group">
           <div
             className="absolute w-full h-full top-0 left-0 group-hover:opacity-100 opacity-0 transition-all duration-300 delay-200 bg-slate-950/30 flex justify-center items-center cursor-pointer z-30"
             onClick={() => {
@@ -172,46 +172,44 @@ const Home = () => {
       </dialog>
       <div className="w-screen relative h-screen overflow-hidden">
         <div className="h-screen lg:h-fit w-auto lg:w-full z-0 overflow-hidden">
-          <video src="/images/hero-video.mp4" className="object-cover !max-w-none" autoPlay muted loop></video>
+          <video src="/images/hero-video.mp4" className="object-cover !max-w-none" autoPlay muted loop controls={false}></video>
         </div>
 
-        <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center gap-24">
-          <div className="w-full flex flex-col justify-center items-center gap-y-3 lg:gap-y-6 z-10 relative mt-48 lg:mt-0">
-            <div className="overflow-hidden">
-              <h1 className={`${urdwinBoldMono.className} antialiased text-[#F3F3F6] font-bold text-[1.5rem] lg:text-[2rem] uppercase`} ref={lineTextRef}>professional line</h1>
-            </div>
-            <Image src="/images/hero-rainbow.png" alt="rainbow-img" width={400} height={2} ref={lineRef} />
+        <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center gap-24">
+          <div className="w-full flex flex-col justify-center items-center gap-y-3 lg:gap-y-6 z-10 relative mt-0">
+              <h1 className={`${urdwinBoldMono.className} antialiased text-[#F3F3F6] font-bold text-[1.5rem] leading-[1.5rem] lg:leading-[2rem] lg:text-[2rem] uppercase`} ref={lineTextRef}>professional line</h1>
+            <Image src="/images/hero-rainbow.png" alt="rainbow-img" width={400} height={2} ref={lineRef} className="w-1/2 lg:w-[400px]" />
             <div className="flex flex-col justify-center items-center">
 
-              <div className="overflow-hidden">
+              {/* <div className="overflow-hidden"> */}
                 <h2
-                  className={`${urdwinBoldMono.className} antialiased text-[#F3F3F6] font-bold text-[3.5rem] lg:text-[8rem] leading-[3.5rem] lg:leading-[8rem] uppercase text-center text-shadow pt-[0.2rem]`}
+                  className={`${urdwinBoldMono.className} antialiased text-[#F3F3F6] font-bold text-[4.5rem] lg:text-[8rem] leading-[4.5rem] lg:leading-[8rem] uppercase text-center text-shadow pt-[0.2rem]`}
                   ref={textTopRef}
                   >
                   GO BOLD WITH
                 </h2>
-              </div>
-              <div className="overflow-hidden">
+              {/* </div> */}
+              {/* <div className="overflow-hidden"> */}
                 <h2
-                  className={`${urdwinBoldMono.className} antialiased text-[#F3F3F6] font-bold text-[3.5rem] lg:text-[8rem] leading-[3.5rem] lg:leading-[8rem] uppercase text-center text-shadow pt-[0.2rem]`}
+                  className={`${urdwinBoldMono.className} antialiased text-[#F3F3F6] font-bold text-[4.5rem] lg:text-[8rem] leading-[4.5rem] lg:leading-[8rem] uppercase text-center text-shadow pt-[0.2rem]`}
                   ref={textBottomRef}
                   >
                   BILCO BRICK
                 </h2>
-              </div>
+              {/* </div> */}
             </div>
           </div>
 
-          <div className="flex flex-col gap-y-6 justify-center items-center z-10 relative w-full pb-24">
-            <div className="w-12 h-12 rounded-full border border-slate-100 flex justify-center items-center cursor-pointer hover:bg-slate-100 transition-colors group duration-300" ref={playButtonRef}
+        </div>
+          <div className=" absolute bottom-0 flex flex-col gap-y-6 justify-center items-center z-10 w-full pb-12">
+            <div className="w-10 h-10 rounded-full border border-slate-100 flex justify-center items-center cursor-pointer hover:bg-slate-100 transition-colors group duration-300" ref={playButtonRef}
               style={{ transform: `translate(${buttonPosition.x}px, ${buttonPosition.y}px)` }}
-              onClick={() => dialogRef.current?.showModal()}
+              onClick={() => dialogRef.current?.show()}
             >
               <Image src="/images/play-icon.svg" alt="chevron-img" width={11} height={16} className="group-hover:invert transition-all duration-300" />
             </div>
-            <p className="text-[#969696] text-lg lg:text-xl text-center px-6 lg:px-0">The only concrete brick that’s colored to the core.</p>
+            <p className="text-[#969696] text-base lg:text-[1.375rem] lg:leading-[1.75rem] lg:text-xl text-center px-16 lg:px-0">The only concrete brick that’s colored to the core.</p>
           </div>
-        </div>
       </div>
 
       <div className="mt-28 lg:mt-52">
@@ -237,18 +235,18 @@ const Home = () => {
       <Contact font={urdwinBoldMono} />
 
 
-      <div className="mt-16 lg:mt-32 footer p-6 lg:p-28 lg:pb-12 ps-6 2xl:ps-80 bg-[#010101] pt-24 lg:pt-12 fade-up-footer z-10 relative"  ref={footerRef}>
-        <div className="flex flex-col gap-y-12 justify-start  fade-up-footer">
+      <div className="mt-16 lg:mt-32 footer p-6 lg:p-28 lg:pb-24 ps-6 2xl:ps-52 bg-[#000000] pt-24 lg:pt-24 fade-up-footer z-10 relative"  ref={footerRef}>
+        <div className="flex flex-col gap-y-10 justify-start  fade-up-footer">
           <Image src="/images/bilco-logo.svg" alt="bilco logo" width={175} height={28}/>
 
-          <p className="text-[#969696] text-sm text-left fade-up-footer lg:w-2/5 xl:1/5">If you’d like more information about our products or would like to place an order, please call, email or fax us:</p>
+          <p className="text-[#969696] text-xl text-left fade-up-footer w-4/5 lg:w-2/5 xl:1/5">If you’d like more information about our products or would like to place an order, please call, email or fax us:</p>
 
-          <div className="flex flex-col gap-y-4 fade-up-footer">
-            <p className="text-[#f3f3f6] text-sm text-left">Phone: (972) 227-3380</p>
-            <p className="text-[#f3f3f6] text-sm text-left">Email: <span className="underline">info@BilcoBrick.com</span></p>
+          <div className="flex flex-col gap-y-2 fade-up-footer">
+            <p className="text-[#f3f3f6] text-xl text-left">Phone: (972) 227-3380</p>
+            <p className="text-[#f3f3f6] text-xl text-left">Email: <span className="underline">info@BilcoBrick.com</span></p>
           </div>
 
-          <p className="text-[#f3f3f6] text-sm text-left fade-up-footer">bilcobrick.com</p>
+          <p className="text-[#f3f3f6] text-xl text-left fade-up-footer">bilcobrick.com</p>
 
           <div className="flex flex-row justify-start items-center gap-x-3 fade-up-footer">
             <Image src="/images/ig-bilco.svg" alt="bilco logo" width={34} height={34} className="hover:scale-105 transition-all cursor-pointer hover:invert"/>
@@ -257,12 +255,13 @@ const Home = () => {
 
           </div>
 
-          <p className="text-[#f3f3f6] text-sm text-left fade-up-footer">© 2024 Bilco Corporation  |  All Rights Reserved  | <span className="underline">Terms of Use</span></p>
+          <p className="text-[#f3f3f6] text-xl text-left fade-up-footer hidden lg:flex">© 2024 Bilco Corporation  |  All Rights Reserved  | <span className="underline">Terms of Use</span></p>
+          <p className="text-[#f3f3f6] text-xl leading-8 text-left fade-up-footer block  lg:hidden">© 2024 Bilco Corporation  <br />  All Rights Reserved  <br /> <span className="underline">Terms of Use</span></p>
 
 
         </div>
       </div>
-          <Image src="/images/footer-bricks.png" alt="bilco logo" width={400} height={100} className="flex lg:hidden w-full fade-up-footer scale-150 z-0 mt-16"/>
+          <Image src="/images/footer-bricks.png" alt="bilco logo" width={400} height={100} className="flex lg:hidden w-full fade-up-footer scale-[1.7] -translate-x-10 z-0 mt-16"/>
       
     </div>
   );

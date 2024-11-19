@@ -12,7 +12,7 @@ import { PopoverPicker } from "./components/PopoverPicker";
 
 const ThreeScene: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [color, setColor] = useState("#cccccc");
+  const [color, setColor] = useState("#bb6565");
   const modelRef = useRef<THREE.Group | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const [lights, setLights] = useState<{ keyLight: THREE.SpotLight; fillLight: THREE.SpotLight; backLight: THREE.SpotLight } | null>(null); // Use state to store lights
@@ -118,7 +118,7 @@ const ThreeScene: React.FC = () => {
               mesh.receiveShadow = true;
 
               if(window.innerWidth > 726) {
-                mesh.scale.set(0.25, 0.25, 0.25);
+                mesh.scale.set(0.3, 0.3, 0.3);
               } else {
                 mesh.scale.set(0.4, 0.4, 0.4);
               }
@@ -259,29 +259,29 @@ useEffect(() => {
             <div className="w-12 h-12 animate-spin transition-all rounded-full">
             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 12 12"><path fill="currentColor" d="M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z"><animateTransform attributeName="transform" dur="0.75s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></svg>
             </div>
-            <p className="text-base text-white ms-3">Loading</p>
+            <p className="text-base text-[#f3f3f6] ms-3">Loading</p>
           </div>
       }
       <div className="relative"  id="overlayText">
         <div ref={containerRef} />
-        {!hideTextOverlay && !isLoading && <div className="w-4/5 lg:w-max absolute top-1/2 left-1/2 flex gap-x-4 justify-center items-center rounded-full px-5 py-3 bg-gray-800 -translate-x-1/2">
+        {!hideTextOverlay && !isLoading && <div className="w-2/3 lg:w-max absolute top-1/2 left-1/2 flex gap-x-4 justify-center items-center rounded-full px-5 py-3 bg-[#2d2d2f] -translate-x-1/2">
           <Image src={'/images/drag-icon.svg'} width={20} height={20} alt="outside" className="drag-icon" />
-          <p className="text-base text-white">Click and drag to rotate</p>
+          <p className="font-thin text-base text-[#f3f3f6]">Click and drag to rotate</p>
         </div>}
       </div>
-      <p className="text-white text-base lg:text-xl text-center">Bring your vision to life with Bilco&apos;s proprietary color precision technology.</p>
+      <p className="text-[#f3f3f6] text-base lg:text-[1.375rem] lg:leading-[1.75rem] lg:text-xl text-center">Bring your vision to life with Bilco&apos;s proprietary color precision technology.</p>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 lg:flex-row gap-x-16 mt-10">
+      <div className="grid grid-cols-1 lg:grid-cols-2 lg:flex-row gap-x-16 mt-5">
 
         <div className="flex flex-col justify-center items-center gap-y-2">
-          <div className="border border-white rounded-full px-4 py-3 relative h-fit flex flex-row gap-x-3 lg:gap-x-9">
+          <div className="border border-[#f3f3f6] rounded-full ps-4 pe-6 py-3 relative h-fit flex flex-row gap-x-3 lg:gap-x-9 justify-between">
             <HexColorInput
               color={color}
               onChange={setColor}
-              className="px-2 bg-transparent rounded-lg placeholder:text-slate-700 text-slate-700 w-1/3 lg:w-[130px] colorInput"
+              className="px-2 bg-transparent rounded-lg placeholder:text-[#969696] text-[#969696] w-1/3 lg:w-[130px] uppercase colorInput"
             />
             <div className="flex flex-row gap-x-4 cursor-pointer" >
-              <p className="text-base text-white uppercase">Select a color</p>
+              <p className="text-base text-[#f3f3f6] uppercase">Select a color</p>
               <PopoverPicker color={color} onChange={setColor} />
             </div>
           </div>
@@ -291,7 +291,7 @@ useEffect(() => {
 
         <div className="flex flex-col justify-center items-center gap-y-2 mt-6 lg:mt-0">
           <div className="flex flex-row gap-2 justify-between items-center bg-[#2D2D2F] rounded-full px-2 w-full">
-            <div className={`flex flex-col gap-2 justify-center items-center relative ${selectedLight === 0 ? 'bg-white' : 'bg-transparent'} rounded-full px-10 py-4 h-[80%] transition-all duration-300`}>
+            <div className={`flex flex-col gap-2 justify-center items-center relative ${selectedLight === 0 ? 'bg-[#f3f3f6]' : 'bg-transparent'} rounded-full px-10 py-4 h-[80%] transition-all duration-300`}>
               <button
                 className="rounded-full w-full h-full cursor-pointer transition-all absolute z-10"
                 onClick={() => {
@@ -301,7 +301,7 @@ useEffect(() => {
               />
               <Image className={`${selectedLight === 0 ? 'invert' : 'invert-0'}`} src={'/images/outside.svg'} width={20} height={20} alt="outside" />
             </div>
-            <div className={`flex flex-col gap-2 justify-center items-center relative ${selectedLight === 1 ? 'bg-white' : 'bg-transparent'} rounded-full px-10 py-4 h-[80%] transition-all duration-300`}>
+            <div className={`flex flex-col gap-2 justify-center items-center relative ${selectedLight === 1 ? 'bg-[#f3f3f6]' : 'bg-transparent'} rounded-full px-10 py-4 h-[80%] transition-all duration-300`}>
               <button
                 className="rounded-full w-full h-full cursor-pointer transition-all absolute z-10"
                 onClick={() => {
@@ -311,7 +311,7 @@ useEffect(() => {
               />
               <Image className={`${selectedLight === 1 ? 'invert-0' : 'invert'}`} src={'/images/house.svg'} width={20} height={20} alt="outside" />
             </div>
-            <div className={`flex flex-col gap-2 justify-center items-center relative ${selectedLight === 2 ? 'bg-white' : 'bg-transparent'} rounded-full px-10 py-4 h-[80%] transition-all duration-300`}>
+            <div className={`flex flex-col gap-2 justify-center items-center relative ${selectedLight === 2 ? 'bg-[#f3f3f6]' : 'bg-transparent'} rounded-full px-10 py-4 h-[80%] transition-all duration-300`}>
               <button
                 className="rounded-full w-full h-full cursor-pointer transition-all absolute z-10"
                 onClick={() => {
