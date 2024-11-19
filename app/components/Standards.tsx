@@ -17,42 +17,42 @@ interface StandardsProps {
 const Standards: React.FC<StandardsProps> = ({ font }) => {
   const sectionRef = useRef(null);
 
-  useGSAP(
-    () => {
-      gsap.from('.fade-up-standards', {
-        y: 70,
-        opacity: 0,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top bottom',
-          end: 'center bottom',
-          scrub: true,
-          // markers: true,
-        },
-      });
-    }, { scope: sectionRef }
-  );
+  // useGSAP(
+  //   () => {
+  //     gsap.from('.fade-up-standards', {
+  //       y: 70,
+  //       opacity: 0,
+  //       scrollTrigger: {
+  //         trigger: sectionRef.current,
+  //         start: 'top bottom',
+  //         end: 'center bottom',
+  //         scrub: true,
+  //         // markers: true,
+  //       },
+  //     });
+  //   }, { scope: sectionRef }
+  // );
 
   return (
-    <div className="mt-24 flex flex-col justify-center items-center w-full p-12 lg:p-24 gap-y-16 standards-bg" ref={sectionRef}>
-    <div className="w-2/3 lg:w-1/2">
-      <h3 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[4rem] leading-[3rem] lg:leading-[4rem] uppercase text-center fade-up-standards`}>Setting a<br/> Stronger Standard</h3>
-      <p className="text-[#969696] text-lg lg:text-base text-center fade-up-standards"><span className="text-white">Create with color</span> that can outlive the building.</p>
+    <div className="mt-28 lg:mt-52 flex flex-col justify-center items-center w-full p-6 lg:p-24 gap-y-16 standards-bg" ref={sectionRef}>
+    <div className="w-4/5 lg:w-1/2 mt-12 lg:mt-0">
+      <h2 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[5.25rem] leading-[3rem] lg:leading-[5.3rem] uppercase text-center fade-up-standards`}>Setting a<br/> Stronger Standard</h2>
+      <p className="text-[#f3f3f6] text-lg lg:text-base text-center fade-up-standards">Create with color that can outlive the building.</p>
 
     </div>
 
-    <div className="flex flex-col lg:flex-row gap-8 justify-around w-full">
-      <div className="flex flex-col justify-center items-start gap-y-6 p-8 bg-black rounded-2xl group hover:bg-white transition-all duration-400 fade-up-standards">
-        <Image src="/images/standards-1.svg" alt="chevron-img" width={36} height={36} className="group-hover:invert" />
-        <h4 className={`${font.className} text-3xl lg:text-2xl text-white uppercase w-full lg:w-2/3 group-hover:text-black transition-colors duration-300`}>Utilizes 30% less mortar than clay bricks</h4>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] justify-around w-full">
+      <div className="flex flex-col justify-center items-start gap-y-6 p-8 bg-black rounded-2xl group transition-all duration-400 fade-up-standards">
+        <Image src="/images/standards-1.svg" alt="chevron-img" width={36} height={36} />
+        <h4 className={`${font.className} text-3xl lg:text-2xl text-[#f3f3f6] uppercase transition-colors duration-300 lg:w-2/3`}>Utilizes 30% less mortar than clay bricks</h4>
       </div> 
-      <div className="flex flex-col justify-center items-start gap-y-6 p-8 bg-black rounded-2xl group hover:bg-white transition-all duration-400 fade-up-standards">
-        <Image src="/images/standards-2.svg" alt="chevron-img" width={36} height={36} className="group-hover:invert" />
-        <h4 className={`${font.className} text-3xl lg:text-2xl text-white uppercase w-full lg:w-2/3 group-hover:text-black transition-colors duration-300`}>Structural integrity lasts 5X longer than clay</h4>
+      <div className="flex flex-col justify-center items-start gap-y-6 p-8 bg-black rounded-2xl group transition-all duration-400 fade-up-standards">
+        <Image src="/images/standards-2.svg" alt="chevron-img" width={36} height={36} />
+        <h4 className={`${font.className} text-3xl lg:text-2xl text-[#f3f3f6] uppercase transition-colors duration-300 lg:w-2/3`}>Negligible Maintenance compared to normal clay bricks</h4>
       </div> 
-      <div className="flex flex-col justify-center items-start gap-y-6 p-8 bg-black rounded-2xl group hover:bg-white transition-all duration-400 fade-up-standards">
-        <Image src="/images/standards-3.svg" alt="chevron-img" width={36} height={36} className="group-hover:invert" />
-        <h4 className={`${font.className} text-3xl lg:text-2xl text-white uppercase w-full lg:w-2/3 group-hover:text-black transition-colors duration-300`}>110 year warranty comes standard</h4>
+      <div className="flex flex-col justify-center items-start gap-y-6 p-8 bg-black rounded-2xl group transition-all duration-400 fade-up-standards">
+        <Image src="/images/standards-3.svg" alt="chevron-img" width={36} height={36} />
+        <h4 className={`${font.className} text-3xl lg:text-2xl text-[#f3f3f6] uppercase transition-colors duration-300 lg:w-2/3`}>110 year warranty comes standard</h4>
       </div> 
     </div>
   </div>

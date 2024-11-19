@@ -18,32 +18,32 @@ SwiperCore.use([FreeMode, Mousewheel]);
 
 const sliderSlides = [
   {
-    front: "/images/brick-1-img.png",
-    back: "/images/brick-1.png",
+    front: "/images/slider-q.png",
+    back: "/images/slider-2.png",
     text: "Augusta Green",
     color: "#006341"
   },
   {
-    front: "/images/brick-2-img.png",
-    back: "/images/brick-2.png",
+    front: "/images/slider-3.png",
+    back: "/images/slider-4.png",
     text: "Glamour Pink",
     color: "#F2CDD4"
   },
   {
-    front: "/images/brick-3.png",
-    back: "/images/brick-3.png",
+    front: "/images/slider-5.png",
+    back: "/images/slider-6.png",
     text: "Lone Star Orange",
     color: "#B84001"
   },
   {
-    front: "/images/brick-4-img.png",
-    back: "/images/brick-4.png",
+    front: "/images/slider-7.png",
+    back: "/images/slider-8.png",
     text: "desert DUNE",
     color: "#CFBA9C"
   },
   {
-    front: "/images/brick-5-img.png",
-    back: "/images/brick-5.png",
+    front: "/images/slider-9.png",
+    back: "/images/slider-10.png",
     text: "Iceberg Blue",
     color: "#ABBCCC"
   }
@@ -65,44 +65,44 @@ const Slider: React.FC<SliderProps> = ({ font }) => {
 
   const sectionRef = useRef(null);
 
-  useGSAP(
-    () => {
-      gsap.from('.fade-up-slider', {
-        y: 70,
-        opacity: 0,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top bottom',
-          end: 'center bottom',
-          scrub: true,
-          // markers: true,
-        },
-      });
-    }, { scope: sectionRef }
-  );
+  // useGSAP(
+  //   () => {
+  //     gsap.from('.fade-up-slider', {
+  //       y: 70,
+  //       opacity: 0,
+  //       scrollTrigger: {
+  //         trigger: sectionRef.current,
+  //         start: 'top bottom',
+  //         end: 'center bottom',
+  //         scrub: true,
+  //         // markers: true,
+  //       },
+  //     });
+  //   }, { scope: sectionRef }
+  // );
 
 
   return (
-    <div className="mt-24 flex flex-col items-center ps-6 lg:ps-36 max-h-screen" ref={sectionRef}>
+    <div className="mt-24 flex flex-col items-center ps-0 lg:ps-56" ref={sectionRef}>
 
         <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start">
           <div className="w-4/5 lg:w-1/3 text-center lg:text-left flex flex-col items-center lg:items-start">
-            <h3 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[4rem] leading-[3rem] lg:leading-[4rem] uppercase fade-up-slider`}><span className="text-bg">Color</span><br/>that inspires</h3>
-            <p className="text-[#969696] text-base fade-up-slider">If you aspire to create stunning structures that are a reflection of your life’s work, consider how the Bilco Professional Line of concrete bricks can <span className="text-white">brighten your next project.</span></p>
+            <h2 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[5.25rem] leading-[3rem] lg:leading-[5.3rem] uppercase fade-up-slider`}><span className="text-bg">Color</span><br/>that inspires</h2>
+            <p className="text-[#969696] text-base fade-up-slider">If you aspire to create stunning structures that are a reflection of your life’s work, consider how the Bilco Professional Line of concrete bricks can <span className="text-[#f3f3f6]">brighten your next project.</span></p>
           </div>
 
-          <div className="lg:flex flex-row gap-x-4 justify-center self-end hidden me-8">
+          <div className="lg:flex flex-row gap-x-4 justify-center self-end hidden me-56">
             <button 
               className="rounded-full w-12 h-12 bg-[#2D2D2F] flex justify-center items-center fade-up-slider"
               onClick={() => swiperRef?.current?.slidePrev()}
             >
-              <Image src="/images/left-chevron.svg" alt="brick-img" width={8} height={16} />
+              <Image src="/images/chevron-left.svg" alt="brick-img" width={12} height={32} />
             </button>
             <button
               className="rounded-full w-12 h-12 bg-[#2D2D2F] flex justify-center items-center fade-up-slider"
               onClick={() => swiperRef.current?.slideNext()}
             >
-              <Image src="/images/right-chevron.svg" alt="brick-img" width={8} height={16} />
+              <Image src="/images/chevron-right.svg" alt="brick-img" width={12} height={32} />
             </button>
           </div>
         </div>
@@ -110,7 +110,7 @@ const Slider: React.FC<SliderProps> = ({ font }) => {
         <div className="w-full mt-6 fade-up-slider" >
           <Swiper
             onSwiper={(swiper) => (swiperRef.current = swiper)}
-            slidesPerView={3.3}
+            slidesPerView={3.25}
             autoplay={false}
             navigation={false}
             freeMode={true}               // Enable free mode for smooth transitions
@@ -120,13 +120,16 @@ const Slider: React.FC<SliderProps> = ({ font }) => {
             updateOnWindowResize={true}
             breakpoints={{
               428: {
-                slidesPerView: 1.5
+                slidesPerView: 1.25
               },
               768: {
-                slidesPerView: 1.5
+                slidesPerView: 1.25
               },
               926: {
-                slidesPerView: 2.5
+                slidesPerView: 2.25
+              },
+              1023: {
+                slidesPerView: 3.25
               },
             }}
           >
@@ -134,7 +137,7 @@ const Slider: React.FC<SliderProps> = ({ font }) => {
               sliderSlides.map((card, i) => (
 
                 <SwiperSlide key={i}>
-                  <div className="rounded-3xl p-3 lg:p-6 flex flex-col gap-y-3 relative">
+                  <div className="rounded-3xl p-3 lg:p-6 ps-0 lg:ps-0 flex flex-col gap-y-3 relative">
                     <div className="absolute top-0 right-0 flex flex-row gap-x-3 justify-center items-center m-6 lg:m-12 z-40">
                       <p className="text-slate-800 text-sm">FLIP</p>
                       <div 
@@ -160,7 +163,7 @@ const Slider: React.FC<SliderProps> = ({ font }) => {
                     </div>
                     <div className="flex flex-row gap-x-3 justify-start items-center">
                       <div className="w-6 h-6 rounded-md" style={{ backgroundColor: card.color }}></div>
-                      <p className="text-white text-base uppercase">{card.text}</p>
+                      <p className="text-[#f3f3f6] text-base uppercase">{card.text}</p>
                     </div>
                   </div>
                 </SwiperSlide>
@@ -174,13 +177,13 @@ const Slider: React.FC<SliderProps> = ({ font }) => {
               className="rounded-full w-12 h-12 bg-[#2D2D2F] flex justify-center items-center fade-up-slider"
               onClick={() => swiperRef?.current?.slidePrev()}
             >
-              <Image src="/images/left-chevron.svg" alt="brick-img" width={8} height={16} />
+              <Image src="/images/chevron-left.svg" alt="brick-img" width={12} height={32} />
             </button>
             <button
               className="rounded-full w-12 h-12 bg-[#2D2D2F] flex justify-center items-center fade-up-slider"
               onClick={() => swiperRef?.current?.slideNext()}
             >
-              <Image src="/images/right-chevron.svg" alt="brick-img" width={8} height={16} />
+              <Image src="/images/chevron-right.svg" alt="brick-img" width={12} height={32} />
             </button>
           </div>
       </div>

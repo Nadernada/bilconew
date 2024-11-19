@@ -36,6 +36,11 @@ body {
   background-size: cover;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  padding-top: 0.2rem;
+}
+
+.bg-contact-gradient {
+  background: linear-gradient(to bottom, #000000, #11121300);
 }
 
 .standards-bg {
@@ -48,14 +53,39 @@ body {
   outline: none;
 }
 
-.colorInput::placeholder {
-  transition: all ease 0.3s;
+.checkmark-container input:checked ~ .checkmark:after {
+  display: block;
 }
 
-.colorInput:focus-visible::placeholder {
-  transform: translateY(-110%);
-  font-size: small;
+.checkmark:after {
+  background-color: #f3f3f6;
+  /* margin: 0.2rem; */
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  width: 75%;
+  height: 75%;
+  border-radius: 100%;
 }
+
+/* .checkmark-container input:checked ~ .checkmark:after {
+  background-color: #f3f3f6;
+  margin: 0.2rem;
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+} */
+
+/* .checkmark-container:hover input ~ .checkmark {
+  background-color: #ccc;
+} */
+
+
 
 .card-inner {
   transition: transform 0.8s;
@@ -98,4 +128,13 @@ body {
     background-position: 100% 100%;
     background-size: contain;
   }
+}
+
+@media screen and (max-width: 796px) { 
+  .bg-contact-gradient {
+  background: none;
+}
+  .bg-contact-gradient-mobile {
+  background: linear-gradient(to bottom, #000000, #11121300);
+}
 }

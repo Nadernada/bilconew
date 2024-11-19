@@ -252,7 +252,7 @@ useEffect(() => {
 }, [])
 
   return (
-    <div className="p-4 flex flex-col gap-4 justify-center items-center w-full">
+    <div className="p-4 pt-0 flex flex-col gap-4 justify-center items-center w-full">
       {
         isLoading &&
           <div className="w-full flex justify-center items-center relative" style={{ height: 'calc(100vh / 2.5)'}}>
@@ -264,21 +264,21 @@ useEffect(() => {
       }
       <div className="relative"  id="overlayText">
         <div ref={containerRef} />
-        {!hideTextOverlay && !isLoading && <div className="absolute top-1/2 left-1/2 flex gap-x-4 justify-center items-center rounded-full px-5 py-3 bg-gray-800 -translate-x-1/2">
+        {!hideTextOverlay && !isLoading && <div className="w-4/5 lg:w-max absolute top-1/2 left-1/2 flex gap-x-4 justify-center items-center rounded-full px-5 py-3 bg-gray-800 -translate-x-1/2">
           <Image src={'/images/drag-icon.svg'} width={20} height={20} alt="outside" className="drag-icon" />
           <p className="text-base text-white">Click and drag to rotate</p>
         </div>}
       </div>
-      <p className="text-white text-xl text-center">Bring your vision to life with Bilco&apos;s proprietary color matching technology.</p>
+      <p className="text-white text-base lg:text-xl text-center">Bring your vision to life with Bilco&apos;s proprietary color precision technology.</p>
 
-      <div className="flex flex-col lg:flex-row gap-x-16 mt-10">
+      <div className="grid grid-cols-1 lg:grid-cols-2 lg:flex-row gap-x-16 mt-10">
 
         <div className="flex flex-col justify-center items-center gap-y-2">
-          <div className="border border-white rounded-full px-4 py-3 relative h-fit flex flex-row gap-x-9">
+          <div className="border border-white rounded-full px-4 py-3 relative h-fit flex flex-row gap-x-3 lg:gap-x-9">
             <HexColorInput
               color={color}
               onChange={setColor}
-              className="px-2 bg-transparent rounded-lg placeholder:text-slate-700 text-slate-700 w-1/3 lg:w-fit colorInput"
+              className="px-2 bg-transparent rounded-lg placeholder:text-slate-700 text-slate-700 w-1/3 lg:w-[130px] colorInput"
             />
             <div className="flex flex-row gap-x-4 cursor-pointer" >
               <p className="text-base text-white uppercase">Select a color</p>
@@ -290,7 +290,7 @@ useEffect(() => {
         </div>
 
         <div className="flex flex-col justify-center items-center gap-y-2 mt-6 lg:mt-0">
-          <div className="flex flex-row gap-2 justify-between lg:justify-center items-center bg-[#2D2D2F] rounded-full px-2 w-full lg:w-auto">
+          <div className="flex flex-row gap-2 justify-between items-center bg-[#2D2D2F] rounded-full px-2 w-full">
             <div className={`flex flex-col gap-2 justify-center items-center relative ${selectedLight === 0 ? 'bg-white' : 'bg-transparent'} rounded-full px-10 py-4 h-[80%] transition-all duration-300`}>
               <button
                 className="rounded-full w-full h-full cursor-pointer transition-all absolute z-10"
@@ -328,7 +328,7 @@ useEffect(() => {
 
       </div>
 
-      <p className="text-[#969696] text-base mt-10">Color saturation and vibrancy may vary on real material</p>
+      <p className="text-[#969696] text-center text-sm lg:text-base mt-14 lg:mt-10">Color saturation and vibrancy may vary on real material</p>
     </div>
   );
 };

@@ -29,7 +29,7 @@ const NavBar = () => {
       ref={navRef}
       className={`fixed top-0 left-0 w-full flex flex-row justify-between px-4 lg:px-14 py-4 z-30 transition-all duration-300 ${isScrolled ? "bg-black lg:py-6" : "bg-transparent lg:py-11"}`}
     >
-      <Image src="/images/bilco-logo.png" alt="bilco logo" width={243} height={38} className={`scale-75 transition-all duration-300 origin-left ${isScrolled ? 'lg:scale-80' : 'lg:scale-100'}`} />
+      <Image src="/images/bilco-logo.svg" alt="bilco logo" width={243} height={38} className={`scale-75 transition-all duration-300 origin-left ${isScrolled ? 'lg:scale-80' : 'lg:scale-100'}`} />
       <div className="hidden lg:flex">
         <Button text="Get Started" link="#contact" />
       </div>
