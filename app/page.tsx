@@ -5,7 +5,7 @@ import NavBar from "./components/NavBar";
 import localFont from "next/font/local";
 import ThreeScene from "./ThreeScene";
 import 'swiper/css'
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Standards from "./components/Standards";
 import ParallelBrick from "./components/ParallelBrick";
 import ZoomIn from "./components/ZoomIn";
@@ -31,8 +31,8 @@ const Home = () => {
   const playButtonRef = useRef<any | null | undefined>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [buttonPosition, setButtonPosition] = useState({ x: 0, y: 0 });
-  const magneticStrength = 300; // Adjust for magnetic range
   const textTopRef = useRef(null);
   const textBottomRef = useRef(null);
   const lineTextRef = useRef(null);

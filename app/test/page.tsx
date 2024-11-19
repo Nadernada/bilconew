@@ -1,10 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import { useEffect, useState } from "react";
 import { orders } from './test';
 
+type ProductSizes = {
+  [key: string]: number;
+};
+
+
 const Test = () => {
-  const [redXl, setRedXl] = useState({
+  const [redXl, setRedXl] = useState<ProductSizes>({
     "Red / XS": 0,
     "Red / S": 0,
     "Red / M": 0,
@@ -16,7 +22,7 @@ const Test = () => {
   });
 
   const [totalQuantity, setTotalQuantity] = useState(0);
-  const [WhiteXl, setWhiteXl] = useState({
+  const [WhiteXl, setWhiteXl] = useState<ProductSizes>({
     "White / XS": 0,
     "White / S": 0,
     "White / M": 0,
@@ -30,27 +36,31 @@ const Test = () => {
   const [totalQuantityWhite, setTotalQuantityWhite] = useState(0);
 
   // Function to get total quantity by SKU and update sizes
-  const getTotalQuantityBySKU = (orders, targetSKU) => {
+  const getTotalQuantityBySKU = (orders: { data: any; extensions?: { cost: { requestedQueryCost: number; actualQueryCost: number; throttleStatus: { maximumAvailable: number; currentlyAvailable: number; restoreRate: number; }; }; search: { path: string[]; query: string; parsed: { and: ({ field: string; range_gte: string; match_all?: undefined; } | { field: string; match_all: string; range_gte?: undefined; })[]; }; warnings: { field: string; message: string; }[]; }[]; }; }, targetSKU: string) => {
     let total = 0;
     let totalWhite = 0;
     // Create a copy of the current state to update
-    const updatedRedXl = { ...redXl };
-    const updatedWhiteXl = { ...WhiteXl };
+    const updatedRedXl: {
+      [key: string]: number;
+    } = { ...redXl };
+    const updatedWhiteXl: {
+      [key: string]: number;
+    } = { ...WhiteXl };
 
     // Loop through each order in the list
-    orders.data.orders.edges.forEach(order => {
+    orders.data.orders.edges.forEach((order: { node: { lineItems: { edges: any[]; }; }; }) => {
       // Loop through each line item in the order
-      order.node.lineItems.edges.forEach(item => {
+      order.node.lineItems.edges.forEach((item: { node: any; }) => {
         const lineItem = item.node;
 
         // Check if the SKU matches the target SKU
         if (lineItem.sku === targetSKU) {
           // Get the variant size option
-          const sizeOption = lineItem.variant.selectedOptions.find(option => option.name === 'Size');
+          const sizeOption = lineItem.variant.selectedOptions.find((option: { name: string; }) => option.name === 'Size');
           const size = sizeOption ? sizeOption.value : '';
 
           // If size exists, check if it's in the "Red / Size" format or just "Size"
-          const fullSizeKey = `Red / ${size}`;
+          const fullSizeKey: string = `Red / ${size}`;
 
           if (updatedRedXl[fullSizeKey] !== undefined) {
             // If "Red / Size" exists in redXl, add to it
@@ -65,7 +75,7 @@ const Test = () => {
         }
         if (lineItem.sku === '777706 02') {
           // Get the variant size option
-          const sizeOption = lineItem.variant.selectedOptions.find(option => option.name === 'Size');
+          const sizeOption = lineItem.variant.selectedOptions.find((option: { name: string; }) => option.name === 'Size');
           const size = sizeOption ? sizeOption.value : '';
 
           // If size exists, check if it's in the "Red / Size" format or just "Size"
