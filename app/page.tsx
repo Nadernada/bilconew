@@ -178,7 +178,7 @@ const Home = () => {
         <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center gap-24">
           <div className="w-full flex flex-col justify-center items-center gap-y-3 lg:gap-y-6 z-10 relative mt-48 lg:mt-0">
             <div className="overflow-hidden">
-              <h1 className={`${urdwinBoldMono.className} antialiased text-[#F3F3F6] font-bold text-[2rem] uppercase`} ref={lineTextRef}>professional line</h1>
+              <h1 className={`${urdwinBoldMono.className} antialiased text-[#F3F3F6] font-bold text-[1.5rem] lg:text-[2rem] uppercase`} ref={lineTextRef}>professional line</h1>
             </div>
             <Image src="/images/hero-rainbow.png" alt="rainbow-img" width={400} height={2} ref={lineRef} />
             <div className="flex flex-col justify-center items-center">
@@ -241,7 +241,7 @@ const Home = () => {
         <div className="flex flex-col gap-y-12 justify-start  fade-up-footer">
           <Image src="/images/bilco-logo.svg" alt="bilco logo" width={175} height={28}/>
 
-          <p className="text-[#969696] text-sm text-left fade-up-footer">If you’d like more information about our products or <br />would like to place an order, please call, email or fax us:</p>
+          <p className="text-[#969696] text-sm text-left fade-up-footer lg:w-2/5 xl:1/5">If you’d like more information about our products or would like to place an order, please call, email or fax us:</p>
 
           <div className="flex flex-col gap-y-4 fade-up-footer">
             <p className="text-[#f3f3f6] text-sm text-left">Phone: (972) 227-3380</p>
