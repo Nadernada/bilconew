@@ -137,7 +137,7 @@ const Slider: React.FC<SliderProps> = ({ font }) => {
               sliderSlides.map((card, i) => (
 
                 <SwiperSlide key={i}>
-                  <div className="rounded-3xl p-3 lg:p-6 ps-0 lg:ps-0 flex flex-col gap-y-3 relative">
+                  <div className="rounded-3xl p-3 lg:p-6 px-0 lg:ps-0 flex flex-col gap-y-3 relative">
                     <div className="absolute top-0 right-0 flex flex-row gap-x-3 justify-center items-center m-6 lg:m-12 z-40">
                       <p className="text-slate-800 text-sm">FLIP</p>
                       <div 

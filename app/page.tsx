@@ -170,7 +170,7 @@ const Home = () => {
           <video src="/images/hero-video.mp4" className="object-cover !max-w-none" autoPlay muted loop ref={videoRef}></video>
         </div>
       </dialog>
-      <div className="w-screen relative h-screen overflow-hidden">
+      <div className="w-screen relative h-svh overflow-hidden">
         <div className="h-screen lg:h-fit w-auto lg:w-full z-0 overflow-hidden">
           <video src="/images/hero-video.mp4" className="object-cover !max-w-none" autoPlay muted loop controls={false}></video>
         </div>
