@@ -127,7 +127,7 @@ body {
 
 @media screen and (min-width: 1024px) { 
   .footer {
-    background-image: url('/images/footer-bricks.jpg');
+    background-image: url('/images/footer-bricks.png');
     background-repeat: no-repeat;
     background-position: 100% 100%;
     background-size: contain;
@@ -140,5 +140,13 @@ body {
 }
   .bg-contact-gradient-mobile {
   background: linear-gradient(to bottom, #000000, #11121300);
+}
+
+
+.footer {
+  background-image: url('/images/footer-bricks-mobile.png');
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+  background-size: contain;
 }
 }

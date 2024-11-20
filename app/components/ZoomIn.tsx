@@ -30,8 +30,8 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
         // opacity: 0,
         scrollTrigger: {
           trigger: brickSectionRef.current,
-          start: 'top 80%',
-          end: '70% bottom',
+          start: 'top bottom',
+          end: 'center bottom',
           scrub: true,
           // markers: true,
         },
@@ -73,7 +73,7 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
   );
 
   return (
-    <div className="mt-40 lg:mt-56 flex flex-col items-center" ref={brickSectionRef}>
+    <div className="mt-40 lg:pt-56 flex flex-col items-center" ref={brickSectionRef}>
         <Image src="/images/gray-brick.png" alt="brick-img" width={1300} height={356} className="mt-12 mb-20 lg:hidden scale-[2.5] md:scale-150" ref={brickRef} />
         <Image src="/images/gray-brick.png" alt="brick-img" width={1300} height={356} className="my-16 lg:hidden" ref={brickRef} />
         <h2 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[5.25rem] leading-[3rem] lg:leading-[5.3rem] uppercase text-center`} ref={textTopRef}>Weather Any Weather</h2>
