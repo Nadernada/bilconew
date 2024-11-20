@@ -41,7 +41,7 @@ const Standards: React.FC<StandardsProps> = ({ font }) => {
 
     </div>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] justify-around w-full">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] justify-around w-full max-w-[1300px]">
       <div className="flex flex-col justify-center items-start gap-y-6 p-8 bg-black rounded-2xl group transition-all duration-400 fade-up-standards">
         <Image src="/images/standards-1.svg" alt="chevron-img" width={36} height={36} />
         <h4 className={`${font.className} text-3xl lg:text-3xl text-[#f3f3f6] uppercase transition-colors duration-300 lg:w-2/3`}>Utilizes 30% less mortar than clay bricks</h4>

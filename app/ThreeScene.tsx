@@ -264,7 +264,7 @@ useEffect(() => {
       }
       <div className="relative"  id="overlayText">
         <div ref={containerRef} />
-        {!hideTextOverlay && !isLoading && <div className="w-2/3 lg:w-max absolute top-1/2 left-1/2 flex gap-x-4 justify-center items-center rounded-full px-5 py-3 bg-[#2d2d2f] -translate-x-1/2">
+        {!hideTextOverlay && !isLoading && <div className="w-max absolute top-1/2 left-1/2 flex gap-x-4 justify-center items-center rounded-full px-5 py-3 bg-[#2d2d2f] -translate-x-1/2">
           <Image src={'/images/drag-icon.svg'} width={20} height={20} alt="outside" className="drag-icon" />
           <p className="font-thin text-base text-[#f3f3f6]">Click and drag to rotate</p>
         </div>}

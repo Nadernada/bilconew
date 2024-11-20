@@ -14,6 +14,7 @@ import Contact from "./components/Contact";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from '@gsap/react';
+import { gothamMonoBook } from "./gothamFont";
 
 
 
@@ -167,18 +168,18 @@ const Home = () => {
               )
             }
           </div>
-          <video src="/images/hero-video.mp4" className="object-cover !max-w-none" autoPlay muted loop ref={videoRef}></video>
+          <video src="/images/hero-video.mp4" className="object-cover !max-w-none" autoPlay muted loop playsInline ref={videoRef}></video>
         </div>
       </dialog>
       <div className="w-screen relative h-svh overflow-hidden">
         <div className="h-screen lg:h-fit w-auto lg:w-full z-0 overflow-hidden">
-          <video src="/images/hero-video.mp4" className="object-cover !max-w-none" autoPlay muted loop controls={false}></video>
+          <video src="/images/hero-video.mp4" className="object-cover !max-w-none" autoPlay muted loop playsInline controls={false}></video>
         </div>
 
         <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center gap-24">
           <div className="w-full flex flex-col justify-center items-center gap-y-3 lg:gap-y-6 z-10 relative mt-0">
               <h1 className={`${urdwinBoldMono.className} antialiased text-[#F3F3F6] font-bold text-[1.5rem] leading-[1.5rem] lg:leading-[2rem] lg:text-[2rem] uppercase`} ref={lineTextRef}>professional line</h1>
-            <Image src="/images/hero-rainbow.png" alt="rainbow-img" width={400} height={2} ref={lineRef} className="w-1/2 lg:w-[400px]" />
+            <Image src="/images/hero-rainbow.png" alt="rainbow-img" width={400} height={2} ref={lineRef} className="w-1/2 lg:w-[400px] h-[2px]" />
             <div className="flex flex-col justify-center items-center">
 
               {/* <div className="overflow-hidden"> */}
@@ -206,7 +207,7 @@ const Home = () => {
               style={{ transform: `translate(${buttonPosition.x}px, ${buttonPosition.y}px)` }}
               onClick={() => dialogRef.current?.show()}
             >
-              <Image src="/images/play-icon.svg" alt="chevron-img" width={11} height={16} className="group-hover:invert transition-all duration-300" />
+              <Image src="/images/play-icon.svg" alt="chevron-img" width={11} height={16} className="group-hover:invert transition-all duration-300 translate-x-[1px]" />
             </div>
             <p className="text-[#969696] text-base lg:text-[1.375rem] lg:leading-[1.75rem] lg:text-xl text-center px-16 lg:px-0">The only concrete brick that’s colored to the core.</p>
           </div>
@@ -239,7 +240,7 @@ const Home = () => {
         <div className="flex flex-col gap-y-10 justify-start  fade-up-footer">
           <Image src="/images/bilco-logo.svg" alt="bilco logo" width={175} height={28}/>
 
-          <p className="text-[#969696] text-xl text-left fade-up-footer w-4/5 lg:w-2/5 xl:1/5">If you’d like more information about our products or would like to place an order, please call, email or fax us:</p>
+          <p className={`${gothamMonoBook.className} text-[#969696] text-xl text-left fade-up-footer w-4/5 lg:w-2/5 xl:1/5`}>If you’d like more information about our products or would like to place an order, please call, email or fax us:</p>
 
           <div className="flex flex-col gap-y-2 fade-up-footer">
             <p className="text-[#f3f3f6] text-xl text-left">Phone: (972) 227-3380</p>
@@ -255,8 +256,8 @@ const Home = () => {
 
           </div>
 
-          <p className="text-[#f3f3f6] text-xl text-left fade-up-footer hidden lg:flex">© 2024 Bilco Corporation  |  All Rights Reserved  | <span className="underline">Terms of Use</span></p>
-          <p className="text-[#f3f3f6] text-xl leading-8 text-left fade-up-footer block  lg:hidden">© 2024 Bilco Corporation  <br />  All Rights Reserved  <br /> <span className="underline">Terms of Use</span></p>
+          <p className={`${gothamMonoBook.className} text-[#f3f3f6] font-normal text-xl text-left fade-up-footer hidden lg:flex`}>© 2024 Bilco Corporation  |  All Rights Reserved  | <span className="underline">Terms of Use</span></p>
+          <p className={`${gothamMonoBook.className} text-[#f3f3f6] text-xl leading-8 text-left fade-up-footer block  lg:hidden`}>© 2024 Bilco Corporation  <br />  All Rights Reserved  <br /> <span className="underline">Terms of Use</span></p>
 
 
         </div>

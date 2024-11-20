@@ -83,9 +83,9 @@ const Slider: React.FC<SliderProps> = ({ font }) => {
 
 
   return (
-    <div className="mt-24 flex flex-col items-center ps-0 lg:ps-52" ref={sectionRef}>
+    <div className="mt-24 flex flex-col items-center lg:items-start ps-0 lg:ps-[19rem]" ref={sectionRef}>
 
-        <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start">
+        <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start max-w-[1330px]">
           <div className="w-4/5 lg:w-1/3 text-center lg:text-left flex flex-col items-center lg:items-start">
             <h2 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[5.25rem] leading-[3rem] lg:leading-[5.3rem] uppercase fade-up-slider`}><span className="text-bg">Color</span><br/>that inspires</h2>
             <p className="text-[#969696] text-base lg:text-[1.375rem] lg:leading-[1.75rem] fade-up-slider">If you aspire to create stunning structures that are a reflection of your life’s work, consider how the Bilco Professional Line of concrete bricks can <span className="text-[#f3f3f6]">brighten your next project.</span></p>
@@ -107,7 +107,7 @@ const Slider: React.FC<SliderProps> = ({ font }) => {
           </div>
         </div>
 
-        <div className="w-full mt-6 fade-up-slider p-6 lg:p-6" >
+        <div className="w-full mt-6 fade-up-slider p-6 lg:p-6 lg:ps-0" >
           <Swiper
             onSwiper={(swiper) => (swiperRef.current = swiper)}
             // slidesPerView={3.25}
@@ -119,11 +119,14 @@ const Slider: React.FC<SliderProps> = ({ font }) => {
             resizeObserver={true}
             updateOnWindowResize={true}
             breakpoints={{
+              328: {
+                slidesPerView: 1.25,
+              },
               428: {
-                slidesPerView: 1
+                slidesPerView: 1.25,
               },
               768: {
-                slidesPerView: 1.25
+                slidesPerView: 1.25,
               },
               926: {
                 slidesPerView: 2.25
@@ -137,7 +140,7 @@ const Slider: React.FC<SliderProps> = ({ font }) => {
               sliderSlides.map((card, i) => (
 
                 <SwiperSlide key={i}>
-                  <div className="rounded-3xl p-3 lg:p-6 px-0 lg:ps-0 flex flex-col gap-y-3 relative">
+                  <div className="rounded-3xl p-3 lg:p-6 ps-0 lg:ps-0 flex flex-col gap-y-3 relative">
                     <div className="absolute top-0 right-0 flex flex-row gap-x-3 justify-center items-center m-6 lg:m-12 z-40">
                       <p className="text-slate-800 text-sm">FLIP</p>
                       <div 

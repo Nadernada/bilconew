@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { orders } from './test';
+import { ordersWhite } from './testWhite';
 
 type ProductSizes = {
   [key: string]: number;
@@ -38,14 +39,10 @@ const Test = () => {
   // Function to get total quantity by SKU and update sizes
   const getTotalQuantityBySKU = (orders: { data: any; extensions?: { cost: { requestedQueryCost: number; actualQueryCost: number; throttleStatus: { maximumAvailable: number; currentlyAvailable: number; restoreRate: number; }; }; search: { path: string[]; query: string; parsed: { and: ({ field: string; range_gte: string; match_all?: undefined; } | { field: string; match_all: string; range_gte?: undefined; })[]; }; warnings: { field: string; message: string; }[]; }[]; }; }, targetSKU: string) => {
     let total = 0;
-    let totalWhite = 0;
     // Create a copy of the current state to update
     const updatedRedXl: {
       [key: string]: number;
     } = { ...redXl };
-    const updatedWhiteXl: {
-      [key: string]: number;
-    } = { ...WhiteXl };
 
     // Loop through each order in the list
     orders.data.orders.edges.forEach((order: { node: { lineItems: { edges: any[]; }; }; }) => {
@@ -73,7 +70,29 @@ const Test = () => {
           // Add to the total quantity
           total += lineItem.quantity;
         }
-        if (lineItem.sku === '777706 02') {
+      });
+    });
+
+    // Update the state with the new quantities and total
+    setRedXl(updatedRedXl);
+    setTotalQuantity(total);
+  };
+  // Function to get total quantity by SKU and update sizes
+  const getTotalQuantityWhiteBySKU = (orders: { data: any; extensions?: { cost: { requestedQueryCost: number; actualQueryCost: number; throttleStatus: { maximumAvailable: number; currentlyAvailable: number; restoreRate: number; }; }; search: { path: string[]; query: string; parsed: { and: ({ field: string; range_gte: string; match_all?: undefined; } | { field: string; match_all: string; range_gte?: undefined; })[]; }; warnings: { field: string; message: string; }[]; }[]; }; }, targetSKU: string) => {
+    let totalWhite = 0;
+    // Create a copy of the current state to update
+
+    const updatedWhiteXl: {
+      [key: string]: number;
+    } = { ...WhiteXl };
+
+    // Loop through each order in the list
+    orders.data.orders.edges.forEach((order: { node: { lineItems: { edges: any[]; }; }; }) => {
+      // Loop through each line item in the order
+      order.node.lineItems.edges.forEach((item: { node: any; }) => {
+        const lineItem = item.node;
+
+        if (lineItem.sku === targetSKU) {
           // Get the variant size option
           const sizeOption = lineItem.variant.selectedOptions.find((option: { name: string; }) => option.name === 'Size');
           const size = sizeOption ? sizeOption.value : '';
@@ -94,10 +113,6 @@ const Test = () => {
         }
       });
     });
-
-    // Update the state with the new quantities and total
-    setRedXl(updatedRedXl);
-    setTotalQuantity(total);
     setWhiteXl(updatedWhiteXl);
     setTotalQuantityWhite(totalWhite);
   };
@@ -105,31 +120,32 @@ const Test = () => {
   // Fetch data when the component mounts
   useEffect(() => {
     getTotalQuantityBySKU(orders, '777696 01');
+    getTotalQuantityWhiteBySKU(ordersWhite, '777706 02');
   }, []);
 
   return (
     <>
     <div>
-      <h2>Total Quantity: {totalQuantity}</h2>
-      <p>Red / XS : {redXl['Red / XS']}</p>
-      <p>Red / S : {redXl['Red / S']}</p>
-      <p>Red / M : {redXl['Red / M']}</p>
-      <p>Red / L : {redXl['Red / L']}</p>
-      <p>Red / XL : {redXl['Red / XL']}</p>
-      <p>Red / XXL : {redXl['Red / XXL']}</p>
-      <p>Red / 2XL : {redXl['Red / 2XL']}</p>
-      <p>Red / 3XL : {redXl['Red / 3XL']}</p>
+      <h2>Red Jersey Total Quantity: {totalQuantity}</h2>
+      <p>Red / XS : purchased: {redXl['Red / XS']} available: {80 - redXl['Red / XS']}</p>
+      <p>Red / S : purchased: {redXl['Red / S']} available: {120 - redXl['Red / S']}</p>
+      <p>Red / M : purchased: {redXl['Red / M']} available: {120 - redXl['Red / M']}</p>
+      <p>Red / L : purchased: {redXl['Red / L']} available: {120 - redXl['Red / L']}</p>
+      <p>Red / XL : purchased: {redXl['Red / XL']} available: {80 - redXl['Red / XL']}</p>
+      <p>Red / XXL : purchased: {redXl['Red / XXL'] + redXl['Red / 2XL']} available: {50 - (redXl['Red / XXL'] + redXl['Red / 2XL'])}</p>
+      {/* <p>Red / 2XL : purchased: {redXl['Red / 2XL']} available: {50 - redXl['Red / XXL']} </p> */}
+      <p>Red / 3XL : purchased: {redXl['Red / 3XL']} available: {30 - redXl['Red / 3XL']}</p>
     </div>
     <div>
-      <h2>Total Quantity: {totalQuantityWhite}</h2>
-      <p>White / XS : {WhiteXl['White / XS']}</p>
-      <p>White / S : {WhiteXl['White / S']}</p>
-      <p>White / M : {WhiteXl['White / M']}</p>
-      <p>White / L : {WhiteXl['White / L']}</p>
-      <p>White / XL : {WhiteXl['White / XL']}</p>
-      <p>White / XXL : {WhiteXl['White / XXL']}</p>
-      <p>White / 2XL : {WhiteXl['White / 2XL']}</p>
-      <p>White / 3XL : {WhiteXl['White / 3XL']}</p>
+      <h2>White Jersey Total Quantity: {totalQuantityWhite}</h2>
+      <p>White / XS : {WhiteXl['White / XS']} available: {40 - WhiteXl['White / XS']}</p>
+      <p>White / S : {WhiteXl['White / S']} available: {100 - WhiteXl['White / S']}</p>
+      <p>White / M : {WhiteXl['White / M']} available: {100 - WhiteXl['White / M']}</p>
+      <p>White / L : {WhiteXl['White / L']} available: {80 - WhiteXl['White / L']}</p>
+      <p>White / XL : {WhiteXl['White / XL']} available: {50 - WhiteXl['White / XL']}</p>
+      <p>White / XXL : {WhiteXl['White / XXL'] + WhiteXl['White / 2XL']} available: {15 - (WhiteXl['White / XXL'] + WhiteXl['White / 2XL'])}</p>
+      {/* <p>White / 2XL : {WhiteXl['White / 2XL']} available: </p> */}
+      <p>White / 3XL : {WhiteXl['White / 3XL']} available: {15 - WhiteXl['White / 3XL']}</p>
     </div>
     </>
   );
