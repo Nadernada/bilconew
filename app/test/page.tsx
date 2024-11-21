@@ -3,7 +3,6 @@
 
 import { useEffect, useState } from "react";
 import { orders } from './test';
-import { ordersWhite } from './testWhite';
 
 type ProductSizes = {
   [key: string]: number;
@@ -119,8 +118,8 @@ const Test = () => {
 
   // Fetch data when the component mounts
   useEffect(() => {
-    getTotalQuantityBySKU(orders, '777696 01');
-    getTotalQuantityWhiteBySKU(ordersWhite, '777706 02');
+    getTotalQuantityBySKU(orders, '3XL-77769601');
+    getTotalQuantityWhiteBySKU(orders, '3XL-77770602');
   }, []);
 
   return (
