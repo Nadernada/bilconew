@@ -15,6 +15,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from '@gsap/react';
 import { gothamMonoBook } from "./gothamFont";
+import Link from "next/link";
 
 
 
@@ -237,7 +238,7 @@ const Home = () => {
       <Contact font={urdwinBoldMono} />
 
 
-      <div className="mt-16 lg:mt-32 footer p-6 lg:p-28 lg:pb-24 ps-6 2xl:ps-52 bg-[#000000] pt-24 lg:pt-24 fade-up-footer z-10 pb-10 relative h-svh"  ref={footerRef}>
+      <div className="mt-16 lg:mt-32 footer p-6 lg:p-28 lg:pb-24 ps-6 2xl:ps-52 bg-[#010101] pt-24 lg:pt-24 fade-up-footer z-10 pb-10 relative h-svh"  ref={footerRef}>
         <div className="flex flex-col gap-y-10 justify-start  fade-up-footer max-w-[1300px] px-0 lg:px-28">
           <Image src="/images/bilco-logo.svg" alt="bilco logo" width={175} height={28}/>
 
@@ -257,7 +258,7 @@ const Home = () => {
 
           </div>
 
-          <p className={`${gothamMonoBook.className} text-[#f3f3f6] font-normal text-xl text-left fade-up-footer hidden lg:flex`}>© 2024 Bilco Corporation  |  All Rights Reserved  | <span className="underline">Terms of Use</span></p>
+          <p className={`${gothamMonoBook.className} text-[#f3f3f6] font-normal text-xl text-left fade-up-footer hidden lg:flex`}>© 2024 Bilco Corporation  |  All Rights Reserved  | <span className="underline ms-2"><Link href={'https://bilcobrick.com/wp-content/uploads/2017/03/Bilco-TermsOfUse-201703.pdf'} target="_blank"> Terms of Use</Link></span></p>
           <p className={`${gothamMonoBook.className} text-[#f3f3f6] text-xl leading-8 text-left fade-up-footer block  lg:hidden`}>© 2024 Bilco Corporation  <br />  All Rights Reserved  <br /> <span className="underline">Terms of Use</span></p>
 
 

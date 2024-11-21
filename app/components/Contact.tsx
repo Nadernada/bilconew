@@ -89,7 +89,7 @@ const Contact:React.FC<ContactProps> = ({ font }) => {
 
             <p className="text-[#f3f3f6] text-base text-left uppercase">Interested In:</p>
 
-            <div className="flex flex-row flex-wrap items-start lg:items-center gap-3 mb-8 ms-0 lg:ms-4">
+            <div className="flex flex-row flex-wrap items-start lg:items-center gap-3 mb-8 ms-0">
               <div className="flex flex-row  relative checkmark-container cursor-pointer">
                 <input type="radio" name="interests" value={'Business Inquiry'} id="inquiry" className="absolute opacity-0 top-0 left-0 w-full h-full z-10 cursor-pointer" />
                 <div className="absolute top-1/2 left-0 -translate-y-1/2 bg-transparent border text-[1rem] lg:text-sm border-[#969696] w-4 h-4 rounded-full checkmark"/>
