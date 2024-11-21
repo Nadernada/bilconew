@@ -25,13 +25,13 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
   useGSAP(
     () => {
       gsap.from(brickRef.current, {
-        scale: 2.6,
-        y: 300,
+        width: '120vw',
+        // y: 300,
         // opacity: 0,
         scrollTrigger: {
           trigger: brickSectionRef.current,
-          start: '30% bottom',
-          end: '40% bottom',
+          start: '20% bottom',
+          end: '30% bottom',
           scrub: true,
           // markers: true,
         },
@@ -78,7 +78,7 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
         <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="my-16 lg:hidden" ref={brickRef} />
         <h2 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[5.25rem] leading-[3rem] lg:leading-[5.3rem] uppercase text-center`} ref={textTopRef}>Weather Any Weather</h2>
         <p className="text-[#969696] text-base lg:text-[1.375rem] lg:leading-[1.75rem] text-center w-4/5 lg:w-full" ref={textBottomRef}>Endure the wear and tear of typical fading and sun damage. Build it brighter. Build it to last.</p>
-        <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="mt-32 hidden lg:block w-4/5 max-w-[1300px]" ref={brickRef} />
+        <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="mt-0 hidden lg:block  w-[1300px] max-w-none origin-top" ref={brickRef} />
 
 
         <div className="mt-28 pt-28 lg:pt-0 flex flex-col lg:flex-row justify-between items-center lg:items-start w-full lg:w-[77%] bg-black lg:bg-transparent max-w-[1300px]">
