@@ -27,14 +27,15 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
       gsap.from(brickRef.current, {
         width: '120vw',
         pin: true,
+        
         // y: 300,
         // opacity: 0,
         scrollTrigger: {
           trigger: brickSectionRef.current,
           start: '15% bottom',
-          end: '30% bottom',
+          end: '15% 80%',
           scrub: true,
-          // markers: true,
+          markers: true,
         },
       });
       // gsap.from(textTopRef.current, {
