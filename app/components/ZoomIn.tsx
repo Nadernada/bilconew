@@ -26,6 +26,7 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
     () => {
       gsap.from(brickRef.current, {
         width: '120vw',
+        pin: true,
         // y: 300,
         // opacity: 0,
         scrollTrigger: {
