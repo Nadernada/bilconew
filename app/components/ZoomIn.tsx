@@ -24,18 +24,20 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
 
   useGSAP(
     () => {
-      gsap.from(brickRef.current, {
-        width: '120vw',
+      gsap.to(brickRef.current, {
+        width: '1300px',
         pin: true,
+        pinSpacing: true, // ensures the space is maintained when pinned
+
         
         // y: 300,
         // opacity: 0,
         scrollTrigger: {
           trigger: brickSectionRef.current,
-          start: '15% bottom',
-          end: '15% 80%',
+          start: '15% 90%',
+          end: 'top 60%',
           scrub: true,
-          markers: true,
+          // markers: true,
         },
       });
       // gsap.from(textTopRef.current, {
@@ -75,12 +77,15 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
   );
 
   return (
-    <div className="mt-40 lg:pt-24 flex flex-col items-center" ref={brickSectionRef}>
+    <div className="mt-40 lg:pt-24 flex flex-col items-center">
         <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="mt-12 mb-20 lg:hidden scale-[2.5] md:scale-150" ref={brickRef} />
         <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="my-16 lg:hidden" ref={brickRef} />
         <h2 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[5.25rem] leading-[3rem] lg:leading-[5.3rem] uppercase text-center`} ref={textTopRef}>Weather Any Weather</h2>
         <p className="text-[#969696] text-base lg:text-[1.375rem] lg:leading-[1.75rem] text-center w-4/5 lg:w-full" ref={textBottomRef}>Endure the wear and tear of typical fading and sun damage. Build it brighter. Build it to last.</p>
-        <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="mt-0 hidden lg:block  w-[1300px] max-w-none origin-top" ref={brickRef} />
+        <div className="relative mt-20"  ref={brickSectionRef}>
+
+        <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="mt-0 hidden lg:block  w-[120vw] max-w-none origin-top" ref={brickRef} />
+        </div>
 
 
         <div className="mt-28 pt-28 lg:pt-0 flex flex-col lg:flex-row justify-between items-center lg:items-start w-full lg:w-[77%] bg-black lg:bg-transparent max-w-[1300px]">
