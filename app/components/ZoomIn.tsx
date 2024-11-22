@@ -27,7 +27,7 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
       width: '1300px',
       scrollTrigger: {
         trigger: brickSectionRef.current,
-        start: 'center center',
+        start: 'center 70%',
         end: 'bottom center',
         scrub: 1.5,
         pin: true, // Pins the element in place during the animation
@@ -42,9 +42,9 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
     <div className="mt-40 lg:pt-24 flex flex-col items-center">
         <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="mt-12 mb-20 lg:hidden scale-[2.5] md:scale-150" />
         <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="my-16 lg:hidden" />
+        <div className="flex flex-col items-center"  ref={brickSectionRef}>
         <h2 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[5.25rem] leading-[3rem] lg:leading-[5.3rem] uppercase text-center`} ref={textTopRef}>Weather Any Weather</h2>
         <p className="text-[#969696] text-base lg:text-[1.375rem] lg:leading-[1.75rem] text-center w-4/5 lg:w-full" ref={textBottomRef}>Endure the wear and tear of typical fading and sun damage. Build it brighter. Build it to last.</p>
-        <div className=" "  ref={brickSectionRef}>
 
         <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="mt-0 mx-auto hidden lg:block !h-auto  w-[120vw] max-w-none" ref={brickRef}  />
         </div>
