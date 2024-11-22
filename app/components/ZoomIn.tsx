@@ -32,7 +32,7 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
         scrub: 1.5,
         pin: true, // Pins the element in place during the animation
         pinSpacing: true, // Ensures space is maintained when pinned
-        markers: true, // Debugging markers for ScrollTrigger
+        // markers: true, // Debugging markers for ScrollTrigger
       },
     });
   });
