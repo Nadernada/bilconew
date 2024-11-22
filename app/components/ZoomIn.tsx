@@ -46,7 +46,7 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
         <p className="text-[#969696] text-base lg:text-[1.375rem] lg:leading-[1.75rem] text-center w-4/5 lg:w-full" ref={textBottomRef}>Endure the wear and tear of typical fading and sun damage. Build it brighter. Build it to last.</p>
         <div className=" "  ref={brickSectionRef}>
 
-        <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="mt-12 mx-auto hidden lg:block !h-auto  w-[120vw] max-w-none" ref={brickRef}  />
+        <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="mt-0 mx-auto hidden lg:block !h-auto  w-[120vw] max-w-none" ref={brickRef}  />
         </div>
 
 
