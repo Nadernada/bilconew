@@ -26,9 +26,9 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
     () => {
       gsap.to(brickRef.current, {
         width: '1300px',
-        pin: true,
-        pinSpacing: true, // ensures the space is maintained when pinned
-
+        // pinSpacing: true, // ensures the space is maintained when pinned
+        pin: brickRef.current,
+        
         
         // y: 300,
         // opacity: 0,
@@ -36,7 +36,7 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
           trigger: brickSectionRef.current,
           start: '15% 90%',
           end: 'top 60%',
-          scrub: true,
+          scrub: 1.5,
           // markers: true,
         },
       });
@@ -82,9 +82,9 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
         <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="my-16 lg:hidden" ref={brickRef} />
         <h2 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[5.25rem] leading-[3rem] lg:leading-[5.3rem] uppercase text-center`} ref={textTopRef}>Weather Any Weather</h2>
         <p className="text-[#969696] text-base lg:text-[1.375rem] lg:leading-[1.75rem] text-center w-4/5 lg:w-full" ref={textBottomRef}>Endure the wear and tear of typical fading and sun damage. Build it brighter. Build it to last.</p>
-        <div className="relative mt-20"  ref={brickSectionRef}>
+        <div className="relative mt-20" style={{ height: '426px'}}  ref={brickSectionRef}>
 
-        <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="mt-0 hidden lg:block  w-[120vw] max-w-none origin-top" ref={brickRef} />
+        <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="mt-0 hidden lg:block  w-[120vw] max-w-none origin-top sticky top-0.5" ref={brickRef} />
         </div>
 
 
