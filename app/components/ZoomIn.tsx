@@ -23,11 +23,12 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
   const textBottomRef = useRef(null);
 
   useGSAP(() => {
-    gsap.to(brickRef.current, {
-      width: '1300px',
+    gsap.from(brickRef.current, {
+      // width: '1300px',
+      scale: 2.6,
       scrollTrigger: {
         trigger: brickSectionRef.current,
-        start: 'center 70%',
+        start: 'center center',
         end: 'bottom center',
         scrub: 1.5,
         pin: true, // Pins the element in place during the animation
@@ -46,7 +47,7 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
         <h2 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[5.25rem] leading-[3rem] lg:leading-[5.3rem] uppercase text-center`} ref={textTopRef}>Weather Any Weather</h2>
         <p className="text-[#969696] text-base lg:text-[1.375rem] lg:leading-[1.75rem] text-center w-4/5 lg:w-full" ref={textBottomRef}>Endure the wear and tear of typical fading and sun damage. Build it brighter. Build it to last.</p>
 
-        <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="mt-0 mx-auto hidden lg:block !h-auto  w-[120vw] max-w-none" ref={brickRef}  />
+        <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="mt-0 mx-auto hidden lg:block origin-top w-[1300px] max-w-none" ref={brickRef}  />
         </div>
 
 
