@@ -83,7 +83,7 @@ const Slider: React.FC<SliderProps> = ({ font }) => {
 
 
   return (
-    <div className="mt-24 flex flex-col items-center lg:items-start ps-0" style={{ paddingLeft: 'calc((100vw - 1300px) / 2)'}} ref={sectionRef}>
+    <div className="mt-24 flex flex-col items-center lg:items-start ps-0 md:ps-36 2xl:ps-['calc((100vw - 1300px) / 2)']" ref={sectionRef}>
 
         <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start max-w-[1330px]">
           <div className="w-4/5 lg:w-[55%] text-center lg:text-left flex flex-col items-center lg:items-start">

@@ -19,8 +19,7 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
 
   const brickRef = useRef(null);
   const brickSectionRef = useRef(null);
-  const textTopRef = useRef(null);
-  const textBottomRef = useRef(null);
+
 
   useGSAP(() => {
     gsap.from(brickRef.current, {
@@ -30,7 +29,7 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
         trigger: brickSectionRef.current,
         start: 'center center',
         end: 'bottom center',
-        scrub: 2.5,
+        scrub: 1,
         pin: true, // Pins the element in place during the animation
         pinSpacing: true, // Ensures space is maintained when pinned
         // markers: true, // Debugging markers for ScrollTrigger
@@ -43,11 +42,11 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
     <div className="mt-40 lg:pt-24 flex flex-col items-center">
         <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="mt-12 mb-20 lg:hidden scale-[2.5] md:scale-150" />
         <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="my-16 lg:hidden" />
-        <h2 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[5.25rem] leading-[3rem] lg:leading-[5.3rem] uppercase text-center`} ref={textTopRef}>Weather Any Weather</h2>
-        <p className="text-[#969696] text-base lg:text-[1.375rem] lg:leading-[1.75rem] text-center w-4/5 lg:w-full" ref={textBottomRef}>Endure the wear and tear of typical fading and sun damage. Build it brighter. Build it to last.</p>
+        <h2 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[5.25rem] leading-[3rem] lg:leading-[5.3rem] uppercase text-center`}>Weather Any Weather</h2>
+        <p className="text-[#969696] text-base lg:text-[1.375rem] lg:leading-[1.75rem] text-center w-4/5 lg:w-full" >Endure the wear and tear of typical fading and sun damage. Build it brighter. Build it to last.</p>
         <div className="flex flex-col items-center max-w-[1300px]"  ref={brickSectionRef}>
 
-        <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="mt-0 mx-auto hidden lg:block origin-top w-full max-w-none" ref={brickRef}  />
+        <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="mt-0 mx-auto hidden lg:block origin-top lg:w-4/5 2xl:w-[1300px] h-auto max-w-none" ref={brickRef}  />
         </div>
 
 
