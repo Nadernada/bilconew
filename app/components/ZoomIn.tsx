@@ -47,11 +47,11 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
   
 
   return (
-    <div className="mt-40 lg:pt-24 flex flex-col items-center">
+    <div className="mt-40 lg:pt-24 flex flex-col items-center overflow-hidden">
         <Image src="/images/yellow-brick.png" alt="brick-img" width={1300} height={356} className="mt-12 mb-20 lg:hidden scale-[2.5] md:scale-150" />
         <Image src="/images/yellow-brick.png" alt="brick-img" width={1300} height={356} className="my-16 lg:hidden" />
-        <h2 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[5.25rem] leading-[3rem] lg:leading-[5.3rem] uppercase text-center`}>Weather Any Weather</h2>
-        <p className="text-[#969696] text-base lg:text-[1.375rem] lg:leading-[1.75rem] text-center w-4/5 lg:w-full" >Endure the wear and tear of typical fading and sun damage. Build it brighter. Build it to last.</p>
+        <h2 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[5.25rem] leading-[3rem] lg:leading-[5.3rem] uppercase text-center mx-6 lg:mx-0`}>Weather Any Weather</h2>
+        <p className="text-[#969696] text-base lg:text-[1.375rem] lg:leading-[1.75rem] text-center w-4/5 lg:w-full mx-6 lg:mx-0" >Endure the wear and tear of typical fading and sun damage. Build it brighter. Build it to last.</p>
         <div className="flex flex-col items-center max-w-[1300px] mt-12"  ref={brickSectionRef}>
 
         <Image src="/images/yellow-brick.png" alt="brick-img" width={1300} height={356} className="mt-0 mx-auto hidden lg:block lg:w-4/5 2xl:w-[1300px] scale-[2] h-auto max-w-none" ref={brickRef} onLoad={handleImageLoad} style={{ transformOrigin: 'top center'}} />

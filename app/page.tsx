@@ -40,6 +40,8 @@ const Home = () => {
   const lineTextRef = useRef(null);
   const lineRef = useRef(null);
   const footerRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
 
 
   // useGSAP(
@@ -150,19 +152,21 @@ const Home = () => {
             onClick={() => dialogRef.current?.close()}
             >X</p>
           </div>
-        <div className="w-full h-full overflow-hidden relative group">
+        <div className="w-full h-full overflow-hidden relative group items-center justify-center bg-transparent flex p-8 md:p-24">
           <div
             className="absolute w-full h-full top-0 left-0 group-hover:opacity-100 opacity-0 transition-all duration-300 delay-200 bg-slate-950/30 flex justify-center items-center cursor-pointer z-30"
             onClick={() => {
               if(videoRef.current?.paused) {
                 videoRef.current?.play();
+                setIsPlaying(true);
               } else {
                 videoRef.current?.pause();
+                setIsPlaying(false);
               }
             }}
           >
             {
-              !videoRef.current?.paused ? (
+              !isPlaying ? (
                 <Image src="/images/pause-svgrepo-com.svg" alt="pause-img" width={31} height={36} className="invert" />
               ): (
                 <Image src="/images/play-icon.svg" alt="chevron-img" width={31} height={36} className="" />
@@ -182,7 +186,7 @@ const Home = () => {
           <div className="w-full flex flex-col justify-center items-center gap-y-3 lg:gap-y-6 z-10 relative mt-0">
               <h1 className={`${urdwinBoldMono.className} antialiased text-[#F3F3F6] font-bold text-[1.5rem] leading-[1.5rem] lg:leading-[2rem] lg:text-[2rem] uppercase`} ref={lineTextRef}>professional line</h1>
             <Image src="/images/hero-rainbow.png" alt="rainbow-img" width={400} height={2} ref={lineRef} className="w-1/2 lg:w-[400px] h-[2px]" />
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col justify-center items-center mx-6 lg:mx-0">
 
               {/* <div className="overflow-hidden"> */}
                 <h2
@@ -238,7 +242,7 @@ const Home = () => {
       <Contact font={urdwinBoldMono} />
 
 
-      <div className="mt-16 lg:mt-32 footer p-6 lg:p-28 lg:pb-24 ps-6 2xl:ps-52 bg-[#010101] pt-24 lg:pt-24 fade-up-footer z-10 pb-10 relative h-svh"  ref={footerRef}>
+      <div className="mt-16 lg:mt-32 footer p-6 lg:p-28 lg:pb-24 ps-6 2xl:ps-52 bg-black lg:bg-[#010101] pt-24 lg:pt-24 fade-up-footer z-10 pb-96 relative"  ref={footerRef}>
         <div className="flex flex-col gap-y-10 justify-start  fade-up-footer max-w-[1300px] px-0 lg:px-8 2xl:px-28">
           <Image src="/images/bilco-logo.svg" alt="bilco logo" width={175} height={28}/>
 
