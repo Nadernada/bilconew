@@ -174,9 +174,9 @@ const setupLights = (scene: THREE.Scene) => {
 
 // Define luminance values
 const luminanceValues = {
-  low: 100,
-  medium: 250,
-  high: 200,
+  low: 300,
+  medium: 450,
+  high: 500,
 };
 
 // Function to change the luminance of the main light
@@ -192,7 +192,7 @@ const switchMainLightLuminance = (keyLight: THREE.SpotLight, level: 'low' | 'med
       break;
     case 'high':
       keyLight.intensity = luminanceValues.high;
-      keyLight.color.set("#BA8E23");
+      keyLight.color.set("#ADD8E6");
       break;
   }
 };
@@ -206,7 +206,7 @@ const handleSetLuminance = (level: 'low' | 'medium' | 'high') => {
 
 useEffect(() => {
   if (modelRef.current) {
-    const blendFactor = 0.55; // Adjust the blend factor (0 = full gray, 1 = full user color)
+    const blendFactor = 0.98; // Adjust the blend factor (0 = full gray, 1 = full user color)
     const baseColor = new THREE.Color("#A9A9A9"); // Gray base
     const userColor = new THREE.Color(color); // User-selected color
     const blendedColor = baseColor.clone().lerp(userColor, blendFactor); // Blend the two colors
