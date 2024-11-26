@@ -5,7 +5,7 @@ import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from '@gsap/react';
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 
 
@@ -19,34 +19,42 @@ const ZoomIn: React.FC<ZoomInProps> = ({ font }) => {
 
   const brickRef = useRef(null);
   const brickSectionRef = useRef(null);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
+  // Handle image load event to ensure the image is fully loaded before animating
+  const handleImageLoad = () => {
+    setIsImageLoaded(true);
+    ScrollTrigger.refresh()
+  };
 
   useGSAP(() => {
-    gsap.from(brickRef.current, {
-      // width: '1300px',
-      scale: 2.6,
+    gsap.to(brickRef.current, {
+      // width: '120vw',
+      scale: 1,
       scrollTrigger: {
         trigger: brickSectionRef.current,
-        start: 'center center',
-        end: 'bottom center',
+        start: 'top center',
+        end: '80% 60%',
         scrub: 1,
-        pin: true, // Pins the element in place during the animation
-        pinSpacing: true, // Ensures space is maintained when pinned
+        // pin: true, // Pins the element in place during the animation
+        // pinSpacing: true, // Ensures space is maintained when pinned
         // markers: true, // Debugging markers for ScrollTrigger
       },
     });
-  });
+  }, [isImageLoaded]);
+
+  
   
 
   return (
     <div className="mt-40 lg:pt-24 flex flex-col items-center">
-        <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="mt-12 mb-20 lg:hidden scale-[2.5] md:scale-150" />
-        <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="my-16 lg:hidden" />
+        <Image src="/images/yellow-brick.png" alt="brick-img" width={1300} height={356} className="mt-12 mb-20 lg:hidden scale-[2.5] md:scale-150" />
+        <Image src="/images/yellow-brick.png" alt="brick-img" width={1300} height={356} className="my-16 lg:hidden" />
         <h2 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[5.25rem] leading-[3rem] lg:leading-[5.3rem] uppercase text-center`}>Weather Any Weather</h2>
         <p className="text-[#969696] text-base lg:text-[1.375rem] lg:leading-[1.75rem] text-center w-4/5 lg:w-full" >Endure the wear and tear of typical fading and sun damage. Build it brighter. Build it to last.</p>
-        <div className="flex flex-col items-center max-w-[1300px]"  ref={brickSectionRef}>
+        <div className="flex flex-col items-center max-w-[1300px] mt-12"  ref={brickSectionRef}>
 
-        <Image src="/images/gray-brick.webp" alt="brick-img" width={1300} height={356} className="mt-0 mx-auto hidden lg:block origin-top lg:w-4/5 2xl:w-[1300px] h-auto max-w-none" ref={brickRef}  />
+        <Image src="/images/yellow-brick.png" alt="brick-img" width={1300} height={356} className="mt-0 mx-auto hidden lg:block lg:w-4/5 2xl:w-[1300px] scale-[2] h-auto max-w-none" ref={brickRef} onLoad={handleImageLoad} style={{ transformOrigin: 'top center'}} />
         </div>
 
 
