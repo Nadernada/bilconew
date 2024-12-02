@@ -50,7 +50,7 @@ const Contact = () => {
         <p className="text-[#969696]  text-base lg:text-[1.375rem] lg:leading-[1.75rem] text-center fade-up-contact -translate-y-14 lg:translate-y-0 w-4/5 lg:w-full">Reach out to get ahold of our team or a sample</p>
 
  
-        <div className="mt-12 flex flex-row justify-around bg-contact-gradient rounded-3xl p-6 lg:px-12 xl:px-28 lg:py-20 w-full xl:w-4/5 fade-up-contact  -translate-y-14 lg:translate-y-0 max-w-[1300px]">
+        <div className="mt-12 flex flex-row justify-around bg-contact-gradient rounded-3xl p-3 md:p-6 lg:px-12 xl:px-28 lg:py-20 w-full xl:w-4/5 fade-up-contact  -translate-y-14 lg:translate-y-0 max-w-[1300px]">
           <form action="" className="w-full lg:w-1/2 flex flex-col gap-y-6">
             <input type="text" name="fullname" id="fullname" className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Full Name" />
             <input type="text" name="business-name" id="business-name" className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Business Name" />
