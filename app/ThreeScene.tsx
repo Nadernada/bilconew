@@ -52,7 +52,7 @@ const ThreeScene: React.FC = () => {
                 
         if(window.innerWidth > 726) {
           camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.05, 20);
-          camera.position.set(0.35, 0.35, 0.35);
+          camera.position.set(0.45, 0.45, 0.45);
         } else {
           camera = new THREE.PerspectiveCamera(50, window.innerWidth / (window.innerHeight / 2.5), 0.05, 20);
           camera.position.set(0.35, 0.35, 0.35);
@@ -81,10 +81,10 @@ const ThreeScene: React.FC = () => {
           })
           .finally(() => setLoadingAssets(prev => prev - 1));
 
-        const normalMapPromise = new THREE.TextureLoader().loadAsync('/baked details.001.png')
+        const normalMapPromise = new THREE.TextureLoader().loadAsync('/baked details.001-min.png')
           .finally(() => setLoadingAssets(prev => prev - 1));
 
-        const aoMapPromise = new THREE.TextureLoader().loadAsync('/ao_map.png')
+        const aoMapPromise = new THREE.TextureLoader().loadAsync('/ao_map-min.png')
           .finally(() => setLoadingAssets(prev => prev - 1));
 
         const gltfPromise = gltfLoader.loadAsync('bilco23.glb')
@@ -274,12 +274,17 @@ useEffect(() => {
       <div className="grid grid-cols-1 lg:grid-cols-2 lg:flex-row gap-x-16 mt-5">
 
         <div className="flex flex-col justify-center items-center gap-y-2">
-          <div className="border border-[#f3f3f6] rounded-full ps-4 pe-6 py-3 relative h-fit flex flex-row gap-x-3 lg:gap-x-9 justify-between">
+        <div className="border border-[#f3f3f6] rounded-full ps-4 pe-6 py-3 relative max-w-full h-fit flex flex-row gap-x-3 lg:gap-x-9 justify-between">
+            <div className="px-2 w-1/3 lg:w-[130px] flex flex-row">
+              <span className="text-[#969696]">#</span>
             <HexColorInput
               color={color}
               onChange={setColor}
-              className="px-2 bg-transparent rounded-lg placeholder:text-[#969696] text-[#969696] w-1/3 lg:w-[130px] uppercase colorInput"
-            />
+              prefix="#"
+              type="text"
+              className=" bg-transparent rounded-lg placeholder:text-[#969696] text-[#969696] uppercase colorInput"
+              />
+              </div>
             <div className="flex flex-row gap-x-4 cursor-pointer" >
               <p className="text-base text-[#f3f3f6] uppercase">Select a color</p>
               <PopoverPicker color={color} onChange={setColor} />
@@ -293,6 +298,7 @@ useEffect(() => {
           <div className="flex flex-row gap-2 justify-between items-center bg-[#2D2D2F] rounded-full px-2 w-full">
             <div className={`flex flex-col gap-2 justify-center items-center relative ${selectedLight === 0 ? 'bg-[#f3f3f6]' : 'bg-transparent'} rounded-full px-10 py-4 h-[80%] transition-all duration-300`}>
               <button
+                name="street light"
                 className="rounded-full w-full h-full cursor-pointer transition-all absolute z-10"
                 onClick={() => {
                   handleSetLuminance('low');
@@ -303,6 +309,7 @@ useEffect(() => {
             </div>
             <div className={`flex flex-col gap-2 justify-center items-center relative ${selectedLight === 1 ? 'bg-[#f3f3f6]' : 'bg-transparent'} rounded-full px-10 py-4 h-[80%] transition-all duration-300`}>
               <button
+                name="room light"
                 className="rounded-full w-full h-full cursor-pointer transition-all absolute z-10"
                 onClick={() => {
                   handleSetLuminance('medium');
@@ -313,6 +320,7 @@ useEffect(() => {
             </div>
             <div className={`flex flex-col gap-2 justify-center items-center relative ${selectedLight === 2 ? 'bg-[#f3f3f6]' : 'bg-transparent'} rounded-full px-10 py-4 h-[80%] transition-all duration-300`}>
               <button
+                name="appartement light"
                 className="rounded-full w-full h-full cursor-pointer transition-all absolute z-10"
                 onClick={() => {
                   handleSetLuminance('high');

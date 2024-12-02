@@ -13,7 +13,7 @@ import localFont from "next/font/local";
 export const gothamMonoBook = localFont({
   src: [
     {
-      path: "./fonts/Gotham-Book.otf",
+      path: "./fonts/Gotham-Book.woff",
       weight: "500", // Medium
       style: "normal",
     },

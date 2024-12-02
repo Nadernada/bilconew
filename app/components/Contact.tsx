@@ -1,6 +1,5 @@
 'use client'
 
-import { NextFontWithVariable } from "next/dist/compiled/@next/font";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { gsap } from "gsap";
@@ -10,12 +9,8 @@ import Button from "./Button";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-interface ContactProps {
-  font: NextFontWithVariable
-}
 
-
-const Contact:React.FC<ContactProps> = ({ font }) => {
+const Contact = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
@@ -46,16 +41,16 @@ const Contact:React.FC<ContactProps> = ({ font }) => {
 
 
   return (
-    <div className="mt-36 flex flex-col items-center bg-contact-gradient-mobile mx-6 lg:mx-0 rounded-3xl" ref={sectionRef}>
+    <div className="mt-36 flex flex-col items-center bg-contact-gradient-mobile mx-6 lg:mx-0 rounded-3xl px-8 xl:px-0" ref={sectionRef}>
         <div className="w-4/5 mb-10  -translate-y-14">
           <Image src="/images/form-img.png" alt="brick-img" width={863} height={468} className="flex lg:hidden" />
         </div>
 
-        <h2 id="contact" className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] leading-[3rem] lg:text-[5.25rem] lg:leading-[5.3rem] uppercase text-center fade-up-contact  -translate-y-14 lg:translate-y-0`}>Let&apos;s Start Building</h2>
+        <h2 id="contact" className="font-[Urdwin] antialiased text-[#F3F3F6] font-bold text-[3rem] leading-[3rem] lg:text-[5.25rem] lg:leading-[5.3rem] uppercase text-center fade-up-contact  -translate-y-14 lg:translate-y-0">Let&apos;s Start Building</h2>
         <p className="text-[#969696]  text-base lg:text-[1.375rem] lg:leading-[1.75rem] text-center fade-up-contact -translate-y-14 lg:translate-y-0 w-4/5 lg:w-full">Reach out to get ahold of our team or a sample</p>
 
  
-        <div className="mt-12 flex flex-row justify-around bg-contact-gradient rounded-3xl p-6 lg:px-28 lg:py-20 w-full lg:w-4/5 fade-up-contact  -translate-y-14 lg:translate-y-0 max-w-[1300px]">
+        <div className="mt-12 flex flex-row justify-around bg-contact-gradient rounded-3xl p-6 lg:px-12 xl:px-28 lg:py-20 w-full xl:w-4/5 fade-up-contact  -translate-y-14 lg:translate-y-0 max-w-[1300px]">
           <form action="" className="w-full lg:w-1/2 flex flex-col gap-y-6">
             <input type="text" name="fullname" id="fullname" className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Full Name" />
             <input type="text" name="business-name" id="business-name" className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Business Name" />

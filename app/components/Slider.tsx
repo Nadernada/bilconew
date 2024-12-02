@@ -1,8 +1,7 @@
 'use client'
 
-import { NextFontWithVariable } from "next/dist/compiled/@next/font";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Swiper as SwiperType } from 'swiper';
 import { FreeMode, Mousewheel } from 'swiper/modules';
@@ -50,44 +49,18 @@ const sliderSlides = [
 ]
 
 
-
-interface SliderProps {
-  font: NextFontWithVariable
-}
-
-const Slider: React.FC<SliderProps> = ({ font }) => {
+const Slider = () => {
   const swiperRef = useRef<SwiperType | null>(null);  const [flipCardIndex, setFlipCardIndex] = useState(-1);
-
-  useEffect(() => {
-    console.log(flipCardIndex);
-    
-  }, [flipCardIndex])
 
   const sectionRef = useRef(null);
 
-  // useGSAP(
-  //   () => {
-  //     gsap.from('.fade-up-slider', {
-  //       y: 70,
-  //       opacity: 0,
-  //       scrollTrigger: {
-  //         trigger: sectionRef.current,
-  //         start: 'top bottom',
-  //         end: 'center bottom',
-  //         scrub: true,
-  //         // markers: true,
-  //       },
-  //     });
-  //   }, { scope: sectionRef }
-  // );
-
 
   return (
-    <div className="mt-24 flex flex-col items-center lg:items-start ps-0 md:ps-36 2xl:ps-['calc((100vw - 1300px) / 2)']" ref={sectionRef}>
+    <div className="mt-24 flex flex-col items-center lg:items-start ps-0 lg:ps-8 xl:ps-36 2xl:ps-['calc((100vw - 1300px) / 2)']" ref={sectionRef}>
 
         <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start max-w-[1330px]">
           <div className="w-4/5 lg:w-[55%] text-center lg:text-left flex flex-col items-center lg:items-start">
-            <h2 className={`${font.className} antialiased text-[#F3F3F6] font-bold text-[3rem] lg:text-[5.25rem] leading-[3rem] lg:leading-[5.3rem] uppercase fade-up-slider`}><span className="text-bg">Color</span><br/>that inspires</h2>
+            <h2 className="font-[Urdwin] antialiased text-[#F3F3F6] font-bold text-[3rem] md:text-[5rem]  lg:text-[5.25rem] leading-[3rem] md:leading-[5rem]  lg:leading-[5.3rem] uppercase fade-up-slider"><span className="text-bg">Color</span><br/>that inspires</h2>
             <p className="text-[#969696] text-base lg:text-[1.375rem] lg:leading-[1.75rem] fade-up-slider">If you aspire to create stunning structures that are a reflection of your life’s work, consider how the Bilco Professional Line of concrete bricks can <span className="text-[#f3f3f6]">brighten your next project.</span></p>
           </div>
 
