@@ -64,7 +64,7 @@ const Slider = () => {
             <p className="text-[#969696] text-base lg:text-[1.375rem] lg:leading-[1.75rem] fade-up-slider">If you aspire to create stunning structures that are a reflection of your life’s work, consider how the Bilco Professional Line of concrete bricks can <span className="text-[#f3f3f6]">brighten your next project.</span></p>
           </div>
 
-          <div className="lg:flex flex-row gap-x-4 justify-center self-end hidden me-56">
+          <div className="lg:flex flex-row gap-x-4 justify-center self-end hidden me-0 ">
             <button 
               className="rounded-full w-12 h-12 bg-[#2D2D2F] flex justify-center items-center fade-up-slider"
               onClick={() => swiperRef?.current?.slidePrev()}
