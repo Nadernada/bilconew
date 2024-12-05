@@ -165,7 +165,7 @@ const Home = () => {
           <video src="/images/hero-video.mp4" className="object-contain w-full !max-w-none" autoPlay muted loop playsInline ref={videoRef}></video>
         </div>
       </dialog>
-      <div className="w-screen relative h-svh overflow-hidden">
+      <div id="Hero" className="w-screen relative h-svh overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-[110%] bg-gradient-to-t from-black to-transparent"></div>
         <div className="h-screen lg:h-fit w-auto lg:w-full z-0 overflow-hidden">
           <video src="/images/hero-video.mp4" className="object-cover !max-w-none 2xl:w-full" autoPlay muted loop playsInline controls={false}></video>

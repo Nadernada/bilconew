@@ -305,7 +305,7 @@ useEffect(() => {
                   setSelectedLight(0);
                 }}
               />
-              <Image className={`${selectedLight === 0 ? 'invert' : 'invert-0'}`} src={'/images/outside.svg'} width={20} height={20} alt="outside" />
+              <Image className={`${selectedLight === 0 ? 'invert' : 'invert-0'} w-auto h-5`} src={'/images/outside.svg'} width={20} height={20} alt="outside" />
             </div>
             <div className={`flex flex-col gap-2 justify-center items-center relative ${selectedLight === 1 ? 'bg-[#f3f3f6]' : 'bg-transparent'} rounded-full px-10 py-4 h-[80%] transition-all duration-300`}>
               <button
@@ -336,7 +336,7 @@ useEffect(() => {
 
       </div>
 
-      <p className="text-[#969696] text-center text-sm lg:text-base mt-14 lg:mt-10">Color saturation and vibrancy may vary on real material</p>
+      <p className="text-[#969696] text-center text-sm lg:text-base mt-14 lg:mt-10">This tool does not accurately represent the final color.<br/>Actual color saturation and vibrancy may vary on real material.</p>
     </div>
   );
 };
