@@ -225,8 +225,8 @@ const Home = () => {
       <Contact />
 
 
-      <div className="mt-16 lg:mt-32 footer p-6 lg:p-28 lg:pb-24 ps-6 lg:ps-8 xl:ps-32 2xl:ps-52 bg-black lg:bg-[#010101] pt-24 lg:pt-24 fade-up-footer z-10 pb-96 md:pb-[70svh] relative"  ref={footerRef}>
-        <div className="flex flex-col gap-y-10 justify-start  fade-up-footer max-w-[1300px] px-0 lg:px-8 2xl:px-28">
+      <div className="mt-16 lg:mt-32 footer p-6 lg:p-28 lg:pb-24 ps-6 lg:ps-8  slider-container bg-black lg:bg-[#010101] pt-24 lg:pt-24 fade-up-footer z-10 pb-96 md:pb-[70svh] relative"  ref={footerRef}>
+        <div className="flex flex-col gap-y-10 justify-start  fade-up-footer max-w-[1300px] px-0 ">
           <Image src="/images/bilco-logo.svg" alt="bilco logo" width={175} height={28}/>
 
           <p className="font-[Gotham-book] text-[#969696] text-xl text-left fade-up-footer w-4/5 lg:w-2/5 xl:1/5 2xl:w-[52%]">If you’d like more information about our products or would like to place an order, please call, email or fax us:</p>
