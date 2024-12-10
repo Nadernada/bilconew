@@ -56,10 +56,10 @@ const ZoomIn = () => {
         <div className="mt-28 pt-28 lg:pt-0 sm:pb-24 lg:pb-0 flex flex-col lg:flex-row justify-between items-center lg:items-start w-full lg:px-8 xl:px-0 xl:w-[80%] bg-black lg:bg-transparent max-w-[1300px]">
           <h2 className="font-[Urdwin] antialiased text-[#F3F3F6] text-center lg:text-left font-bold text-[3rem] md:text-[5rem]  lg:text-[5.25rem] leading-[3rem] md:leading-[5rem]  lg:leading-[5.3rem] uppercase fade-up-zoom">Custom<br /> Created</h2>
           <p className="text-[#969696] text-base lg:text-[1.375rem] lg:leading-[1.75rem]  w-4/5 lg:w-1/2 text-center lg:text-left fade-up-zoom">Unlike mass produced clay bricks, every batch of the Bilco Professional Line is <span className="text-[#f3f3f6]">made to order.</span> <br/><br/>Through this personalized manufacturing process, the bricks are guaranteed to reflect your vision.</p>
-          <Image src="/images/brick-pattern-mobile.png" alt="brick-img" width={1302} height={463} className="mt-24 w-full max-w-none aspect-auto object-cover flex sm:hidden fade-up-zoom" />
+          <Image src="/images/brick-pattern-mobile.png" alt="brick-img" width={1302} height={463} className="mt-24 w-full max-w-none aspect-auto object-cover flex md:hidden fade-up-zoom" />
         </div>
 
-        <Image src="/images/brick-pattern.png" alt="brick-img" width={1302} height={463} className="mt-0 lg:mt-24 w-auto lg:w-full max-w-none lg:max-w-full h-svh lg:h-auto hidden sm:flex fade-up-zoom" />
+        <Image src="/images/brick-pattern.png" alt="brick-img" width={1302} height={463} className="mt-0 lg:mt-24 w-auto lg:w-full max-w-none lg:max-w-full h-svh lg:h-auto hidden md:flex fade-up-zoom" />
       </div>
   );
 };
