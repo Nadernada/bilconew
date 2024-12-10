@@ -130,6 +130,10 @@ body {
   animation: slide ease-out 1s infinite;
 }
 
+.slider-container {
+  
+}
+
 @keyframes slide {
   0% {
     transform: translateX(0);
@@ -167,6 +171,17 @@ body {
     background-repeat: no-repeat;
     background-position: 100% 100%;
     background-size: contain;
+  }
+
+}
+@media screen and (min-width: 1300px) { 
+    .slider-container {
+    padding-left: calc((100vw - 80vw) / 2) !important;
+  }
+}
+@media screen and (min-width: 1600px) { 
+    .slider-container {
+    padding-left: calc((100vw - 75vw) / 2) !important;
   }
 }
 
