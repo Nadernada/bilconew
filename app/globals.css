@@ -184,6 +184,11 @@ body {
     padding-left: calc((100vw - 75vw) / 2) !important;
   }
 }
+@media screen and (min-width: 1700px) { 
+    .slider-container {
+    padding-left: calc((100vw - 1300px) / 2) !important;
+  }
+}
 
 @media screen and (max-width: 1023px) { 
   .bg-contact-gradient {
