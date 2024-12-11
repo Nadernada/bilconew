@@ -37,7 +37,7 @@ const sliderSlides = [
   {
     front: "/images/slider-8.png",
     back: "/images/slider-7.png",
-    text: "desert DUNE",
+    text: "Saharan Sand",
     color: "#CFBA9C"
   },
   {

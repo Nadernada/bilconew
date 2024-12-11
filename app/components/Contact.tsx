@@ -50,12 +50,12 @@ const Contact = () => {
         <p className="text-[#969696]  text-base lg:text-[1.375rem] lg:leading-[1.75rem] text-center fade-up-contact -translate-y-14 lg:translate-y-0 w-4/5 lg:w-full">Reach out to get ahold of our team or a sample</p>
 
  
-        <div className="mt-12 flex flex-row justify-around bg-contact-gradient rounded-3xl p-3 md:p-6 lg:px-12 xl:px-28 lg:py-20 w-full xl:w-4/5 fade-up-contact  -translate-y-14 lg:translate-y-0 max-w-[1300px]">
-          <form action="" className="w-full lg:w-1/2 flex flex-col gap-y-6">
-            <input type="text" name="fullname" id="fullname" className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Full Name" />
-            <input type="text" name="business-name" id="business-name" className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Business Name" />
-            <input type="text" name="business-website" id="business-website" className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Business Website" />
-            <div id="business-website" className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full lg:w-4/5 leading-7 py-2 colorInput relative cursor-pointer">
+        <div className="mt-12 flex flex-row justify-around bg-contact-gradient rounded-3xl p-3 md:p-12 lg:py-20 w-fit fade-up-contact  -translate-y-14 lg:translate-y-0 max-w-[1300px]">
+          <form action="" className="w-full flex flex-col gap-y-6">
+            <input type="text" name="fullname" id="fullname" className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full leading-7 py-2 colorInput" placeholder="Full Name" />
+            <input type="text" name="business-name" id="business-name" className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full leading-7 py-2 colorInput" placeholder="Business Name" />
+            <input type="text" name="business-website" id="business-website" className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full leading-7 py-2 colorInput" placeholder="Business Website" />
+            <div id="business-website" className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full leading-7 py-2 colorInput relative cursor-pointer">
               <div
                 className="dropdown-header w-full flex justify-between items-center text-[#f3f3f6] uppercase"
                 onClick={() => setIsOpen(!isOpen)}
@@ -79,8 +79,8 @@ const Contact = () => {
                 </div>
               )}
             </div>
-            <input type="phone" name="phone" id="phone" className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Phone" />
-            <input type="email" name="email" id="email" className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full lg:w-4/5 leading-7 py-2 colorInput" placeholder="Email" />
+            <input type="phone" name="phone" id="phone" className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full leading-7 py-2 colorInput" placeholder="Phone" />
+            <input type="email" name="email" id="email" className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full leading-7 py-2 colorInput" placeholder="Email" />
 
             <p className="text-[#f3f3f6] text-base text-left uppercase">Interested In:</p>
 
@@ -105,11 +105,6 @@ const Contact = () => {
             <Button link="#" text="Submit" />
           </form>
 
-          <div className="relative w-1/2 hidden lg:flex">
-            <div className="mt-24 absolute -top-[15%] -right-48">
-              <Image src="/images/form-img.png" alt="brick-img" width={863} height={468} className="hidden lg:flex" />
-            </div>
-          </div>
 
         </div>
 
