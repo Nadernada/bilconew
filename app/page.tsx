@@ -162,7 +162,7 @@ const Home = () => {
               )
             }
           </div>
-          <iframe src="https://player.vimeo.com/video/1038261096?controls=0&autoplay=1"  className="object-cover h-full !max-w-none w-full" frameborder="0" allow="autoplay; fullscreen; nocontrols" allowfullscreen></iframe>
+          <iframe src="https://player.vimeo.com/video/1038261096?controls=0&autoplay=1"  className="object-cover h-full !max-w-none w-full" allow="autoplay; fullscreen; nocontrols" allowfullscreen></iframe>
           {/* <video src="/images/hero-video.mp4" className="object-contain w-full !max-w-none" autoPlay muted loop playsInline ref={videoRef}></video> */}
         </div>
       </dialog>
