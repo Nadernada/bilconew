@@ -3,8 +3,8 @@ import "./globals.css";
 
 
 export const metadata: Metadata = {
-  title: "Bilco",
-  description: "Bilco landing page",
+  title: "Bilco Professional Line: Custom-Colored Concrete Bricks",
+  description: "Discover Bilco's new Professional Line. Create custom concrete bricks colored to the core in any hue—green, purple, red or other unique shades. Perfect for personalized commercial projects with exceptional durability.",
 };
 
 export default function RootLayout({
