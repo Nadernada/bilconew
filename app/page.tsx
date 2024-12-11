@@ -162,13 +162,16 @@ const Home = () => {
               )
             }
           </div>
-          <video src="/images/hero-video.mp4" className="object-contain w-full !max-w-none" autoPlay muted loop playsInline ref={videoRef}></video>
+          <iframe src="https://player.vimeo.com/video/1038261096?controls=0&autoplay=1"  className="object-cover h-full !max-w-none w-full" frameborder="0" allow="autoplay; fullscreen; nocontrols" allowfullscreen></iframe>
+          {/* <video src="/images/hero-video.mp4" className="object-contain w-full !max-w-none" autoPlay muted loop playsInline ref={videoRef}></video> */}
         </div>
       </dialog>
       <div id="Hero" className="w-screen relative h-svh overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-[110%] bg-gradient-to-t from-black to-transparent"></div>
-        <div className="h-screen lg:h-fit w-auto lg:w-full z-0 overflow-hidden">
-          <video src="/images/hero-video.mp4" className="object-cover !max-w-none 2xl:w-full" autoPlay muted loop playsInline controls={false}></video>
+        <div className="h-screen w-full z-0 overflow-hidden">
+        <iframe src="https://player.vimeo.com/video/1038261096?controls=0&autoplay=1"  className="object-cover h-full !max-w-none w-full" frameborder="0" allow="autoplay; fullscreen; nocontrols" allowfullscreen></iframe>
+
+          {/* <video src="/images/hero-video.mp4" className="object-cover !max-w-none 2xl:w-full" autoPlay muted loop playsInline controls={false}></video> */}
         </div>
 
         <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center gap-24">
