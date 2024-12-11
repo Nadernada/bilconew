@@ -27,7 +27,7 @@ const Standards = () => {
       </div> 
       <div className="flex flex-col justify-center items-start gap-y-6 p-8 bg-black rounded-2xl group transition-all duration-400 fade-up-standards">
         <Image src="/images/standards-2.svg" alt="chevron-img" width={36} height={36} />
-        <h3 className="font-[Urdwin] text-3xl lg:text-3xl text-[#f3f3f6] uppercase transition-colors duration-300 lg:w-4/5">Negligible Maintenance compared to normal clay bricks</h3>
+        <h3 className="font-[Urdwin] text-3xl lg:text-3xl text-[#f3f3f6] uppercase transition-colors duration-300 lg:w-4/5">Requires virtually no maintenance</h3>
       </div> 
       <div className="flex flex-col justify-center items-start gap-y-6 p-8 bg-black rounded-2xl group transition-all duration-400 fade-up-standards">
         <Image src="/images/standards-3.svg" alt="chevron-img" width={36} height={36} />
