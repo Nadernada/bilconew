@@ -236,7 +236,7 @@ const Home = () => {
             <p className="text-[#f3f3f6] text-xl text-left">Email: <span className="underline">info@BilcoBrick.com</span></p>
           </div>
 
-          <a href="https://bilcobrick.com/" target="_blank" className="text-[#f3f3f6] text-xl text-left fade-up-footer">bilcobrick.com</a>
+          <a href="https://bilcobrick.com/" target="_blank" className="text-[#f3f3f6] text-xl text-left fade-up-footer underline">bilcobrick.com</a>
 
           <div className="flex flex-row justify-start items-center gap-x-3 fade-up-footer">
             <a href="https://www.instagram.com/bilco_brick/" target="_blank"><Image src="/images/ig-bilco.svg" alt="bilco logo" width={34} height={34} className="hover:scale-105 transition-all cursor-pointer hover:invert"/></a>
