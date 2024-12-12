@@ -118,7 +118,7 @@ const ThreeScene: React.FC = () => {
               mesh.receiveShadow = true;
 
               if(window.innerWidth > 726) {
-                mesh.scale.set(0.3, 0.3, 0.3);
+                mesh.scale.set(0.35, 0.35, 0.35);
               } else {
                 mesh.scale.set(0.4, 0.4, 0.4);
               }
