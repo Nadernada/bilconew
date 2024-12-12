@@ -23,13 +23,13 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 const Home = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const playButtonRef = useRef<any | null | undefined>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  // const videoRef = useRef<HTMLVideoElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [buttonPosition, setButtonPosition] = useState({ x: 0, y: 0 });
   const lineRef = useRef(null);
   const footerRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  // const [isPlaying, setIsPlaying] = useState(false);
 
 
 
@@ -162,7 +162,7 @@ const Home = () => {
               )
             }
           </div> */}
-          <iframe src="https://player.vimeo.com/1038261096/d02c10dad5?autoplay=1"  className="object-cover h-full !max-w-none w-full" allow="autoplay; fullscreen; nocontrols" ></iframe>
+          <iframe src="https://player.vimeo.com/video/1038261096?h=d02c10dad5&autoplay=1"  className="object-cover h-full !max-w-none w-full" allow="autoplay; fullscreen; nocontrols" ></iframe>
           {/* <video src="/images/hero-video.mp4" className="object-contain w-full !max-w-none" autoPlay muted loop playsInline ref={videoRef}></video> */}
         </div>
       </dialog>
