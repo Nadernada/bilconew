@@ -36,7 +36,7 @@ const Contact = () => {
         const errorData = await response.json();
         setResponseMessage(errorData.message || 'Failed to send email');
       } else {
-        setResponseMessage('Email sent successfully!');
+        setResponseMessage('Thank you for contacting us!');
         setFormData({
           fullname: '',
           email: '',
