@@ -97,9 +97,9 @@ const Contact = () => {
  
         <div className="mt-12 flex flex-col justify-around bg-contact-gradient rounded-3xl p-3 md:p-12 lg:py-20 w-fit fade-up-contact  -translate-y-14 lg:translate-y-0 max-w-[1300px]">
           {responseMessage !== 'Thank you for contacting us!' && <form className="w-full flex flex-col gap-y-6"  onSubmit={handleSubmit}>
-            <input type="text" name="fullname" id="fullname" value={formData.fullname} onChange={handleChange} className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full leading-7 py-2 colorInput" placeholder="Full Name" />
-            <input type="text" name="business_name" id="business_name" value={formData.business_name} onChange={handleChange} className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full leading-7 py-2 colorInput" placeholder="Business Name" />
-            <input type="text" name="business_website" id="business_website" value={formData.business_website} onChange={handleChange} className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full leading-7 py-2 colorInput" placeholder="Business Website" />
+            <input type="text" name="fullname" id="fullname" value={formData.fullname} onChange={handleChange} className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full leading-7 py-2 colorInput" placeholder="Full Name" required />
+            <input type="text" name="business_name" id="business_name" value={formData.business_name} onChange={handleChange} className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full leading-7 py-2 colorInput" placeholder="Business Name" required />
+            <input type="text" name="business_website" id="business_website" value={formData.business_website} onChange={handleChange} className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full leading-7 py-2 colorInput" placeholder="Business Website" required />
             <div id="business-website" className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full leading-7 py-2 colorInput relative cursor-pointer">
               <div
                 className="dropdown-header w-full flex justify-between items-center text-[#f3f3f6] uppercase"
@@ -124,8 +124,8 @@ const Contact = () => {
                 </div>
               )}
             </div>
-            <input type="phone" name="phone" id="phone" value={formData.phone} onChange={handleChange} className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full leading-7 py-2 colorInput" placeholder="Phone" />
-            <input type="email" name="email" id="email" value={formData.email} onChange={handleChange} className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full leading-7 py-2 colorInput" placeholder="Email" />
+            <input type="phone" name="phone" id="phone" value={formData.phone} onChange={handleChange} className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full leading-7 py-2 colorInput" placeholder="Phone" required />
+            <input type="email" name="email" id="email" value={formData.email} onChange={handleChange} className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full leading-7 py-2 colorInput" placeholder="Email" required />
 
             <p className="text-[#f3f3f6] text-base text-left uppercase">Interested In:</p>
 
