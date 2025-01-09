@@ -4,7 +4,7 @@ import Image from "next/image";
 import NavBar from "./components/NavBar";
 import ThreeScene from "./ThreeScene";
 import 'swiper/css'
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Standards from "./components/Standards";
 import ParallelBrick from "./components/ParallelBrick";
 import ZoomIn from "./components/ZoomIn";
@@ -14,6 +14,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from '@gsap/react';
 import Link from "next/link";
+import Player from "@vimeo/player";
 
 
 
@@ -30,6 +31,24 @@ const Home = () => {
   const lineRef = useRef(null);
   const footerRef = useRef(null);
   // const [isPlaying, setIsPlaying] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+
+  useEffect(() => {
+    const iframe = document.querySelector('iframe');
+    if (!iframe) {
+      console.warn('Iframe not found.');
+      return; // Exit early if the iframe is not in the DOM
+    }
+    const iframePlayer = new Player(iframe);
+    if (isDialogOpen) {
+      iframePlayer.play();
+    } else if (!isDialogOpen) {
+      iframePlayer.pause();
+    }
+
+  
+  }, [isDialogOpen]);
 
 
 
@@ -135,10 +154,10 @@ const Home = () => {
 
       <NavBar />
 
-      <dialog className=" h-screen w-screen bg-[#000000cc] focus-visible:outline-none p-0 z-50 backdrop:bg-[#000000cc] sticky top-0" ref={dialogRef}>
+      <dialog open={isDialogOpen} className=" h-screen w-screen bg-[#000000cc] focus-visible:outline-none p-0 z-50 backdrop:bg-[#000000cc] fixed top-0" ref={dialogRef}>
           <div className="w-full absolute top-4 right-4 z-50 p-4 flex justify-end">
             <p className="text-black bg-[#f3f3f6] rounded-full w-12 h-12 flex justify-center items-center text-lg cursor-pointer hover:bg-transparent hover:text-[#f3f3f6] duration-300 border border-[#f3f3f6] transition-colors"
-            onClick={() => dialogRef.current?.close()}
+            onClick={() => setIsDialogOpen(false)}
             >X</p>
           </div>
         <div className="w-full h-full overflow-hidden relative group items-center justify-center bg-transparent flex p-8 md:p-24">
@@ -197,7 +216,7 @@ const Home = () => {
           <div className=" absolute bottom-0 flex flex-col gap-y-6 justify-center items-center z-10 w-full pb-12">
             <div className="w-10 h-10 rounded-full border border-slate-100 flex justify-center items-center cursor-pointer hover:bg-slate-100 transition-colors group duration-300" ref={playButtonRef}
               style={{ transform: `translate(${buttonPosition.x}px, ${buttonPosition.y}px)` }}
-              onClick={() => dialogRef.current?.show()}
+              onClick={() => setIsDialogOpen(true)}
             >
               <Image src="/images/play-icon.svg" alt="chevron-img" width={11} height={16} className="group-hover:invert transition-all duration-300 translate-x-[1px]" />
             </div>

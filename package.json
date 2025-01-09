@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.1",
+    "@vimeo/player": "^2.25.0",
     "gsap": "^3.12.5",
     "next": "14.2.15",
     "nodemailer": "^6.9.16",
@@ -25,6 +26,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/three": "^0.169.0",
+    "@types/vimeo__player": "^2.18.3",
     "eslint": "^8",
     "eslint-config-next": "14.2.15",
     "postcss": "^8",
