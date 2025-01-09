@@ -8,7 +8,7 @@ export async function POST(req) {
     // Validate required fields
     const { fullname, email, phone, business_name, business_website, interest } = body;
 
-    if (!fullname || !email || !phone || !business_name || !business_website || !interest) {
+    if (!fullname || !email || !phone || !interest) {
       return new Response(
         JSON.stringify({ message: 'All fields are required' }),
         { status: 400 }
