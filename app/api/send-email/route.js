@@ -6,9 +6,9 @@ export async function POST(req) {
     const body = await req.json();
 
     // Validate required fields
-    const { fullname, email, phone, business_name, business_website, interest } = body;
+    const { fullname, email, phone, business_name, business_website, interest, description } = body;
 
-    if (!fullname || !email || !phone || !interest) {
+    if (!fullname || !email || !phone || !business_name || !business_website || !interest || !description) {
       return new Response(
         JSON.stringify({ message: 'All fields are required' }),
         { status: 400 }
@@ -27,9 +27,9 @@ export async function POST(req) {
     // Define email content
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: 'info@bilcobrick.com',
+      to: 'nada@webloo.com',
       subject: `New Form Submission from ${fullname}`,
-      text: `Name: ${fullname}\nEmail: ${email}\nPhone: ${phone}\nBusiness Name: ${business_name}\nBusiness Website: ${business_website}\nInterest: ${interest}`,
+      text: `Name: ${fullname}\nEmail: ${email}\nPhone: ${phone}\nBusiness Name: ${business_name}\nBusiness Website: ${business_website}\nDescription: ${description}\nInterest: ${interest}`,
     };
 
     // Send the email

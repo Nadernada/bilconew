@@ -5,12 +5,6 @@ import { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Swiper as SwiperType } from 'swiper';
 import { FreeMode, Mousewheel } from 'swiper/modules';
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from '@gsap/react';
-
-gsap.registerPlugin(useGSAP, ScrollTrigger);
-
 
 SwiperCore.use([FreeMode, Mousewheel]);
 

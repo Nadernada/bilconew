@@ -10,27 +10,18 @@ import ParallelBrick from "./components/ParallelBrick";
 import ZoomIn from "./components/ZoomIn";
 import Slider from "./components/Slider";
 import Contact from "./components/Contact";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from '@gsap/react';
 import Link from "next/link";
 import Player from "@vimeo/player";
-
-
-
-gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 
 const Home = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const playButtonRef = useRef<any | null | undefined>(null);
-  // const videoRef = useRef<HTMLVideoElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [buttonPosition, setButtonPosition] = useState({ x: 0, y: 0 });
   const lineRef = useRef(null);
   const footerRef = useRef(null);
-  // const [isPlaying, setIsPlaying] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
 
@@ -51,104 +42,6 @@ const Home = () => {
   }, [isDialogOpen]);
 
 
-
-  // useGSAP(
-  //   () => {
-  //     gsap.from(textTopRef.current, {
-  //       y: 200,
-  //       opacity: 0,
-  //       start: 'top 60%',
-  //       end: 'top 0%',
-  //       scrub: true,
-  //       ease: 'expo.out',
-  //       duration: 2,
-  //       delay: 1
-  //     });
-  //     gsap.from(textBottomRef.current, {
-  //       y: 200,
-  //       opacity: 0,
-  //       start: 'top 60%',
-  //       end: 'top 0%',
-  //       scrub: true,
-  //       ease: 'expo.out',
-  //       duration: 2,
-  //       delay: 1.5
-  //     });
-  //     gsap.from(lineTextRef.current, {
-  //       y: 200,
-  //       opacity: 0,
-  //       start: 'top 60%',
-  //       end: 'top 0%',
-  //       scrub: true,
-  //       ease: 'expo.out',
-  //       duration: 1
-  //     });
-  //     gsap.from(lineRef.current, {
-  //       scaleX: 0,
-  //       start: 'top 60%',
-  //       end: 'top 0%',
-  //       scrub: true,
-  //       ease: 'expo.out',
-  //       duration: 1,
-  //       delay: 0.5
-  //     });
-  //     gsap.from('.fade-up-footer', {
-  //       y: 100,
-  //       opacity: 0,
-  //       scrollTrigger: {
-  //         trigger: footerRef.current,
-  //         start: 'top bottom',
-  //         end: 'center bottom',
-  //         scrub: true,
-  //         // markers: true,
-  //       },
-  //     });
-  //   }
-  // );
-  
-  
-  // useEffect(() => {
-  //   const handleMouseMove = (event: MouseEvent) => {
-  //     if (playButtonRef.current) {
-  //       const buttonRect= playButtonRef.current.getBoundingClientRect();
-  //       const buttonX = buttonRect.left + buttonRect.width / 2;
-  //       const buttonY = buttonRect.top + buttonRect.height / 2;
-
-  //       const deltaX = event.clientX - buttonX;
-  //       const deltaY = event.clientY - buttonY;
-  //       const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-  //       // Adjusted distance checks
-  //       if (distance < magneticStrength) {
-  //         const angle = Math.atan2(deltaY, deltaX);
-  //         const intensity = Math.max(0, (1 - distance / magneticStrength) * 10);
-  //         const offsetX = Math.cos(angle) * intensity;
-  //         const offsetY = Math.sin(angle) * intensity;
-
-  //         // Smoothing the transition
-  //         setButtonPosition((prev) => ({
-  //           x: prev.x + (offsetX - prev.x) * 0.1,
-  //           y: prev.y + (offsetY - prev.y) * 0.1,
-  //         }));
-  //       } else {
-  //         setButtonPosition({ x: 0, y: 0 });
-  //       }
-  //     }
-  //   };
-
-  //   const optimizedMouseMove = (event: MouseEvent) => {
-  //     requestAnimationFrame(() => handleMouseMove(event));
-  //   };
-
-  //   window.addEventListener('mousemove', optimizedMouseMove);
-    
-  //   return () => {
-  //     window.removeEventListener('mousemove', optimizedMouseMove);
-  //   };
-  // }, [playButtonRef.current]);
-
-
-
   return (
     <div className="w-full bg-[#090A0A] relative overflow-x-hidden">
 
@@ -161,35 +54,12 @@ const Home = () => {
             >X</p>
           </div>
         <div className="w-full h-full overflow-hidden relative group items-center justify-center bg-transparent flex p-8 md:p-24">
-          {/* <div
-            className="absolute w-full h-full top-0 left-0 group-hover:opacity-100 opacity-0 transition-all duration-300 delay-200 bg-slate-950/30 flex justify-center items-center cursor-pointer z-30"
-            onClick={() => {
-              if(videoRef.current?.paused) {
-                videoRef.current?.play();
-                setIsPlaying(true);
-              } else {
-                videoRef.current?.pause();
-                setIsPlaying(false);
-              }
-            }}
-          >
-            {
-              !isPlaying ? (
-                <Image src="/images/pause-svgrepo-com.svg" alt="pause-img" width={31} height={36} className="invert" />
-              ): (
-                <Image src="/images/play-icon.svg" alt="chevron-img" width={31} height={36} className="" />
-              )
-            }
-          </div> */}
-          <iframe src="https://player.vimeo.com/video/1038261096?h=d02c10dad5&autoplay=0"  className="object-cover h-full !max-w-none w-full" allow="autoplay; fullscreen; nocontrols" ></iframe>
-          {/* <video src="/images/hero-video.mp4" className="object-contain w-full !max-w-none" autoPlay muted loop playsInline ref={videoRef}></video> */}
+          <iframe src="https://player.vimeo.com/video/1038261096?h=d02c10dad5&autoplay=0"  className="object-cover h-full !max-w-none w-full" allow="autoplay; fullscreen" ></iframe>
         </div>
       </dialog>
       <div id="Hero" className="w-screen relative h-svh overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-[110%] bg-gradient-to-t from-black to-transparent"></div>
         <div className="h-screen w-full z-0 overflow-hidden">
-        {/* <iframe src="https://player.vimeo.com/video/1038261096/d02c10dad5?controls=0&autoplay=1"  className="object-cover h-full !max-w-none w-full" allow="autoplay; fullscreen; nocontrols"></iframe> */}
-
           <video src="/images/hero-video.mp4" className="object-cover !max-w-none 2xl:w-full" autoPlay muted loop playsInline controls={false}></video>
         </div>
 
