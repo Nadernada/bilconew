@@ -27,7 +27,7 @@ export async function POST(req) {
     // Define email content
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: 'nada@webloo.com',
+      to: 'info@bilcobrick.com',
       subject: `New Form Submission from ${fullname}`,
       text: `Name: ${fullname}\nEmail: ${email}\nPhone: ${phone}\nBusiness Name: ${business_name}\nBusiness Website: ${business_website}\nDescription: ${description}\nInterest: ${interest}`,
     };
