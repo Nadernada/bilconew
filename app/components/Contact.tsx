@@ -137,7 +137,7 @@ const Contact = () => {
             <button type="submit" disabled={isLoading} className="w-full lg:w-fit px-[18.5px] py-[13px] flex justify-center items-center text-black font-semibold bg-[#F3F3F6] rounded-full uppercase text-sm leading-[14.5px] border border-[#F3F3F6] transition-all">{isLoading ? 'Submitting...' : 'Submit'}</button>
           </form>}
 
-            {responseMessage === 'Thank you for contacting us!' && <p>{responseMessage}</p>}
+            {responseMessage === 'Thank you for contacting us!' && <p className="text-[#F3F3F6]">{responseMessage}</p>}
 
 
         </div>
