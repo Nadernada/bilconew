@@ -49,7 +49,7 @@ const Contact = () => {
 
         setTimeout(() => {
           setResponseMessage('')
-        }, 3000)
+        }, 10000)
       }
     } catch (error: unknown) {
       console.log(error);
