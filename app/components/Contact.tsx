@@ -110,7 +110,7 @@ const Contact = () => {
                 </div>
               )}
             </div>
-            <input type="phone" name="phone" id="phone" value={formData.phone} onChange={handleChange} className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full leading-7 py-2 colorInput" placeholder="Phone*" required />
+            <input type="tel" name="phone" pattern="[0-9]{10}" id="phone" value={formData.phone} onChange={handleChange} className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full leading-7 py-2 colorInput" placeholder="Phone*" required />
             <input type="email" name="email" id="email" value={formData.email} onChange={handleChange} className="bg-transparent placeholder:text-[#f3f3f6] rounded-none text-[#f3f3f6] placeholder:uppercase border-b text-[1rem] lg:text-sm border-[#969696] w-full leading-7 py-2 colorInput" placeholder="Email*" required />
 
             <p className="text-[#f3f3f6] text-base text-left uppercase">Interested In: *</p>
